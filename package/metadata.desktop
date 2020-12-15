@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Shamsi Calendar
+Comment=Shamsi Calendar with holidays. Known as Persian Calendar or Jalali Calendar.
+Icon=office-calendar
+Type=Service
+
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Amirhossein Najafi
+X-KDE-PluginInfo-Email=amirnajafidev@gmail.com
+X-KDE-PluginInfo-License=GPLv3
+X-KDE-PluginInfo-Name=org.kde.plasma.shamsi-calendar
+X-KDE-PluginInfo-Version=0.1.0
+X-KDE-PluginInfo-Website=onitsway.soon
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-KDE-PluginInfo-Category=Date and Time
