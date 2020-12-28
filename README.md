@@ -1,5 +1,5 @@
 # KDE Plasma Shamsi Calendar
-This is a plasmoid that is used to show Shamsi Calendar (also known as Persian Calendar or Jalali Calendar) in KDE Plasma and available in the KDE store. The Calendar supports official holidays.
+This is a plasmoid that is used to show Shamsi Calendar (also known as Persian Calendar or Jalali Calendar) in KDE Plasma available in the [KDE store](https://store.kde.org/p/1460130/). The Calendar supports official holidays.
 
 ![screenshot](./package/contents/img/shamsi-calendar-full.png)
 
