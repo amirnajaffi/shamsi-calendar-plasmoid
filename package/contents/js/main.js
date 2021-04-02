@@ -18,7 +18,7 @@ function startOfWeek (pDate) {
 
 function getYears() {
     const startYear = 1350
-    const endYear = 1500
+    const endYear = 1450
     const years = [];
     
     for (let i = startYear; i <= endYear; i++) 
