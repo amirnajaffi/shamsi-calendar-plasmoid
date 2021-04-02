@@ -64,7 +64,7 @@ Item {
                 popup: Popup {
                     y: yearsCombo.height - 1
                     width: yearsCombo.width
-                    implicitHeight: contentItem.implicitHeight
+                    implicitHeight: 250
                     padding: 1
 
                     contentItem: ListView {
@@ -124,7 +124,7 @@ Item {
                 popup: Popup {
                     y: monthCombo.height - 1
                     width: monthCombo.width
-                    implicitHeight: contentItem.implicitHeight
+                    implicitHeight: 250
                     padding: 1
 
                     contentItem: ListView {
