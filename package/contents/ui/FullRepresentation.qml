@@ -1,5 +1,5 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.15
+import QtQuick.Controls 2.12
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
@@ -51,12 +51,14 @@ Item {
                     width: yearsCombo.width
                     contentItem: Text {
                         text: modelData
-                        color: PlasmaCore.Theme.textColor
+                        // color: PlasmaCore.Theme.textColor
                         elide: Text.ElideRight
                         verticalAlignment: Text.AlignVCenter
                     }
                     highlighted: yearsCombo.highlightedIndex === index
                 }
+
+                contentItem: Text {} // It must exist here otherwise error will occur in QtQuick.Controls below v2.15
 
                 popup: Popup {
                     y: yearsCombo.height - 1
@@ -98,7 +100,7 @@ Item {
                     width: monthCombo.width
                     contentItem: Text {
                         text: name
-                        color: PlasmaCore.Theme.textColor
+                        // color: PlasmaCore.Theme.textColor
                         elide: Text.ElideRight
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -107,10 +109,16 @@ Item {
 
                 onCurrentIndexChanged: function () {
                     if (monthComboModel.get(currentIndex)) {
-                        root.screenDate = Scripts.monthChanged(monthComboModel.get(currentIndex).monthNumber ?? 1, screenDate);
+                        var monthNum = 1;
+                        if (monthComboModel.get(currentIndex).monthNumber) {
+                            monthNum = monthComboModel.get(currentIndex).monthNumber;
+                        }
+                        root.screenDate = Scripts.monthChanged(monthNum, screenDate);
                         root.days = Scripts.daysInMonth(screenDate);
                     }
                 }
+
+                contentItem: Text {} // It must exist here otherwise error will occur in QtQuick.Controls below v2.15
 
                 popup: Popup {
                     y: monthCombo.height - 1

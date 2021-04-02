@@ -38,7 +38,7 @@ function makeYears(modelId) {
 }
 
 function yearChanged(year, currentDate = false) {
-    currentDate = currentDate ?? new persianDate();
+    if (!currentDate) currentDate = new persianDate();
 
     return currentDate.year(year);
 }
@@ -73,7 +73,7 @@ function makeMonths(modelId) {
 }
 
 function monthChanged(month, currentDate = false) {
-    currentDate = currentDate ?? new persianDate();
+    if (!currentDate) currentDate = new persianDate();
 
     return currentDate.month(month);
 }
