@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.15
+import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.4 as Kirigami
