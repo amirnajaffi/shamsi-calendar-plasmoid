@@ -7,6 +7,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import QtQml.Models 2.2
+import org.kde.kirigami 2.4 as Kirigami
 import "../js/dateConverts.js" as Ghamari
 import "../js/holidays.js" as Holidays
 import "../js/persian-date/persian-date.min.js" as PersianDate
@@ -51,7 +52,7 @@ Item {
                     width: yearsCombo.width
                     contentItem: Text {
                         text: modelData
-                        // color: PlasmaCore.Theme.textColor
+                        color: Kirigami.Theme.textColor
                         elide: Text.ElideRight
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -100,7 +101,7 @@ Item {
                     width: monthCombo.width
                     contentItem: Text {
                         text: name
-                        // color: PlasmaCore.Theme.textColor
+                        color: Kirigami.Theme.textColor
                         elide: Text.ElideRight
                         verticalAlignment: Text.AlignVCenter
                     }
