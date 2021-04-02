@@ -28,7 +28,7 @@ Item {
             id: grid
 
             ComboBox {
-                property var _maxWidth: 70
+                property var _maxWidth: 85
                 currentIndex: Scripts.getYearIndexOf(screenDate.year())
                 id: yearsCombo
                 width: _maxWidth
@@ -83,7 +83,7 @@ Item {
             }
 
             ComboBox {
-                property var _maxWidth: 70
+                property var _maxWidth: 85
                 currentIndex: Scripts.getMonthIndexOf(screenDate.month())
                 id: monthCombo
                 width: _maxWidth
