@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.0] - 2021-05-19
+### Added
+- Displaying compact representation in sync with the date change
+- Add 3 new display format
+
 ## [0.2.0] - 2021-04-02
 ### Added
 - CHANGELOG.md
@@ -14,5 +19,6 @@
 ## [0.1.0] - 2020-12-15
 - Initial release.
 
+[1.0.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/1.0.0
 [0.2.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/0.2.0
 [0.1.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/v0.1.0
