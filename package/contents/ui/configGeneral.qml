@@ -35,12 +35,15 @@ Item {
                 ListElement {text: '1399 01 01'; format: 'YYYY MM DD'}
                 ListElement {text: '1399-01-01'; format: 'YYYY-MM-DD'}
                 ListElement {text: '1399/01/01'; format: 'YYYY/MM/DD'}
+                ListElement {text: '1/1'; format: 'M/D'}
                 ListElement {text: '1 فروردین'; format: 'D MMMM'}
+                ListElement {text: '1'; format: 'D'}
                 ListElement {text: '1 فروردین 1399'; format: 'D MMMM YYYY'}
                 ListElement {text: 'شنبه 1 فروردین'; format: 'dddd D MMMM'}
                 ListElement {text: 'ش 1 فروردین'; format: 'ddd D MMMM'}
                 ListElement {text: 'شنبه 1 فرو'; format: 'dddd D MMM'}
                 ListElement {text: 'ش 1 فرو'; format: 'ddd D MMM'}
+                ListElement {text: '1 فرو'; format: 'D MMM'}
                 ListElement {text: 'شنبه 1 فروردین 1399'; format: 'dddd D MMMM YYYY'}
                 ListElement {text: 'ش 1 فروردین 1399'; format: 'ddd D MMMM YYYY'}
                 ListElement {text: 'شنبه 1 فرو 1399'; format: 'dddd D MMM YYY'}
