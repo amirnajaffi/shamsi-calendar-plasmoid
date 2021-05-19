@@ -21,6 +21,15 @@ Item {
     Plasmoid.toolTipMainText: todayDate.format('dddd')
     Plasmoid.toolTipSubText: todayDate.format('D MMMM YYYY')
 
+    Timer {
+       id: dateTimer
+       interval: 60000
+       repeat: true
+       running: true
+       triggeredOnStart: true
+       onTriggered: todayDate = new persianDate()
+   }
+
     function isToday(date) {
         return todayDate.year() == date[0] && todayDate.month() == date[1] && todayDate.date()  == date[2];
     }
