@@ -6,17 +6,16 @@ import "../js/main.js" as Scripts
 
 Item {
     id: root
-    property bool showTooltip:         plasmoid.configuration.showTooltip
-    property var selectedDate: new persianDate();
-    property var screenDate: new persianDate();
-    property var todayDate: new persianDate();
+    property bool showTooltip: plasmoid.configuration.showTooltip
+    property var selectedDate: new persianDate()
+    property var screenDate: new persianDate()
+    property var todayDate: new persianDate()
     property var week: ['شنبه', '1شنبه', '2شنبه', '3شنبه', '4شنبه', '5شنبه', 'جمعه']
-    property var days: Scripts.daysInMonth(root.screenDate);
-    property int startOfWeek: Scripts.startOfWeek(screenDate);
+    property var days: Scripts.daysInMonth(root.screenDate)
+    property int startOfWeek: Scripts.startOfWeek(screenDate)
 
     Plasmoid.compactRepresentation: CompactRepresentation {}
     Plasmoid.fullRepresentation: FullRepresentation {}
-
 	// Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
     Plasmoid.toolTipMainText: todayDate.format('dddd')
