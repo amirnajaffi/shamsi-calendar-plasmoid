@@ -5,69 +5,75 @@ import sys
 import zipfile
 import subprocess
 
-def installed():
-    return os.path.exists(os.path.expanduser('~/.local/share/plasma/plasmoids/org.kde.plasma.shamsi-calendar'))
+class Installer:
 
-def getLatestVersion():
-    print('Checking for latest version...')
-    response = requests.get("https://api.github.com/repos/amirnajaffi/shamsi-calendar-plasmoid/releases/latest")
-    lastVersion = response.json()['name'].strip()
-    print('Latest Version:', lastVersion)
-    return lastVersion
+    githubUrl = 'https://api.github.com/repos/amirnajaffi/shamsi-calendar-plasmoid/releases/latest'
+    isInstalled = False
 
-def getInstalledVersion():
-    print('Checking for installed version...')
-    file = open(os.path.expanduser('~/.local/share/plasma/plasmoids/org.kde.plasma.shamsi-calendar/metadata.desktop'), "r")
-    for line in file.readlines():
-        lineList = line.partition('=')
-        if (lineList[0] == "X-KDE-PluginInfo-Version" and lineList[2]):
-            print('Installed Version:', lineList[2].strip())
-            return lineList[2].strip()
-    return False
+    def __init__(self):
+        self.isInstalled = os.path.exists(os.path.expanduser('~/.local/share/plasma/plasmoids/org.kde.plasma.shamsi-calendar'))
 
-# def remove():
+    def getLatestVersion(self):
+        print('Checking for latest version...')
+        response = requests.get(self.githubUrl)
+        lastVersion = response.json()['name'].strip()
+        print('Latest Version:', lastVersion)
+        return lastVersion
 
-def update():
-    response = requests.get("https://api.github.com/repos/amirnajaffi/shamsi-calendar-plasmoid/releases/latest")
-    tmpZipFile = '/tmp/shamsi-calendar.zip'
-    tempFolder = '/tmp/shamsi-calendar/'
-    urllib.request.urlretrieve(response.json()['zipball_url'], tmpZipFile)
+    def getInstalledVersion(self):
+        print('Checking for installed version...')
+        file = open(os.path.expanduser('~/.local/share/plasma/plasmoids/org.kde.plasma.shamsi-calendar/metadata.desktop'), "r")
+        for line in file.readlines():
+            lineList = line.partition('=')
+            if (lineList[0] == "X-KDE-PluginInfo-Version" and lineList[2]):
+                print('Installed Version:', lineList[2].strip())
+                return lineList[2].strip()
+        return False
 
-    with zipfile.ZipFile(tmpZipFile, 'r') as zipRef:
-        zipRef.extractall(tempFolder)
-        names = [info.filename for info in zipRef.infolist() if info.is_dir()]
-    
-    subprocess.run(['kpackagetool5 -t Plasma/Applet --remove org.kde.plasma.shamsi-calendar'], shell=True)
-    subprocess.run(['kpackagetool5 -t Plasma/Applet --install ' + tempFolder + names[0] + 'package'], shell=True)
-    print('Shamsi Calendar updated successfully')
-    sys.exit()
+    def update(self):
+        response = requests.get("https://api.github.com/repos/amirnajaffi/shamsi-calendar-plasmoid/releases/latest")
+        tmpZipFile = '/tmp/shamsi-calendar.zip'
+        tempFolder = '/tmp/shamsi-calendar/'
+        urllib.request.urlretrieve(response.json()['zipball_url'], tmpZipFile)
 
-def install():
-    response = requests.get("https://api.github.com/repos/amirnajaffi/shamsi-calendar-plasmoid/releases/latest")
-    tmpZipFile = '/tmp/shamsi-calendar.zip'
-    tempFolder = '/tmp/shamsi-calendar/'
-    urllib.request.urlretrieve(response.json()['zipball_url'], tmpZipFile)
+        with zipfile.ZipFile(tmpZipFile, 'r') as zipRef:
+            zipRef.extractall(tempFolder)
+            names = [info.filename for info in zipRef.infolist() if info.is_dir()]
+        
+        subprocess.run(['kpackagetool5 -t Plasma/Applet --remove org.kde.plasma.shamsi-calendar'], shell=True)
+        subprocess.run(['kpackagetool5 -t Plasma/Applet --install ' + tempFolder + names[0] + 'package'], shell=True)
+        print('Shamsi Calendar updated successfully')
+        sys.exit()
 
-    with zipfile.ZipFile(tmpZipFile, 'r') as zipRef:
-        zipRef.extractall(tempFolder)
-        names = [info.filename for info in zipRef.infolist() if info.is_dir()]
-    
-    subprocess.run(['kpackagetool5 -t Plasma/Applet --install ' + tempFolder + names[0] + 'package'], shell=True)
-    print('Shamsi Calendar installed successfully')
-    sys.exit()
+    def install(self):
+        response = requests.get(self.githubUrl)
+        tmpZipFile = '/tmp/shamsi-calendar.zip'
+        tempFolder = '/tmp/shamsi-calendar/'
+        urllib.request.urlretrieve(response.json()['zipball_url'], tmpZipFile)
+
+        with zipfile.ZipFile(tmpZipFile, 'r') as zipRef:
+            zipRef.extractall(tempFolder)
+            names = [info.filename for info in zipRef.infolist() if info.is_dir()]
+        
+        subprocess.run(['kpackagetool5 -t Plasma/Applet --install ' + tempFolder + names[0] + 'package'], shell=True)
+        print('Shamsi Calendar installed successfully')
+        sys.exit()
 
 # Executing...
+installer = Installer()
+
 print('Checking for Shamsi Calendar on your system...')
+# installer.()
 
-if not installed():
+if not installer.isInstalled:
     print('You have not installed Shamsi Calendar')
-    install()
+    installer.install()
 
-if installed():
+if installer.isInstalled:
     print('You have installed Shamsi Calender')
 
-    latestVersion = getLatestVersion()
-    installedVersion = getInstalledVersion()
+    latestVersion = installer.getLatestVersion()
+    installedVersion = installer.getInstalledVersion()
     latestVersion = latestVersion.replace('.', '')
     installedVersion = installedVersion.replace('.', '')
 
@@ -78,4 +84,4 @@ if installed():
     if (installedVersion < latestVersion):
         print('There is newer version of Shamsi Calendar')
         print('Updating...')
-        update()
+        installer.update()
