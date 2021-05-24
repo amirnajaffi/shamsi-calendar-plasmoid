@@ -9,15 +9,22 @@ class Installer:
 
     githubUrl = 'https://api.github.com/repos/amirnajaffi/shamsi-calendar-plasmoid/releases/latest'
     isInstalled = False
+    installedVersion = 0
+    latestVersion = 0
 
     def __init__(self):
+        print('Checking for Shamsi Calendar on your system...')
         self.isInstalled = os.path.exists(os.path.expanduser('~/.local/share/plasma/plasmoids/org.kde.plasma.shamsi-calendar'))
+        self.getLatestVersion()
+        self.getInstalledVersion()
 
     def getLatestVersion(self):
         print('Checking for latest version...')
         response = requests.get(self.githubUrl)
         lastVersion = response.json()['name'].strip()
+        self.latestVersion = lastVersion
         print('Latest Version:', lastVersion)
+        
         return lastVersion
 
     def getInstalledVersion(self):
@@ -26,8 +33,11 @@ class Installer:
         for line in file.readlines():
             lineList = line.partition('=')
             if (lineList[0] == "X-KDE-PluginInfo-Version" and lineList[2]):
-                print('Installed Version:', lineList[2].strip())
-                return lineList[2].strip()
+                installedVer = lineList[2].strip()
+                print('Installed Version:', installedVer)
+                self.installedVersion = installedVer
+                return installedVer
+        print('You have not install Shamsi Calendar')
         return False
 
     def update(self):
@@ -62,8 +72,6 @@ class Installer:
 # Executing...
 installer = Installer()
 
-print('Checking for Shamsi Calendar on your system...')
-
 if not installer.isInstalled:
     print('You have not installed Shamsi Calendar')
     installer.install()
@@ -71,11 +79,10 @@ if not installer.isInstalled:
 if installer.isInstalled:
     print('You have installed Shamsi Calender')
 
-    latestVersion = installer.getLatestVersion()
-    installedVersion = installer.getInstalledVersion()
-    latestVersion = latestVersion.replace('.', '')
-    installedVersion = installedVersion.replace('.', '')
+    latestVersion = installer.latestVersion.replace('.', '')
+    installedVersion = installer.installedVersion.replace('.', '')
 
+    # print('Checking for update...')
     if (installedVersion == latestVersion ):
         print('You have already installed latest version')
         sys.exit()
@@ -84,3 +91,4 @@ if installer.isInstalled:
         print('There is newer version of Shamsi Calendar')
         print('Updating...')
         installer.update()
+        sys.exit()
