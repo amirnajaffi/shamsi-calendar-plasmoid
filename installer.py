@@ -31,7 +31,7 @@ class Installer:
         return False
 
     def update(self):
-        response = requests.get("https://api.github.com/repos/amirnajaffi/shamsi-calendar-plasmoid/releases/latest")
+        response = requests.get(self.githubUrl)
         tmpZipFile = '/tmp/shamsi-calendar.zip'
         tempFolder = '/tmp/shamsi-calendar/'
         urllib.request.urlretrieve(response.json()['zipball_url'], tmpZipFile)
@@ -63,7 +63,6 @@ class Installer:
 installer = Installer()
 
 print('Checking for Shamsi Calendar on your system...')
-# installer.()
 
 if not installer.isInstalled:
     print('You have not installed Shamsi Calendar')
