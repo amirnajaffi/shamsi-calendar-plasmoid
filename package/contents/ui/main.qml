@@ -10,7 +10,7 @@ Item {
     property var selectedDate: new persianDate()
     property var screenDate: new persianDate()
     property var todayDate: new persianDate()
-    property var week: ['شنبه', '1شنبه', '2شنبه', '3شنبه', '4شنبه', '5شنبه', 'جمعه']
+    property var week: ['شنبه', '۱شنبه', '۲شنبه', '۳شنبه', '۴شنبه', 'پنجشنبه', 'جمعه']
     property var days: Scripts.daysInMonth(root.screenDate)
     property int startOfWeek: Scripts.startOfWeek(screenDate)
 
