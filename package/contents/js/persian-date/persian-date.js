@@ -1,11 +1,11 @@
 /*!
- * 
+ *
  * persian-date -  1.1.0
  * Reza Babakhani <babakhani.reza@gmail.com>
  * http://babakhani.github.io/PersianWebToolkit/docs/persian-date/
- * Under MIT license 
- * 
- * 
+ * Under MIT license
+ *
+ *
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -3063,7 +3063,7 @@ module.exports = {
     persian: {
         months: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
         monthsShort: ['فرو', 'ارد', 'خرد', 'تیر', 'مرد', 'شهر', 'مهر', 'آبا', 'آذر', 'دی', 'بهم', 'اسف'],
-        weekdays: ['شنبه', 'یکشنبه', 'دوشنبه', 'سه شنبه', 'چهار شنبه', '\u067E\u0646\u062C\u200C\u0634\u0646\u0628\u0647', 'جمعه'],
+        weekdays: ['شنبه', '\u06CC\u06A9\u200C\u0634\u0646\u0628\u0647', 'دوشنبه', '\u0633\u0647\u200C\u0634\u0646\u0628\u0647', '\u0686\u0647\u0627\u0631\u0634\u0646\u0628\u0647', '\u067E\u0646\u062C\u200C\u0634\u0646\u0628\u0647', 'جمعه'],
         weekdaysShort: ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'],
         weekdaysMin: ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'],
         persianDaysName: ['اورمزد', 'بهمن', 'اوردیبهشت', 'شهریور', 'سپندارمذ', 'خورداد', 'امرداد', 'دی به آذز', 'آذز', 'آبان', 'خورشید', 'ماه', 'تیر', 'گوش', 'دی به مهر', 'مهر', 'سروش', 'رشن', 'فروردین', 'بهرام', 'رام', 'باد', 'دی به دین', 'دین', 'ارد', 'اشتاد', 'آسمان', 'زامیاد', 'مانتره سپند', 'انارام', 'زیادی']
@@ -3266,15 +3266,15 @@ module.exports = {
     if (input[2] < 1 || input[1] > 31) {
       out = false;
     }
-    // Check hour 
+    // Check hour
     if (input[3] < 0 || input[3] > 24) {
       out = false;
     }
-    // Check minute 
+    // Check minute
     if (input[4] < 0 || input[4] > 60) {
       out = false;
     }
-    // Check second 
+    // Check second
     if (input[5] < 0 || input[5] > 60) {
       out = false;
     }
