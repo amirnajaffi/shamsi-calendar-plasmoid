@@ -27,6 +27,16 @@ Item {
         Component.onCompleted: Store.setStore(store)
     }
 
+    PlasmaCore.DataSource {
+        id: localTime
+        engine: "time"
+        connectedSources: ["Local"]
+        interval: 60000
+        onNewData: (sourceName, data) => {
+            // Later...
+        }
+    }
+
     Timer {
        id: dateTimer
        interval: 60000
