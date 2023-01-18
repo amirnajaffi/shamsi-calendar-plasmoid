@@ -3,6 +3,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "../js/persian-date/persian-date.min.js" as PersianDate
 import "../js/main.js" as Scripts
+import "../js/store.js" as Store
 
 Item {
     id: root
@@ -20,6 +21,11 @@ Item {
 
     Plasmoid.toolTipMainText: todayDate.format('dddd')
     Plasmoid.toolTipSubText: todayDate.format('D MMMM YYYY')
+
+    QtObject {
+        id: store
+        Component.onCompleted: Store.setStore(store)
+    }
 
     Timer {
        id: dateTimer
