@@ -5,6 +5,7 @@ import "../js/store.js" as Store
 import "../js/bin/persian-date.js" as PersianDate
 import "../js/bin/jalaali.js" as Jalaali
 import "../js/bin/jalalidate.js" as JalaliDate
+import "../js/calendar.js" as CalendarJS
 import "../js/main.js" as Scripts
 
 Item {
@@ -18,7 +19,7 @@ Item {
     property int startOfWeek: Scripts.startOfWeek(screenDate)
 
     Plasmoid.compactRepresentation: CompactRepresentation {}
-    Plasmoid.fullRepresentation: FullRepresentation {}
+    Plasmoid.fullRepresentation: Calendar {}
 	// Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
     Plasmoid.toolTipMainText: todayDate.format('dddd')
@@ -27,6 +28,12 @@ Item {
     QtObject {
         id: qmlStore
         objectName: 'qmlStore'
+        property QtObject calendarSlice: QtObject {
+            id: calendarSlice
+            objectName: 'calendarSlice'
+            property var jToday // array
+            property var gToday // array
+        }
     }
 
     PlasmaCore.DataSource {
@@ -35,7 +42,7 @@ Item {
         connectedSources: ["Local"]
         interval: 60000
         onNewData: (sourceName, data) => {
-            // Later...
+            Qt.calendar.setDate(data.DateTime);
         }
     }
 
@@ -50,6 +57,7 @@ Item {
 
     Component.onCompleted: {
         Qt.storeUtils.setStore(qmlStore);
+        Qt.calendar.setDate(localTime.data.Local.DateTime);
     }
 
     function isToday(date) {
