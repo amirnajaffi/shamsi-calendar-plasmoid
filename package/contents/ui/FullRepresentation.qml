@@ -8,9 +8,9 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import QtQml.Models 2.2
 import org.kde.kirigami 2.4 as Kirigami
-import "../js/dateConverts.js" as Ghamari
+import "../js/bin/jalalidate.js" as Ghamari
 import "../js/holidays.js" as Holidays
-import "../js/persian-date/persian-date.min.js" as PersianDate
+import "../js/bin/persian-date.js" as PersianDate
 import "../js/main.js" as Scripts
 
 Item {

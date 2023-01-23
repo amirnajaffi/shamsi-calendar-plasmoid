@@ -1,3 +1,9 @@
+/* 
+Source: https://github.com/babakhani/PersianDate
+*/
+
+.pragma library
+
 /*!
  * 
  * persian-date -  1.1.0

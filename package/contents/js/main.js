@@ -89,8 +89,8 @@ function isHoliday(date) {
     const lh = Holidays.getLunarHolidays();
 
     // For performance hits i'm using jalali_to_gregorian instead of persianDate library
-    const gregorianDate = Ghamari.jalali_to_gregorian(date[0], date[1], date[2]);
-    const lunarDate = Ghamari.gregorian_to_islamic(gregorianDate[0], gregorianDate[1], gregorianDate[2]);
+    const gregorianDate = Qt.jalalidate.jalali_to_gregorian(date[0], date[1], date[2]);
+    const lunarDate = Qt.jalalidate.gregorian_to_islamic(gregorianDate[0], gregorianDate[1], gregorianDate[2]);
 
     return ph[date[1]][date[2]] != undefined || lh[lunarDate[1]][lunarDate[2]] != undefined;
 }
@@ -98,8 +98,8 @@ function isHoliday(date) {
 function getHolidays(pDate) {
     const persianHodilays = Holidays.getPersianHolidays();
     const lunarHolidays = Holidays.getLunarHolidays();
-    const gregorianDate = Ghamari.jalali_to_gregorian(pDate.year(), pDate.month(), pDate.date());
-    const lunarDate = Ghamari.gregorian_to_islamic(gregorianDate[0], gregorianDate[1], gregorianDate[2]);
+    const gregorianDate = Qt.jalalidate.jalali_to_gregorian(pDate.year(), pDate.month(), pDate.date());
+    const lunarDate = Qt.jalalidate.gregorian_to_islamic(gregorianDate[0], gregorianDate[1], gregorianDate[2]);
     const persianHolidaysResult = persianHodilays[pDate.month()][pDate.date()];
     const lunarHolidaysResult = lunarHolidays[lunarDate[1]][lunarDate[2]];
 

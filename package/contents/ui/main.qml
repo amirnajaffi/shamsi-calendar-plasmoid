@@ -1,9 +1,11 @@
 import QtQuick 2.12
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import "../js/persian-date/persian-date.min.js" as PersianDate
-import "../js/main.js" as Scripts
 import "../js/store.js" as Store
+import "../js/bin/persian-date.js" as PersianDate
+import "../js/bin/jalaali.js" as Jalaali
+import "../js/bin/jalalidate.js" as JalaliDate
+import "../js/main.js" as Scripts
 
 Item {
     id: root
