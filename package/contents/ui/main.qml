@@ -9,58 +9,58 @@ import "../js/calendar.js" as CalendarJS
 import "../js/main.js" as Scripts
 
 Item {
-    id: root
-    property bool showTooltip: plasmoid.configuration.showTooltip
-    property var selectedDate: new persianDate()
-    property var screenDate: new persianDate()
-    property var todayDate: new persianDate()
-    property var week: ['شنبه', '1شنبه', '2شنبه', '3شنبه', '4شنبه', '5شنبه', 'جمعه']
-    property var days: Scripts.daysInMonth(root.screenDate)
-    property int startOfWeek: Scripts.startOfWeek(screenDate)
+  id: root
+  property bool showTooltip: plasmoid.configuration.showTooltip
+  property var selectedDate: new persianDate()
+  property var screenDate: new persianDate()
+  property var todayDate: new persianDate()
+  property var week: ['شنبه', '1شنبه', '2شنبه', '3شنبه', '4شنبه', '5شنبه', 'جمعه']
+  property var days: Scripts.daysInMonth(root.screenDate)
+  property int startOfWeek: Scripts.startOfWeek(screenDate)
 
-    Plasmoid.compactRepresentation: CompactRepresentation {}
-    Plasmoid.fullRepresentation: Calendar {}
-	// Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+  Plasmoid.compactRepresentation: CompactRepresentation {}
+  Plasmoid.fullRepresentation: Calendar {}
+  // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
-    Plasmoid.toolTipMainText: todayDate.format('dddd')
-    Plasmoid.toolTipSubText: todayDate.format('D MMMM YYYY')
+  Plasmoid.toolTipMainText: todayDate.format('dddd')
+  Plasmoid.toolTipSubText: todayDate.format('D MMMM YYYY')
 
-    QtObject {
-        id: qmlStore
-        objectName: 'qmlStore'
-        property QtObject calendarSlice: QtObject {
-            id: calendarSlice
-            objectName: 'calendarSlice'
-            property var jToday // array
-            property var gToday // array
-        }
+  QtObject {
+    id: qmlStore
+    objectName: 'qmlStore'
+    property QtObject calendarSlice: QtObject {
+      id: calendarSlice
+      objectName: 'calendarSlice'
+      property var jToday // array
+      property var gToday // array
     }
+  }
 
-    PlasmaCore.DataSource {
-        id: localTime
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60000
-        onNewData: (sourceName, data) => {
-            Qt.calendar.setDate(data.DateTime);
-        }
+  PlasmaCore.DataSource {
+    id: localTime
+    engine: "time"
+    connectedSources: ["Local"]
+    interval: 60000
+    onNewData: (sourceName, data) => {
+      Qt.calendar.setDate(data.DateTime);
     }
+  }
 
-    Timer {
-       id: dateTimer
-       interval: 60000
-       repeat: true
-       running: true
-       triggeredOnStart: true
-       onTriggered: todayDate = new persianDate()
-   }
+  Timer {
+    id: dateTimer
+    interval: 60000
+    repeat: true
+    running: true
+    triggeredOnStart: true
+    onTriggered: todayDate = new persianDate()
+  }
 
-    Component.onCompleted: {
-        Qt.storeUtils.setStore(qmlStore);
-        Qt.calendar.setDate(localTime.data.Local.DateTime);
-    }
+  Component.onCompleted: {
+    Qt.storeUtils.setStore(qmlStore);
+    Qt.calendar.setDate(localTime.data.Local.DateTime);
+  }
 
-    function isToday(date) {
-        return todayDate.year() == date[0] && todayDate.month() == date[1] && todayDate.date()  == date[2];
-    }
+  function isToday(date) {
+    return todayDate.year() == date[0] && todayDate.month() == date[1] && todayDate.date()  == date[2];
+  }
 }
