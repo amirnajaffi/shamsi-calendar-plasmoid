@@ -25,8 +25,8 @@ Item {
     Plasmoid.toolTipSubText: todayDate.format('D MMMM YYYY')
 
     QtObject {
-        id: store
-        Component.onCompleted: Store.setStore(store)
+        id: qmlStore
+        objectName: 'qmlStore'
     }
 
     PlasmaCore.DataSource {
@@ -47,6 +47,10 @@ Item {
        triggeredOnStart: true
        onTriggered: todayDate = new persianDate()
    }
+
+    Component.onCompleted: {
+        Qt.storeUtils.setStore(qmlStore);
+    }
 
     function isToday(date) {
         return todayDate.year() == date[0] && todayDate.month() == date[1] && todayDate.date()  == date[2];

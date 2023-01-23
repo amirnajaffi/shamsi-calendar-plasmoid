@@ -1,7 +1,11 @@
+/*
+Application store
+*/
+
 .pragma library
 
-var store
-
-function setStore(source) {
-  store = source
+Qt.storeUtils = {
+  setStore: function(source) {
+    Qt.store = source
+  }
 }
