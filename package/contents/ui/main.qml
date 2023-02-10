@@ -10,7 +10,6 @@ import "../js/main.js" as Scripts
 
 Item {
   id: root
-  property bool showTooltip: plasmoid.configuration.showTooltip
   property var selectedDate: new persianDate()
   property var screenDate: new persianDate()
   property var todayDate: new persianDate()
