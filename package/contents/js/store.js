@@ -4,8 +4,11 @@ Application store
 
 .pragma library
 
-Qt.storeUtils = {
+// Init Shamsi Calendar Object
+Qt._sc_ = {}
+
+Qt._sc_.storeUtils = {
   setStore: function (source) {
-    Qt.store = source;
+    Qt._sc_.store = source;
   },
 };

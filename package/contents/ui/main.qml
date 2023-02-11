@@ -41,7 +41,7 @@ Item {
     connectedSources: ["Local"]
     interval: 60000
     onNewData: (sourceName, data) => {
-      Qt.calendar.setDate(data.DateTime);
+      Qt._sc_.calendar.setDate(data.DateTime);
     }
   }
 
@@ -55,8 +55,8 @@ Item {
   }
 
   Component.onCompleted: {
-    Qt.storeUtils.setStore(qmlStore);
-    Qt.calendar.setDate(localTime.data.Local.DateTime);
+    Qt._sc_.storeUtils.setStore(qmlStore);
+    Qt._sc_.calendar.setDate(localTime.data.Local.DateTime);
   }
 
   function isToday(date) {
