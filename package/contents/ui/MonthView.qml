@@ -1,6 +1,7 @@
 import QtQuick 2.12
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Grid {
@@ -60,11 +61,16 @@ Grid {
           maximumLineCount: 1
           elide: Text.ElideRight
           font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
-          font.weight: Font.DemiBold          
-          // background: Rectangle {
-          //   radius: width * 10
-          //   color: 'blue'
-          // }
+          font.weight: Font.DemiBold
+
+          RoundedHighlight {
+            property bool isHovered: false
+            id: monthViewHighlight
+            anchors.fill: parent
+            hovered: true
+            visible: true
+            opacity: Qt._sc_.calendarUI.monthView_highlightOpacity(isHovered, modelData)
+          }
         } // end cell top (number)
 
         Row { // cell bottom (event badges)
@@ -91,10 +97,10 @@ Grid {
 
       MouseArea {
         id: labelMouseArea
-        hoverEnabled: true
         anchors.fill: parent
-        // onEntered: yearViewHighlight.isHovered = true
-        // onExited: yearViewHighlight.isHovered = false
+        hoverEnabled: true
+        onEntered: monthViewHighlight.isHovered = true
+        onExited: monthViewHighlight.isHovered = false
         onClicked: {
           Qt._sc_.calendar.reducers.setSelectedDate(modelData);
         }

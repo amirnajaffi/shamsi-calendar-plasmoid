@@ -1,4 +1,4 @@
-.pragma library
+// .pragma library
 
 Qt._sc_.calendarUI = {
   headerNavigation_goNextModelState: function (nextDirection) {
@@ -54,6 +54,24 @@ Qt._sc_.calendarUI = {
       stack.pop();
       return;
     }
+  },
+
+  monthView_highlightOpacity: function (isHovered, monthCellData) {
+    const { selectedDate, jToday } = Qt._sc_.store.calendarSlice;
+    if (jToday[0] === monthCellData[0] && jToday[1] === monthCellData[1] && jToday[2] === monthCellData[2]) {
+      return 0.9; // current date
+    }
+    if (
+      selectedDate &&
+      selectedDate.length === 3 &&
+      selectedDate[0] === monthCellData[0] &&
+      selectedDate[1] === monthCellData[1] &&
+      selectedDate[2] === monthCellData[2]
+    ) {
+      return 0.4; // selected
+    }
+    if (isHovered) return 0.1; // hovered
+    return 0; // no highlight
   },
 
   yearView_highlightOpacity: function (isHovered, celMonth) {
