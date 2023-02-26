@@ -1,4 +1,4 @@
-// .pragma library
+.pragma library
 
 Qt._sc_.calendarUI = {
   headerNavigation_goNextModelState: function (nextDirection) {
@@ -74,21 +74,26 @@ Qt._sc_.calendarUI = {
     return 0; // no highlight
   },
 
-  yearView_highlightOpacity: function (isHovered, celMonth) {
+  yearView_highlightOpacity: function (isHovered, monthNumberCell) {
     const { selectedDate, surface_yearAndMonth, jToday } = Qt._sc_.store.calendarSlice;
-    if (surface_yearAndMonth[0] === jToday[0] && celMonth === jToday[1]) return 0.9; // current date
-    if (selectedDate && selectedDate.length === 3) {
-      if (surface_yearAndMonth[0] === selectedDate[0] && selectedDate[1] === celMonth) return 0.4; // selected
+    if (surface_yearAndMonth[0] === jToday[0] && monthNumberCell === jToday[1]) return 0.9; // current date
+    if (
+      selectedDate &&
+      selectedDate.length === 3 &&
+      surface_yearAndMonth[0] === selectedDate[0] &&
+      selectedDate[1] === monthNumberCell
+    ) {
+      return 0.4; // selected
     }
     if (isHovered) return 0.1; // hovered
     return 0; // no highlight
   },
 
-  decadeView_highlightOpacity: function (isHovered, cellYear) {
+  decadeView_highlightOpacity: function (isHovered, yearNumberCell) {
     const { selectedDate, jToday } = Qt._sc_.store.calendarSlice;
-    if (jToday[0] === cellYear) return 0.9; // current date
-    if (selectedDate && selectedDate.length === 3) {
-      if (selectedDate[0] === cellYear) return 0.4; // selected
+    if (jToday[0] === yearNumberCell) return 0.9; // current date
+    if (selectedDate && selectedDate.length === 3 && selectedDate[0] === yearNumberCell) {
+      return 0.4; // selected
     }
     if (isHovered) return 0.1; // hovered
     return 0; // no highlight
