@@ -32,9 +32,8 @@ Grid {
 
   Repeater { // days number Repeater
     id: daysRepeater
-    model: Array.from(Array(42).keys()) // TODO: temp data for ui testing purpose
-
-    Item { // cell container Item
+    model: Qt._sc_.store.calendarSlice.surface_daysOfMonth
+    delegate: Item { // cell container Item
       id: cellContainer
       width: calendar.cellWidth
       height: calendar.cellHeight
@@ -51,7 +50,7 @@ Grid {
         spacing: 0
 
         PlasmaComponents3.Label { // cell top (number)
-          text: modelData
+          text: modelData[2]
           width: height
           height: monthView.dayNumberHeight
           anchors.horizontalCenter: parent.horizontalCenter
@@ -62,10 +61,10 @@ Grid {
           elide: Text.ElideRight
           font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
           font.weight: Font.DemiBold          
-          background: Rectangle {
-            radius: width * 10
-            color: 'blue'
-          }
+          // background: Rectangle {
+          //   radius: width * 10
+          //   color: 'blue'
+          // }
         } // end cell top (number)
 
         Row { // cell bottom (event badges)
@@ -89,6 +88,18 @@ Grid {
         } // end cell bottom (event badges)
 
       } // end column
+
+      MouseArea {
+        id: labelMouseArea
+        hoverEnabled: true
+        anchors.fill: parent
+        // onEntered: yearViewHighlight.isHovered = true
+        // onExited: yearViewHighlight.isHovered = false
+        onClicked: {
+          Qt._sc_.calendar.reducers.setSelectedDate(modelData);
+        }
+      }
+
     } // end cell container Item
   } // end days number Repeater
 } // end Grid

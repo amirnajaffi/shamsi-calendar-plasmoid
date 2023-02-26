@@ -4,9 +4,8 @@ import QtQuick.Layouts 1.15
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 PlasmaExtras.Representation {
   id: calendar
@@ -46,7 +45,7 @@ PlasmaExtras.Representation {
 
       PlasmaComponents3.Label { // header month section
         id: monthLabel
-        text: "February"
+        text: Qt._sc_.store.calendarSlice.surface_yearAndMonth[1]
         Layout.maximumWidth: monthLabel.paintedWidth
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignLeft
@@ -58,15 +57,13 @@ PlasmaExtras.Representation {
         font.weight: Font.DemiBold
         MouseArea {
           anchors.fill: parent
-          onClicked: {
-            stack.push(yearViewComponent);
-          }
+          onClicked: Qt._sc_.calendarUI.stackNavigation_toOrFromYearView()
         }
       }
 
       PlasmaComponents3.Label { // header year section
         id: yearLabel
-        text: "2022"
+        text: Qt._sc_.store.calendarSlice.surface_yearAndMonth[0]
         Layout.maximumWidth: yearLabel.paintedWidth
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignLeft
@@ -78,9 +75,7 @@ PlasmaExtras.Representation {
         font.weight: Font.Light
         MouseArea {
           anchors.fill: parent
-          onClicked: {
-            stack.push(decadeViewComponent);
-          }
+          onClicked: Qt._sc_.calendarUI.stackNavigation_toOrFromDecadeView()
         }
       }
 
@@ -92,38 +87,45 @@ PlasmaExtras.Representation {
         spacing: 0
 
         PlasmaComponents3.ToolButton {
-          property string displayText: "Today"
           id: todayButton
+          property string displayText: Qt._sc_.calendarUI.headerNavigation_buttonName('current')
           icon.name: "go-jump-today"
           Accessible.description: displayText
-          onClicked: function() {}
+          onClicked: Qt._sc_.calendarUI.headerNavigation_goNextModelState('current')
           PlasmaComponents3.ToolTip {
             text: parent.displayText
           }
         }
 
         PlasmaComponents3.ToolButton {
-          property string displayText: "Previous Month"
+          property string displayText: Qt._sc_.calendarUI.headerNavigation_buttonName('prev')
           id: previousButton
           icon.name: "go-up"
           Accessible.description: displayText
-          onClicked: function() {}
+          onClicked: Qt._sc_.calendarUI.headerNavigation_goNextModelState('prev')
           PlasmaComponents3.ToolTip {
             text: parent.displayText
           }
         }
 
         PlasmaComponents3.ToolButton {
-          property string displayText: "Next Month"
+          property string displayText: Qt._sc_.calendarUI.headerNavigation_buttonName('next')
           id: nextButton
           icon.name: "go-down"
           Accessible.description: displayText
-          onClicked: function() {}
+          onClicked: Qt._sc_.calendarUI.headerNavigation_goNextModelState('next')
           PlasmaComponents3.ToolTip {
             text: parent.displayText
           }
         }
 
+        Component.onCompleted: {
+          qmlStore.uiReference.monthLabel = monthLabel
+          qmlStore.uiReference.yearLabel = yearLabel
+          qmlStore.uiReference.todayButton = todayButton
+          qmlStore.uiReference.previousButton = previousButton
+          qmlStore.uiReference.nextButton = nextButton
+        }
       } // end header buttons RowLayout
     } // End header RowLayout
   } // End header PlasmaExtras.PlasmoidHeading
@@ -143,8 +145,12 @@ PlasmaExtras.Representation {
       anchors.fill: parent
       initialItem: MonthViewAndEvents {
         id: monthViewAndEvents
+        objectName: Qt._sc_.const.stack.MONTH_VIEW_AND_EVENTS.objectName
       }
+
+      Component.onCompleted: qmlStore.uiReference.stack = stack
     }
+
   } // end contentItem
 
   footer: PlasmaExtras.PlasmoidHeading {
@@ -185,8 +191,8 @@ PlasmaExtras.Representation {
   } // end footer PlasmaExtras.PlasmoidHeading
 
   component MonthViewAndEvents: Item {
-    property Grid monthView: _monthView
-    property Column events: _events
+    property alias monthView: _monthView
+    property alias events: _events
 
     MonthView {
       id: _monthView
@@ -206,15 +212,20 @@ PlasmaExtras.Representation {
   Component {
     id: yearViewComponent
     YearView {
-      id: yearView
+      objectName: Qt._sc_.const.stack.YEAR_VIEW.objectName
     }
   }
 
   Component {
     id: decadeViewComponent
     DecadeView {
-      id: decadeView
+      objectName: Qt._sc_.const.stack.DECADE_VIEW.objectName
     }
+  }
+
+  Component.onCompleted: {
+    qmlStore.uiReference.yearViewComponent = yearViewComponent
+    qmlStore.uiReference.decadeViewComponent = decadeViewComponent
   }
 
 } // end PlasmaExtras.Representation
