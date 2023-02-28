@@ -6,6 +6,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import "../js/store.js" as Store
 import "../js/constants.js" as Constants
+import "../js/bin/i18next.js" as I18next
+import "../js/translate.js" as Translate
 import "../js/bin/persian-date.js" as PersianDate
 import "../js/bin/jalaali.js" as Jalaali
 import "../js/bin/jalalidate.js" as JalaliDate
