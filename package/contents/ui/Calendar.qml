@@ -18,14 +18,15 @@ PlasmaExtras.Representation {
 
   property int headerHeight: Math.round(PlasmaCore.Units.gridUnit * 3.15)
   property int footerHeight: Math.round(PlasmaCore.Units.gridUnit * 2)
-  property int eventsHeight: eventsData.length * PlasmaCore.Units.gridUnit
+  property int eventsHeight: PlasmaCore.Units.gridUnit * 6
   property int cellWidth: Math.round(( width - (monthViewAndEvents.monthView.columnSpacing * (monthViewAndEvents.monthView.columns - 1)) ) / monthViewAndEvents.monthView.columns)
   property int cellHeight: Math.round((height - headerHeight - cellDaysNamesHeight - footerHeight - eventsHeight) / (monthViewAndEvents.monthView.rows - 1))
   property int cellDaysNamesHeight: cellWidth / 2
+  // property var eventsData: Array()
   property var eventsData: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    "2Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    "3Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit elitt elit elit",
+    "2Lorem ipsum dolor sit amet, consectetur adipiscing elit elit elit",
+    "3Lorem ipsum dolor sit amet, consectetur adipiscing elit", 
     "4Lorem ipsum dolor sit amet, consectetur adipiscing elit",
   ] // TODO: temp data for ui testing purpose
   
