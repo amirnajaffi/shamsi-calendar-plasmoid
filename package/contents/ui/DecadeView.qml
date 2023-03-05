@@ -8,13 +8,17 @@ Grid {
   id: decadeViewGrid
   rows: 4
   columns: 3
+  rightPadding: PlasmaCore.Units.gridUnit / 2
+  leftPadding: PlasmaCore.Units.gridUnit / 2
+  bottomPadding: PlasmaCore.Units.gridUnit / 2
+  topPadding: PlasmaCore.Units.gridUnit / 2
 
   Repeater {
     model: Qt._sc_.store.calendarSlice.surface_yearsOfDecade
     delegate: PlasmaComponents3.Label {
       text: modelData
-      width: parent.width / decadeViewGrid.columns
-      height: parent.height / decadeViewGrid.rows
+      width: (parent.width - PlasmaCore.Units.gridUnit) / decadeViewGrid.columns
+      height: (parent.height - PlasmaCore.Units.gridUnit) / decadeViewGrid.rows
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       opacity: 1

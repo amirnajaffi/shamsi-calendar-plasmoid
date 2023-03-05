@@ -8,14 +8,18 @@ Grid {
   id: yearViewGrid
   rows: 4
   columns: 3
+  rightPadding: PlasmaCore.Units.gridUnit / 2
+  leftPadding: PlasmaCore.Units.gridUnit / 2
+  bottomPadding: PlasmaCore.Units.gridUnit / 2
+  topPadding: PlasmaCore.Units.gridUnit / 2
   
   Repeater {
     model: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     delegate:  PlasmaComponents3.Label {
       id: label
       text: modelData
-      width: parent.width / yearViewGrid.columns
-      height: parent.height / yearViewGrid.rows
+      width: (parent.width - PlasmaCore.Units.gridUnit) / yearViewGrid.columns
+      height: (parent.height - PlasmaCore.Units.gridUnit) / yearViewGrid.rows
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       opacity: 1

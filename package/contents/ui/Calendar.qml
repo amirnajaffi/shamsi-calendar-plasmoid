@@ -20,7 +20,7 @@ PlasmaExtras.Representation {
   property int footerHeight: Math.round(PlasmaCore.Units.gridUnit * 2)
   property int eventsHeight: PlasmaCore.Units.gridUnit * 6
   property int cellWidth: Math.round(( width - (monthViewAndEvents.monthView.columnSpacing * (monthViewAndEvents.monthView.columns - 1)) ) / monthViewAndEvents.monthView.columns)
-  property int cellHeight: Math.round((height - headerHeight - cellDaysNamesHeight - footerHeight - eventsHeight) / (monthViewAndEvents.monthView.rows - 1))
+  property int cellHeight: Math.round((height - PlasmaCore.Units.gridUnit - headerHeight - cellDaysNamesHeight - footerHeight - eventsHeight) / (monthViewAndEvents.monthView.rows - 1))
   property int cellDaysNamesHeight: cellWidth / 2
   // property var eventsData: Array()
   property var eventsData: [
