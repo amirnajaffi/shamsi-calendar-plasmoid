@@ -21,7 +21,7 @@ Grid {
       height: (parent.height - PlasmaCore.Units.gridUnit) / decadeViewGrid.rows
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
-      opacity: 1
+      opacity: index === 0 || index === 11 ? 0.5 : 1
       maximumLineCount: 1
       elide: Text.ElideRight
       font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2

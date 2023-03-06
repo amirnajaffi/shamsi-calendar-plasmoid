@@ -57,11 +57,11 @@ Grid {
           anchors.horizontalCenter: parent.horizontalCenter
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
-          opacity: 1
+          opacity: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? 1 : 0.5
           maximumLineCount: 1
           elide: Text.ElideRight
           font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
-          font.weight: Font.DemiBold
+          font.weight: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? Font.DemiBold : Font.Normal
 
           RoundedHighlight {
             property bool isHovered: false
