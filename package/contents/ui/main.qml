@@ -23,13 +23,14 @@ Item {
   property var week: ['شنبه', '1شنبه', '2شنبه', '3شنبه', '4شنبه', '5شنبه', 'جمعه']
   property var days: Scripts.daysInMonth(root.screenDate)
   property int startOfWeek: Scripts.startOfWeek(screenDate)
+  property bool hideOnWindowDeactivate: true
 
   Plasmoid.compactRepresentation: CompactRepresentation {}
   Plasmoid.fullRepresentation: Calendar {}
   // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
-
   Plasmoid.toolTipMainText: todayDate.format('dddd')
   Plasmoid.toolTipSubText: todayDate.format('D MMMM YYYY')
+  Plasmoid.hideOnWindowDeactivate: hideOnWindowDeactivate
 
   QtObject {
     id: qmlStore

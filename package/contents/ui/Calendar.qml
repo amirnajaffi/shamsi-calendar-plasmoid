@@ -170,7 +170,7 @@ PlasmaExtras.Representation {
         property string displayText: "Configure"
         icon.name: "configure"
         Accessible.description: displayText
-        onClicked: function() {}
+        onClicked: plasmoid.action("configure").trigger()
         PlasmaComponents3.ToolTip {
           text: parent.displayText
         }
@@ -182,7 +182,7 @@ PlasmaExtras.Representation {
         checkable: true
         icon.name: "window-pin"
         Accessible.description: displayText
-        onClicked: function() {}
+        onToggled: root.hideOnWindowDeactivate = !root.hideOnWindowDeactivate
         PlasmaComponents3.ToolTip {
           text: parent.displayText
         }
