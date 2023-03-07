@@ -46,8 +46,8 @@ PlasmaExtras.Representation {
 
       PlasmaComponents3.Label { // header month section
         id: monthLabel
-        text: Qt._sc_.store.calendarSlice.surface_yearAndMonth[1]
-        Layout.maximumWidth: monthLabel.paintedWidth
+        text: Qt.scTr('month.normal.' + Qt._sc_.store.calendarSlice.surface_yearAndMonth[1])
+        Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignLeft
         verticalAlignment: Text.AlignVCenter
