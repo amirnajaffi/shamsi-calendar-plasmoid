@@ -24,6 +24,7 @@ Item {
   property var days: Scripts.daysInMonth(root.screenDate)
   property int startOfWeek: Scripts.startOfWeek(screenDate)
   property bool hideOnWindowDeactivate: true
+  property string lang: 'en' // temp
 
   Plasmoid.compactRepresentation: CompactRepresentation {}
   Plasmoid.fullRepresentation: Calendar {}
@@ -44,6 +45,7 @@ Item {
       property var surface_yearAndMonth // array 2
       property var surface_daysOfMonth // array of arrays 3
       property var surface_yearsOfDecade // array 10
+      property var lang: 'en'
     }
     property QtObject uiReference: QtObject {
       id: uiReference

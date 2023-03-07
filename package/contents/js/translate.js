@@ -48,6 +48,14 @@ Qt.i18next.init({
   },
 });
 
-Qt.scTr = function (...key) {
-  return Qt.i18next.t(...key);
+Qt._sc_.t = function (...props) {
+  Qt._sc_.store.calendarSlice.lang;
+  return Qt.i18next.t(...props);
+};
+
+Qt._sc_.changeLang = function (...props) {
+  const lang = Qt._sc_.store.calendarSlice.lang === 'en' ? 'fa' : 'en';
+  Qt.i18next.changeLanguage(lang, () => {
+    Qt._sc_.store.calendarSlice.lang = lang;
+  });
 };

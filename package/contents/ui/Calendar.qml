@@ -46,7 +46,7 @@ PlasmaExtras.Representation {
 
       PlasmaComponents3.Label { // header month section
         id: monthLabel
-        text: Qt.scTr('month.normal.' + Qt._sc_.store.calendarSlice.surface_yearAndMonth[1])
+        text: Qt._sc_.t('month.normal.' + Qt._sc_.store.calendarSlice.surface_yearAndMonth[1])
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignLeft
@@ -183,6 +183,17 @@ PlasmaExtras.Representation {
         icon.name: "window-pin"
         Accessible.description: displayText
         onToggled: root.hideOnWindowDeactivate = !root.hideOnWindowDeactivate
+        PlasmaComponents3.ToolTip {
+          text: parent.displayText
+        }
+      }
+
+      PlasmaComponents3.ToolButton {
+        id: langButton
+        property string displayText: "Change Language"
+        icon.name: "config-language"
+        Accessible.description: displayText
+        onClicked: Qt._sc_.changeLang()
         PlasmaComponents3.ToolTip {
           text: parent.displayText
         }
