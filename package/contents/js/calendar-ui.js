@@ -99,6 +99,24 @@ Qt._sc_.calendarUI = {
     return 0; // no highlight
   },
 
+  monthView_repeater_dayHasHoliday: function (dateIndex) {
+    if (!Qt._sc_.store.calendarSlice.events[dateIndex]) return false;
+    const events = Qt._sc_.store.calendarSlice.events;
+    for (let i = 0; i < events[dateIndex].length; i++) {
+      if (events[dateIndex][i][1] === true) return true;
+    }
+    return false;
+  },
+
+  monthView_repeater_dayHasOtherEvent: function (dateIndex) {
+    if (!Qt._sc_.store.calendarSlice.events[dateIndex]) return false;
+    const events = Qt._sc_.store.calendarSlice.events;
+    for (let i = 0; i < events[dateIndex].length; i++) {
+      if (events[dateIndex][i][1] === false) return true;
+    }
+    return false;
+  },
+
   _getNextNavigableData: function (nextDirection) {
     const { MONTH_VIEW_AND_EVENTS, YEAR_VIEW, DECADE_VIEW } = Qt._sc_.const.stack;
     const isMonthView = this._isStackCurrentItem(MONTH_VIEW_AND_EVENTS.objectName);

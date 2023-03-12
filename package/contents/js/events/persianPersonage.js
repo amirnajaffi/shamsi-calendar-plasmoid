@@ -1,8 +1,10 @@
-'use strict';
+/*
+Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
+*/
 
 // copyright http://www.farhangiran.com
 
-var persianPersonage = class {
+class PersianPersonage {
   constructor() {
     this.name = 'شخصیت‌های ایرانی';
     this.type = 'persian';
@@ -28,4 +30,4 @@ var persianPersonage = class {
     this.events[11][1] = ['زادروز فردوسی', false];
     this.events[12][5] = ['بزرگ‌داشت خواجه نصیر‌الدین طوسی', false];
   }
-};
+}

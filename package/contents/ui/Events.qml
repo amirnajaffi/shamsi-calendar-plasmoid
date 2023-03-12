@@ -6,8 +6,15 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 ScrollView {
+  QtObject {
+    id: eventsObject
+    property var events: Qt._sc_.events.getSelectedDateEvents()
+  }
+
   clip: true
   ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+  contentWidth: availableWidth
+
   anchors {
     topMargin: PlasmaCore.Units.gridUnit
     bottomMargin: PlasmaCore.Units.gridUnit
@@ -19,7 +26,7 @@ ScrollView {
 
     PlasmaComponents3.Label {
       text: 'No Event'
-      visible: eventsData.length > 0 ? false : true
+      visible: !eventsObject.events.length > 0
       width: parent.width
       height: parent.height
       horizontalAlignment: Text.AlignHCenter
@@ -30,9 +37,10 @@ ScrollView {
     }
 
     Repeater {
-      model: eventsData
+      model: eventsObject.events
       delegate: RowLayout {
         spacing: PlasmaCore.Units.gridUnit / 2
+        layoutDirection: Qt.RightToLeft
         anchors {
           right: parent.right
           left: parent.left
@@ -42,12 +50,12 @@ ScrollView {
           width: height
           height: PlasmaCore.Units.gridUnit / 2
           radius: 180
-          color: 'orange'
+          color: modelData[1] === true ? Qt._sc_.const.COLOR_EVENT_HOLIDAY : Qt._sc_.const.COLOR_EVENT_OTHER
         }
 
         PlasmaComponents3.Label {
           Layout.fillWidth: true
-          text: modelData
+          text: modelData[0]
           wrapMode: Text.Wrap
           font.weight: Font.DemiBold
         }

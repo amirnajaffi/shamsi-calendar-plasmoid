@@ -1,10 +1,12 @@
-'use strict';
+/*
+Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
+*/
 
 /*
  * see https://www.farhang.gov.ir/ershad_content/media/image/2020/09/1004261_orig.pdf
  */
 
-var iranLunar = class {
+class IranLunar {
   constructor() {
     this.name = 'مناسبت‌های مذهبی ایران';
     this.type = 'hijri';
@@ -57,4 +59,4 @@ var iranLunar = class {
     this.events[12][18] = ['عید غدیر خم', true];
     this.events[12][20] = ['ولادت امام موسی کاظم (ع)', false];
   }
-};
+}

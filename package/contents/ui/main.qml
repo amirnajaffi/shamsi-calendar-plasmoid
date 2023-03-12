@@ -5,12 +5,14 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import "../js/store.js" as Store
+import "../js/utils.js" as Utils
 import "../js/constants.js" as Constants
 import "../js/bin/i18next.js" as I18next
 import "../js/translate.js" as Translate
 import "../js/bin/persian-date.js" as PersianDate
 import "../js/bin/jalaali.js" as Jalaali
 import "../js/bin/jalalidate.js" as JalaliDate
+import "../js/events.js" as Events
 import "../js/calendar.js" as CalendarJS
 import "../js/calendar-ui.js" as CalendarUI
 import "../js/main.js" as Scripts
@@ -45,6 +47,7 @@ Item {
       property var surface_yearAndMonth // array 2
       property var surface_daysOfMonth // array of arrays 3
       property var surface_yearsOfDecade // array 10
+      property var events // array of arrays
       property var lang: 'en'
     }
     property QtObject uiReference: QtObject {

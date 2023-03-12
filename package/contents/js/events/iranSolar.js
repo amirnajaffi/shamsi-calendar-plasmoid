@@ -1,6 +1,8 @@
-'use strict';
+/*
+Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
+*/
 
-var iranSolar = class {
+class IranSolar {
   constructor() {
     this.name = 'مناسبت‌های رسمی ایران';
     this.type = 'persian';

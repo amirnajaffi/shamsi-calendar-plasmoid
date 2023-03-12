@@ -1,4 +1,6 @@
-'use strict';
+/*
+Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
+*/
 
 // copyright http://www.farhangiran.com
 
@@ -9,7 +11,7 @@
  * see https://www.farhang.gov.ir/ershad_content/media/image/2020/09/1004261_orig.pdf
  */
 
-var world = class {
+class World {
   constructor() {
     this.name = 'مناسبت‌های جهانی';
     this.type = 'gregorian';

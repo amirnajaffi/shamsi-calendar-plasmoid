@@ -1,12 +1,10 @@
-'use strict';
+/*
+Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
+*/
 
 // copyright پژوهش‌های ایرانی at http://ghiasabadi.com/
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const PersianDate = Me.imports.PersianDate;
-
-var persian = class {
+class Persian {
   constructor(pyear) {
     this.name = 'مناسبت‌های ملی';
     this.type = 'persian';
@@ -74,6 +72,7 @@ var persian = class {
   }
 
   addSpecificEvents(pyear) {
+    const PersianDate = Qt._sc_.utils.pcgs_adapter; /* Added by shamsi calendar plasmoid */
     let first_saturday_of_year, first_wednesday_of_year, last_day_of_year, last_wednesday_of_year;
 
     // find first saturday of the year

@@ -22,13 +22,6 @@ PlasmaExtras.Representation {
   property int cellWidth: Math.round(( width - (monthViewAndEvents.monthView.columnSpacing * (monthViewAndEvents.monthView.columns - 1)) ) / monthViewAndEvents.monthView.columns)
   property int cellHeight: Math.round((height - PlasmaCore.Units.gridUnit - headerHeight - cellDaysNamesHeight - footerHeight - eventsHeight) / (monthViewAndEvents.monthView.rows - 1))
   property int cellDaysNamesHeight: cellWidth / 2
-  // property var eventsData: Array()
-  property var eventsData: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit elitt elit elit",
-    "2Lorem ipsum dolor sit amet, consectetur adipiscing elit elit elit",
-    "3Lorem ipsum dolor sit amet, consectetur adipiscing elit", 
-    "4Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-  ] // TODO: temp data for ui testing purpose
   
   collapseMarginsHint: true
   

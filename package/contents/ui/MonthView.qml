@@ -49,6 +49,7 @@ Grid {
         width: parent.width
         height: parent.height
         spacing: 0
+        opacity: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? 1 : 0.5 // less opacity for prev and next month dates
 
         PlasmaComponents3.Label { // cell top (number)
           text: modelData[2]
@@ -57,11 +58,11 @@ Grid {
           anchors.horizontalCenter: parent.horizontalCenter
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
-          opacity: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? 1 : 0.5
           maximumLineCount: 1
           elide: Text.ElideRight
           font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
           font.weight: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? Font.DemiBold : Font.Normal
+          color: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index) === true ? Qt._sc_.const.COLOR_EVENT_HOLIDAY : PlasmaCore.Theme.textColor
 
           RoundedHighlight {
             property bool isHovered: false
@@ -71,6 +72,14 @@ Grid {
             visible: true
             opacity: Qt._sc_.calendarUI.monthView_highlightOpacity(isHovered, modelData)
           }
+
+          // background: Rectangle { // Holiday background
+          //   visible: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index)
+          //   radius: 180
+          //   color: Qt._sc_.const.COLOR_EVENT_HOLIDAY
+          //   anchors.fill: parent
+          // }
+
         } // end cell top (number)
 
         Row { // cell bottom (event badges)
@@ -79,17 +88,11 @@ Grid {
           spacing: PlasmaCore.Units.gridUnit / 4
 
           Rectangle {
+            visible: Qt._sc_.calendarUI.monthView_repeater_dayHasOtherEvent(index)
             width: height
             height: PlasmaCore.Units.gridUnit / 4
             radius: 180
-            color: 'orange'
-          }
-
-          Rectangle {
-            width: height
-            height: PlasmaCore.Units.gridUnit / 4
-            radius: 180
-            color: 'gray'
+            color: Qt._sc_.const.COLOR_EVENT_OTHER
           }
         } // end cell bottom (event badges)
 

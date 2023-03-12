@@ -6,4 +6,6 @@ Qt._sc_.const = {
     YEAR_VIEW: { objectName: 'yearView' },
     DECADE_VIEW: { objectName: 'decadeView' },
   },
+  COLOR_EVENT_HOLIDAY: '#dd1f28',
+  COLOR_EVENT_OTHER: '#0c61b9',
 };

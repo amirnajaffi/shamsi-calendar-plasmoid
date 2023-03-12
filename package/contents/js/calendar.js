@@ -7,6 +7,7 @@ Qt._sc_.calendar = {
     this.reducers.setYearAndMonth(nextYearAndMonth);
     this.reducers.setDaysOfMonth(nextDaysOfMonthList);
     this.changeDecade(nextYearAndMonth[0]);
+    Qt._sc_.events.calculateAndSetSurfaceEvents(Qt._sc_.store.calendarSlice.surface_daysOfMonth);
   },
 
   changeMonth: function (monthOrYearAndMonthArr) {
@@ -113,6 +114,7 @@ Qt._sc_.calendar = {
         // so run in first shot only
         // TODO: Maybe in future check for isFullRepresentationClose and then run reevaluateSurfaceDates()
         this.reevaluateSurfaceDates([calendarSlice.jToday[0], calendarSlice.jToday[1]]);
+        this.reducers.setSelectedDate(calendarSlice.jToday);
       }
     }
   },
