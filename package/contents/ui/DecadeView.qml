@@ -17,7 +17,7 @@ Grid {
   Repeater {
     model: Qt._sc_.store.calendarSlice.surface_yearsOfDecade
     delegate: PlasmaComponents3.Label {
-      text: modelData
+      text: Qt._sc_.tpd(modelData)
       width: (parent.width - PlasmaCore.Units.gridUnit) / decadeViewGrid.columns
       height: (parent.height - PlasmaCore.Units.gridUnit) / decadeViewGrid.rows
       horizontalAlignment: Text.AlignHCenter

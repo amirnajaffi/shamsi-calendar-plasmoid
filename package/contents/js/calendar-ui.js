@@ -10,6 +10,15 @@ Qt._sc_.calendarUI = {
     return Qt.LeftToRight;
   },
 
+  useTextHorizontalAlignment: function (reverse = false) {
+    if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_FA) {
+      return reverse ? Qt.AlignLeft : Qt.AlignRight;
+    } else if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_EN) {
+      return reverse ? Qt.AlignRight : Qt.AlignLeft;
+    }
+    return Qt.AlignLeft;
+  },
+
   headerNavigation_goNextModelState: function (nextDirection) {
     const next = this._getNextNavigableData(nextDirection);
     next.callback.call(Qt._sc_.calendar);
@@ -146,15 +155,15 @@ Qt._sc_.calendarUI = {
 
   _getNavigationMap: function () {
     return {
-      current_month: { callback: Qt._sc_.calendar.goCurrentDay, buttonName: 'Today' },
-      current_year: { callback: Qt._sc_.calendar.goCurrentYear, buttonName: 'Current Year' },
-      current_decade: { callback: Qt._sc_.calendar.goCurrentDecade, buttonName: 'Current Decade' },
-      next_month: { callback: Qt._sc_.calendar.goNextMonth, buttonName: 'Next Month' },
-      next_year: { callback: Qt._sc_.calendar.goNextYear, buttonName: 'Next Year' },
-      next_decade: { callback: Qt._sc_.calendar.goNextDecade, buttonName: 'Next Decade' },
-      prev_month: { callback: Qt._sc_.calendar.goPrevMonth, buttonName: 'Previous Month' },
-      prev_year: { callback: Qt._sc_.calendar.goPrevYear, buttonName: 'Previous Year' },
-      prev_decade: { callback: Qt._sc_.calendar.goPrevDecade, buttonName: 'Previous Decade' },
+      current_month: { callback: Qt._sc_.calendar.goCurrentDay, buttonName: 'today' },
+      current_year: { callback: Qt._sc_.calendar.goCurrentYear, buttonName: 'current_year' },
+      current_decade: { callback: Qt._sc_.calendar.goCurrentDecade, buttonName: 'current_decade' },
+      next_month: { callback: Qt._sc_.calendar.goNextMonth, buttonName: 'next_month' },
+      next_year: { callback: Qt._sc_.calendar.goNextYear, buttonName: 'next_year' },
+      next_decade: { callback: Qt._sc_.calendar.goNextDecade, buttonName: 'next_decade' },
+      prev_month: { callback: Qt._sc_.calendar.goPrevMonth, buttonName: 'previous_month' },
+      prev_year: { callback: Qt._sc_.calendar.goPrevYear, buttonName: 'previous_year' },
+      prev_decade: { callback: Qt._sc_.calendar.goPrevDecade, buttonName: 'previous_decade' },
     };
   },
 

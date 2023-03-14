@@ -11,6 +11,7 @@ PlasmaExtras.Representation {
   id: calendar
   readonly property int _minimumWidth: Math.round(PlasmaCore.Units.gridUnit * 21)
   readonly property int _minimumHeight: Math.round(PlasmaCore.Units.gridUnit * 20) + eventsHeight
+  implicitWidth: _minimumWidth
   Layout.minimumWidth: _minimumWidth
   Layout.minimumHeight: _minimumHeight
   Layout.maximumWidth: PlasmaCore.Units.gridUnit * 80
@@ -44,6 +45,8 @@ PlasmaExtras.Representation {
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignLeft
+        leftPadding: PlasmaCore.Units.largeSpacing / 2
+        rightPadding: PlasmaCore.Units.largeSpacing / 2
         verticalAlignment: Text.AlignVCenter
         fontSizeMode: Text.Fit
         wrapMode: Text.Wrap
@@ -56,35 +59,40 @@ PlasmaExtras.Representation {
         }
       }
 
-      PlasmaComponents3.Label { // header year section
-        id: yearLabel
-        text: Qt._sc_.store.calendarSlice.surface_yearAndMonth[0]
-        Layout.maximumWidth: yearLabel.paintedWidth
-        Layout.fillHeight: true
-        Layout.alignment: Qt.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        fontSizeMode: Text.Fit
-        wrapMode: Text.Wrap
-        elide: Text.ElideRight
-        font.pixelSize: 300
-        font.weight: Font.Light
-        MouseArea {
-          anchors.fill: parent
-          onClicked: Qt._sc_.calendarUI.stackNavigation_toOrFromDecadeView()
-        }
-      }
-
-      Item { // spacer between header month/year and header buttons
+      Item { // spacer between header month and header buttons/year
         Layout.fillWidth: true
       }
       
-      RowLayout { // header buttons RowLayout
+      RowLayout { // header buttons/year RowLayout
         spacing: 0
         layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
+        Layout.rightMargin: PlasmaCore.Units.largeSpacing / 2
+        Layout.leftMargin: PlasmaCore.Units.largeSpacing / 2
+
+        PlasmaComponents3.Label { // header year section
+          leftPadding: 2
+          rightPadding: 2
+          id: yearLabel
+          text: Qt._sc_.tpd(Qt._sc_.store.calendarSlice.surface_yearAndMonth[0])
+          Layout.maximumWidth: calendar.width / 3
+          Layout.minimumWidth: calendar.width / 3
+          Layout.fillHeight: true
+          horizontalAlignment: Qt._sc_.calendarUI.useTextHorizontalAlignment(true)
+          verticalAlignment: Text.AlignVCenter
+          fontSizeMode: Text.Fit
+          wrapMode: Text.Wrap
+          elide: Text.ElideRight
+          font.pixelSize: 300
+          font.weight: Font.Light
+          MouseArea {
+            anchors.fill: parent
+            onClicked: Qt._sc_.calendarUI.stackNavigation_toOrFromDecadeView()
+          }
+        }
 
         PlasmaComponents3.ToolButton {
           id: todayButton
-          property string displayText: Qt._sc_.calendarUI.headerNavigation_buttonName('current')
+          property string displayText: Qt._sc_.t(Qt._sc_.calendarUI.headerNavigation_buttonName('current'))
           icon.name: "go-jump-today"
           Accessible.description: displayText
           onClicked: Qt._sc_.calendarUI.headerNavigation_goNextModelState('current')
@@ -94,7 +102,7 @@ PlasmaExtras.Representation {
         }
 
         PlasmaComponents3.ToolButton {
-          property string displayText: Qt._sc_.calendarUI.headerNavigation_buttonName('prev')
+          property string displayText: Qt._sc_.t(Qt._sc_.calendarUI.headerNavigation_buttonName('prev'))
           id: previousButton
           icon.name: "go-up"
           Accessible.description: displayText
@@ -105,7 +113,7 @@ PlasmaExtras.Representation {
         }
 
         PlasmaComponents3.ToolButton {
-          property string displayText: Qt._sc_.calendarUI.headerNavigation_buttonName('next')
+          property string displayText: Qt._sc_.t(Qt._sc_.calendarUI.headerNavigation_buttonName('next'))
           id: nextButton
           icon.name: "go-down"
           Accessible.description: displayText
@@ -162,7 +170,7 @@ PlasmaExtras.Representation {
       
       PlasmaComponents3.ToolButton {
         id: configButton
-        property string displayText: "Configure"
+        property string displayText: Qt._sc_.t("configure")
         icon.name: "configure"
         Accessible.description: displayText
         onClicked: plasmoid.action("configure").trigger()
@@ -173,7 +181,7 @@ PlasmaExtras.Representation {
 
       PlasmaComponents3.ToolButton {
         id: pinButton
-        property string displayText: "Keep Open"
+        property string displayText: Qt._sc_.t("keep_open")
         checkable: true
         icon.name: "window-pin"
         Accessible.description: displayText
@@ -185,7 +193,7 @@ PlasmaExtras.Representation {
 
       PlasmaComponents3.ToolButton {
         id: langButton
-        property string displayText: "Change Language"
+        property string displayText: Qt._sc_.t("change_language")
         icon.name: "config-language"
         Accessible.description: displayText
         onClicked: Qt._sc_.changeLang()
@@ -194,7 +202,7 @@ PlasmaExtras.Representation {
         }
       }
 
-    } // end footer buttons Row
+    } // end footer buttons/year Row
   } // end footer PlasmaExtras.PlasmoidHeading
 
   component MonthViewAndEvents: Item {

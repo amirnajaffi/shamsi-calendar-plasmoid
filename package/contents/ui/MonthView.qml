@@ -17,10 +17,9 @@ Grid {
   
   Repeater { // days name Repeater
     id: daysName
-    model: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'] // TODO: temp data for ui testing purpose
-
-    PlasmaComponents3.Label {
-      text: modelData
+    model: Array.from({length: 7}, (_, index) => index + 1)
+    delegate: PlasmaComponents3.Label {
+      text: Qt._sc_.t('week_label.' + modelData) 
       width: calendar.cellWidth
       height: calendar.cellDaysNamesHeight
       verticalAlignment: Text.AlignBottom
@@ -53,7 +52,7 @@ Grid {
         opacity: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? 1 : 0.5 // less opacity for prev and next month dates
 
         PlasmaComponents3.Label { // cell top (number)
-          text: modelData[2]
+          text: Qt._sc_.tpd(modelData[2])
           width: height
           height: monthView.dayNumberHeight
           anchors.horizontalCenter: parent.horizontalCenter

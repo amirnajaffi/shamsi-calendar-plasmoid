@@ -15,10 +15,10 @@ Grid {
   layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
   
   Repeater {
-    model: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    model: Array.from({length: 12}, (_, index) => index + 1)
     delegate:  PlasmaComponents3.Label {
       id: label
-      text: modelData
+      text: Qt._sc_.t('month.normal.' + modelData)
       width: (parent.width - PlasmaCore.Units.gridUnit) / yearViewGrid.columns
       height: (parent.height - PlasmaCore.Units.gridUnit) / yearViewGrid.rows
       horizontalAlignment: Text.AlignHCenter

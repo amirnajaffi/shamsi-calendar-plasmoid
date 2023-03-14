@@ -25,7 +25,7 @@ ScrollView {
     spacing: PlasmaCore.Units.gridUnit / 2
 
     PlasmaComponents3.Label {
-      text: 'No Event'
+      text: Qt._sc_.t('no_event')
       visible: !eventsObject.events.length > 0
       width: parent.width
       height: parent.height
