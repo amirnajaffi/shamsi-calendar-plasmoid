@@ -1,6 +1,15 @@
 .pragma library
 
 Qt._sc_.calendarUI = {
+  useLayoutDirection: function () {
+    if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_FA) {
+      return Qt.RightToLeft;
+    } else if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_EN) {
+      return Qt.LeftToRight;
+    }
+    return Qt.LeftToRight;
+  },
+
   headerNavigation_goNextModelState: function (nextDirection) {
     const next = this._getNextNavigableData(nextDirection);
     next.callback.call(Qt._sc_.calendar);

@@ -12,6 +12,7 @@ Grid {
   leftPadding: PlasmaCore.Units.gridUnit / 2
   bottomPadding: PlasmaCore.Units.gridUnit / 2
   topPadding: PlasmaCore.Units.gridUnit / 2
+  layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
   
   Repeater {
     model: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

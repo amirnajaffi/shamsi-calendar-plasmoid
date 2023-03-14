@@ -32,10 +32,11 @@ PlasmaExtras.Representation {
     height: calendar.headerHeight
 
     RowLayout {
+      spacing: PlasmaCore.Units.smallSpacing
+      layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
       anchors.fill: parent
       anchors.topMargin: PlasmaCore.Units.gridUnit / 3
       anchors.bottomMargin: PlasmaCore.Units.gridUnit / 3
-      spacing: PlasmaCore.Units.smallSpacing
 
       PlasmaComponents3.Label { // header month section
         id: monthLabel
@@ -79,6 +80,7 @@ PlasmaExtras.Representation {
       
       RowLayout { // header buttons RowLayout
         spacing: 0
+        layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
 
         PlasmaComponents3.ToolButton {
           id: todayButton

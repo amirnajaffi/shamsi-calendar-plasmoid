@@ -13,6 +13,7 @@ Grid {
   rows: 7
   columnSpacing: 0
   rowSpacing: 0
+  layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
   
   Repeater { // days name Repeater
     id: daysName

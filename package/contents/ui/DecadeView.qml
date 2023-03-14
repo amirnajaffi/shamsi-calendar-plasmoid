@@ -12,6 +12,7 @@ Grid {
   leftPadding: PlasmaCore.Units.gridUnit / 2
   bottomPadding: PlasmaCore.Units.gridUnit / 2
   topPadding: PlasmaCore.Units.gridUnit / 2
+  layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
 
   Repeater {
     model: Qt._sc_.store.calendarSlice.surface_yearsOfDecade
