@@ -28,7 +28,7 @@ Item {
   property bool hideOnWindowDeactivate: true
   property string lang: 'en' // temp
 
-  Plasmoid.compactRepresentation: CompactRepresentation {}
+  Plasmoid.compactRepresentation: DateDisplay {}
   Plasmoid.fullRepresentation: Calendar {}
   // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
   Plasmoid.toolTipMainText: todayDate.format('dddd')

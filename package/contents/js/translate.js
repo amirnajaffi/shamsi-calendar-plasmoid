@@ -125,7 +125,16 @@ Qt._sc_.tpd = function (number) {
   return number;
 };
 
-Qt._sc_.changeLang = function (...props) {
+Qt._sc_.useLocale = function () {
+  if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_FA) {
+    return 'fa';
+  } else if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_EN) {
+    return 'en';
+  }
+  return 'en';
+};
+
+Qt._sc_.changeLang = function () {
   const lang = Qt._sc_.store.calendarSlice.lang === 'en' ? 'fa' : 'en';
   Qt.i18next.changeLanguage(lang, () => {
     Qt._sc_.store.calendarSlice.lang = lang;
