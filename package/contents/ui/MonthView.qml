@@ -1,5 +1,6 @@
 import QtQuick 2.12
 
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -8,6 +9,9 @@ Grid {
   id: monthView
   property int dayNumberHeight: Math.round((calendar.cellHeight * 80) / 100) // 80% of cell for number
   property int dayEventsHeight: calendar.cellHeight - dayNumberHeight // 20% of cell for event badges
+  property var weekendHighlightDaysIndexes: Plasmoid.configuration.weekendHighlight 
+    ? Qt._sc_.calendarUI.getWeekendHighlightIndexes(Plasmoid.configuration.weekendHighlightDays, rows, columns) 
+    : []
 
   columns: 7
   rows: 7
@@ -19,7 +23,7 @@ Grid {
     id: daysName
     model: Array.from({length: 7}, (_, index) => index + 1)
     delegate: PlasmaComponents3.Label {
-      text: Qt._sc_.t('week_label.' + modelData) 
+      text: Qt._sc_.t('week_label.' + modelData)
       width: calendar.cellWidth
       height: calendar.cellDaysNamesHeight
       verticalAlignment: Text.AlignBottom
@@ -39,11 +43,12 @@ Grid {
       width: calendar.cellWidth
       height: calendar.cellHeight
 
-      // TODO: add weekend highlight 
-      // Rectangle {
-      //   anchors.fill: parent
-      //   color: "gray"
-      // }
+      Rectangle { // add weekend highlight if enabled
+        visible: Plasmoid.configuration.weekendHighlight && monthView.weekendHighlightDaysIndexes.includes(index + 1)
+        anchors.fill: parent
+        color: Qt.darker(PlasmaCore.Theme.backgroundColor)
+        opacity: 0.5
+      }
 
       Column { // cell design
         width: parent.width

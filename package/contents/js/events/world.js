@@ -13,6 +13,7 @@ Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
 
 class World {
   constructor() {
+    this.id = 'world';
     this.name = 'مناسبت‌های جهانی';
     this.type = 'gregorian';
     /* [month][day] = [title, isHoliday] */

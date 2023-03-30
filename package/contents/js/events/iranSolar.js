@@ -4,6 +4,7 @@ Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
 
 class IranSolar {
   constructor() {
+    this.id = 'iransolar';
     this.name = 'مناسبت‌های رسمی ایران';
     this.type = 'persian';
     /* [month][day] = [title, isHoliday] */

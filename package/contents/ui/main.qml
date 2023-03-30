@@ -6,7 +6,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import "../js/store.js" as Store
 import "../js/utils.js" as Utils
 import "../js/constants.js" as Constants
-import "../js/bin/i18next.js" as I18next
 import "../js/translate.js" as Translate
 import "../js/bin/persian-date.js" as PersianDate
 import "../js/bin/jalaali.js" as Jalaali
@@ -29,7 +28,7 @@ Item {
   */
   Plasmoid.hideOnWindowDeactivate: hideOnWindowDeactivate
 
-  /* For testing compact representation */
+  /* Debugging */
   // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
   QtObject {
@@ -46,6 +45,12 @@ Item {
       property var surface_yearsOfDecade // array 10
       property var events // array of arrays
       property var lang: 'en' //string
+    }
+    property QtObject configSlice: QtObject {
+      id: configSlice
+      objectName: 'configSlice'
+      property string language: Plasmoid.configuration.language // string
+      property string activeEvents: Plasmoid.configuration.activeEvents // string
     }
     property QtObject uiReference: QtObject {
       id: uiReference
@@ -71,10 +76,27 @@ Item {
     }
   }
 
+  /* Actions that needed to trigger after configuation changed */
+  Connections {
+    target: Plasmoid.configuration
+
+    function onTempLanguageChanged() {
+      Qt.i18next.changeLanguage(Plasmoid.configuration.tempLanguage, () => {
+        Plasmoid.configuration.language = Plasmoid.configuration.tempLanguage
+      });
+    }
+
+    function onActiveEventsChanged() {
+      Qt._sc_.events.calculateAndSetSurfaceEvents(Qt._sc_.store.calendarSlice.surface_daysOfMonth);
+    }
+  }
+
   Component.onCompleted: {
+    /* Boot calendar */
     Qt._sc_.storeUtils.setStore(qmlStore);
     Qt._sc_.calendar.baseDateChangeHandler(localTime.data.Local.DateTime);
     Qt._sc_.calendar.changeDecade(Qt._sc_.store.calendarSlice.jToday[0]);
+    Qt.i18next.changeLanguage(Plasmoid.configuration.language);
   }
 
 }

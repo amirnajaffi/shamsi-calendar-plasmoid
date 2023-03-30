@@ -8,6 +8,7 @@ Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
 
 class IranLunar {
   constructor() {
+    this.id = 'iranlunar';
     this.name = 'مناسبت‌های مذهبی ایران';
     this.type = 'hijri';
     /* [month][day] = [title, isHoliday] */

@@ -18,4 +18,15 @@ Qt._sc_.utils = {
       return Qt.jalaali.isLeapJalaaliYear(...props);
     },
   },
+
+  stringToArray(sourceStr) {
+    return sourceStr.split(',').filter((item) => item != '');
+  },
+
+  stringToNumberArray(sourceStr) {
+    return sourceStr
+      .split(',')
+      .map((item) => (item == '' ? item : parseInt(item)))
+      .filter((item) => item != '');
+  },
 };

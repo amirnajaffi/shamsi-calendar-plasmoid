@@ -6,6 +6,7 @@ Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
 
 class PersianPersonage {
   constructor() {
+    this.id = 'persianpersonage';
     this.name = 'شخصیت‌های ایرانی';
     this.type = 'persian';
     /* [month][day] = [title, isHoliday] */

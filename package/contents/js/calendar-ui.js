@@ -2,21 +2,34 @@
 
 Qt._sc_.calendarUI = {
   useLayoutDirection: function () {
-    if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_FA) {
+    const lang = Qt._sc_.store.configSlice.language;
+    if (lang === Qt._sc_.const.LANG_FA) {
       return Qt.RightToLeft;
-    } else if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_EN) {
+    } else if (lang === Qt._sc_.const.LANG_EN) {
       return Qt.LeftToRight;
     }
     return Qt.LeftToRight;
   },
 
   useTextHorizontalAlignment: function (reverse = false) {
-    if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_FA) {
+    const lang = Qt._sc_.store.configSlice.language;
+    if (lang === Qt._sc_.const.LANG_FA) {
       return reverse ? Qt.AlignLeft : Qt.AlignRight;
-    } else if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_EN) {
+    } else if (lang === Qt._sc_.const.LANG_EN) {
       return reverse ? Qt.AlignRight : Qt.AlignLeft;
     }
     return Qt.AlignLeft;
+  },
+
+  getWeekendHighlightIndexes: function (weekendHighlightDaysStr, rows, columns) {
+    const weekendHighlightDays = Qt._sc_.utils.stringToNumberArray(weekendHighlightDaysStr);
+    const mustHighlight = [];
+    weekendHighlightDays.forEach((item) => {
+      for (let i = 0; i < rows - 1; i++) {
+        mustHighlight.push(item + columns * i);
+      }
+    });
+    return mustHighlight;
   },
 
   headerNavigation_goNextModelState: function (nextDirection) {

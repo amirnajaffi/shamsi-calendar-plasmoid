@@ -41,10 +41,19 @@ Qt._sc_.events = {
     */
     if (!dates) return;
     const jDates = [...dates];
+
+    const activeEventsArray = Qt._sc_.utils.stringToArray(Qt._sc_.store.configSlice.activeEvents);
+    if (activeEventsArray.length < 1) return;
+
     const iranSolar = new IranSolar.IranSolar();
     const iranLunar = new IranLunar.IranLunar();
     const persianPersonage = new PersianPersonage.PersianPersonage();
     const world = new World.World();
+    const isIranSolarActive = activeEventsArray.includes(iranSolar.id);
+    const isIranLunarActive = activeEventsArray.includes(iranLunar.id);
+    const isPersianPersonageActive = activeEventsArray.includes(persianPersonage.id);
+    const isWorldActive = activeEventsArray.includes(world.id);
+
     const events = [];
     const pushEvent = (event, index) => (events[index] = [...(events[index] || []), [...event]]);
 
@@ -54,24 +63,29 @@ Qt._sc_.events = {
       gDate = [...Object.keys(gDate).map((key) => gDate[key])];
       const lunarDate = Qt.jalalidate.gregorian_to_islamic(...gDate);
 
-      if (iranSolar.events[jDate[1]] && iranSolar.events[jDate[1]][jDate[2]]) {
+      if (isIranSolarActive && iranSolar.events[jDate[1]] && iranSolar.events[jDate[1]][jDate[2]]) {
         pushEvent(iranSolar.events[jDate[1]][jDate[2]], i);
       }
 
-      if (iranLunar.events[lunarDate[1]] && iranLunar.events[lunarDate[1]][lunarDate[2]]) {
+      if (isIranLunarActive && iranLunar.events[lunarDate[1]] && iranLunar.events[lunarDate[1]][lunarDate[2]]) {
         pushEvent(iranLunar.events[lunarDate[1]][lunarDate[2]], i);
       }
 
       const persian = new Persian.Persian(jDate[0]);
-      if (persian.events[jDate[1]] && persian.events[jDate[1]][jDate[2]]) {
+      const isPersianActive = activeEventsArray.includes(persian.id);
+      if (isPersianActive && persian.events[jDate[1]] && persian.events[jDate[1]][jDate[2]]) {
         pushEvent(persian.events[jDate[1]][jDate[2]], i);
       }
 
-      if (persianPersonage.events[jDate[1]] && persianPersonage.events[jDate[1]][jDate[2]]) {
+      if (
+        isPersianPersonageActive &&
+        persianPersonage.events[jDate[1]] &&
+        persianPersonage.events[jDate[1]][jDate[2]]
+      ) {
         pushEvent(persianPersonage.events[jDate[1]][jDate[2]], i);
       }
 
-      if (world.events[gDate[1]] && world.events[gDate[1]][gDate[2]]) {
+      if (isWorldActive && world.events[gDate[1]] && world.events[gDate[1]][gDate[2]]) {
         pushEvent(world.events[gDate[1]][gDate[2]], i);
       }
     }

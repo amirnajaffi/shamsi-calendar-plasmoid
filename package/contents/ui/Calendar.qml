@@ -196,7 +196,10 @@ PlasmaExtras.Representation {
         property string displayText: Qt._sc_.t("change_language")
         icon.name: "config-language"
         Accessible.description: displayText
-        onClicked: Qt._sc_.changeLang()
+        onClicked: {
+          const newLang = Plasmoid.configuration.tempLanguage === 'en' ? 'fa' : 'en';
+          Plasmoid.configuration.tempLanguage = newLang;
+        }
         PlasmaComponents3.ToolTip {
           text: parent.displayText
         }

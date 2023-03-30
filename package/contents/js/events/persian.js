@@ -6,6 +6,7 @@ Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
 
 class Persian {
   constructor(pyear) {
+    this.id = 'persian';
     this.name = 'مناسبت‌های ملی';
     this.type = 'persian';
     /* [month][day] = [title, isHoliday] */
@@ -130,3 +131,23 @@ class Persian {
     this.events[12][last_wednesday_of_year] = ['چارشنبه آخر', false];
   }
 };
+
+
+/*
+
+this.extras = [
+      [1, first_saturday_of_year],
+      [1, first_wednesday_of_year],
+      [12, last_day_of_year],
+      [12, last_wednesday_of_year - 1],
+      [12,last_wednesday_of_year],
+    ];
+    
+
+removeSpecificEvents() {
+  this.trackSpecificEvents.forEach((item) => {
+    this.events[item[0]][item[1]] = undefined;
+  });
+  this.trackSpecificEvents = [];
+}
+*/

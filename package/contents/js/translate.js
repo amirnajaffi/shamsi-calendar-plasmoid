@@ -1,5 +1,7 @@
 .pragma library
 
+.import "./bin/i18next.js" as I18next
+
 Qt.i18next.init({
   compatibilityJSON: 'v3',
   lng: 'en',
@@ -7,6 +9,7 @@ Qt.i18next.init({
   resources: {
     en: {
       translation: {
+        /* Calendar UI */
         week_label: {
           1: 'Sat',
           2: 'Sun',
@@ -45,10 +48,34 @@ Qt.i18next.init({
         configure: 'Configure',
         keep_open: 'Keep Open',
         change_language: 'Change Language',
+        /* Config */
+        appearance: 'Appearance',
+        event: 'Event',
+        other: 'Other',
+        panel: 'Panel',
+        primary_text: 'Primary Text',
+        date_format: 'Date format',
+        result: 'Result',
+        templates: 'Templates',
+        secondary_text: 'Secondary Text',
+        enable_secondary_text: 'Enable secondary text',
+        height: 'Height',
+        calendar: 'Calendar',
+        enable_weekend_highlight: 'Enable weekend highlight',
+        weekend: 'Weekend',
+        available_events: 'Available events',
+        events_list: {
+          iransolar_desc: 'Official Iranian Solar(including holidays)',
+          iranlunar_desc: 'Official Iranian Lunar(including holidays)',
+          persian_desc: 'Ancient Persian',
+          persianpersonage_desc: 'Persian Personages',
+          world_desc: 'International',
+        },
       },
     },
     fa: {
       translation: {
+        /* Calendar UI */
         week_label: {
           1: 'ش',
           2: 'ی',
@@ -87,19 +114,49 @@ Qt.i18next.init({
         configure: 'تنظیمات',
         keep_open: 'باز نگه داشتن',
         change_language: 'تعویض زبان',
+        /* Config */
+        appearance: 'ظاهر',
+        event: 'رویداد',
+        other: 'دیگر',
+        panel: 'پنل',
+        primary_text: 'متن اصلی',
+        date_format: 'فرمت تاریخ',
+        result: 'نتیجه',
+        templates: 'نمونه‌ها',
+        secondary_text: 'متن دوم',
+        enable_secondary_text: 'فعال‌سازی متن دوم',
+        height: 'ارتفاع',
+        calendar: 'تقویم',
+        enable_weekend_highlight: 'علامت‌گذاری تعطیلات آخر هفته',
+        weekend: 'تعطیلات آخر هفته',
+        available_events: 'رویداد‌ها',
+        events_list: {
+          iransolar_desc: 'رویدادهای رسمی ایران(شامل تعطیلات رسمی)',
+          iranlunar_desc: 'رویدادهای مذهبی ایران(شامل تعطیلات رسمی)',
+          persian_desc: 'رویدادهای ایران کهن',
+          persianpersonage_desc: 'شخصیت‌های ایرانی',
+          world_desc: 'رویدادهای جهانی',
+        },
       },
     },
   },
 });
 
 Qt._sc_.t = function (...props) {
-  Qt._sc_.store.calendarSlice.lang;
+  /* translation function depends on store */
+  Qt._sc_.store.configSlice.language;
   return Qt.i18next.t(...props);
 };
 
-Qt._sc_.tpd = function (number) {
+Qt._sc_.tpd = function (number, source = undefined) {
   // To Persian Digits
-  if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_FA) {
+  let lang;
+  if (source) {
+    lang = source;
+  } else {
+    lang = Qt._sc_.store.configSlice.language;
+  }
+  if (lang === Qt._sc_.const.LANG_FA) {
     const persian = {
       0: '۰',
       1: '۱',
@@ -125,18 +182,18 @@ Qt._sc_.tpd = function (number) {
   return number;
 };
 
-Qt._sc_.useLocale = function () {
-  if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_FA) {
+Qt._sc_.useLocale = function (source = undefined) {
+  let lang;
+  if (source) {
+    lang = source;
+  } else {
+    lang = Qt._sc_.store.configSlice.language;
+  }
+
+  if (lang === Qt._sc_.const.LANG_FA) {
     return 'fa';
-  } else if (Qt._sc_.store.calendarSlice.lang === Qt._sc_.const.LANG_EN) {
+  } else if (lang === Qt._sc_.const.LANG_EN) {
     return 'en';
   }
   return 'en';
-};
-
-Qt._sc_.changeLang = function () {
-  const lang = Qt._sc_.store.calendarSlice.lang === 'en' ? 'fa' : 'en';
-  Qt.i18next.changeLanguage(lang, () => {
-    Qt._sc_.store.calendarSlice.lang = lang;
-  });
 };

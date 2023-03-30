@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
     <kcfgfile name=""/>
-    <group name="General">
-        <entry name="compactRepresentationFormat" type="String">
+
+    <group name="Appearance">
+        <entry name="panelPrimaryTextFormat" type="String">
             <default>dddd D MMMM</default>
         </entry>
-        <entry name="compactRepresentationHorizontalExtraSpace" type="Int">
-            <default>5</default>
+        <entry name="secondaryText" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="panelSecondaryTextFormat" type="String">
+            <default>dddd D MMMM</default>
+        </entry>
+        <entry name="secondaryTextHeight" type="Int">
+            <default>50</default>
+        </entry>
+        <entry name="weekendHighlight" type="Bool">
+            <default>false</default>
+        </entry>
+        <entry name="weekendHighlightDays" type="String">
+            <default></default>
         </entry>
     </group>
+
+    <group name="Event">
+        <entry name="activeEvents" type="String">
+            <default>iranlunar,iransolar</default>
+        </entry>
+    </group>
+
+    <group name="Other">
+        <entry name="tempLanguage" type="String">
+            <default>fa</default>
+        </entry>
+        <entry name="language" type="String">
+            <default>fa</default>
+        </entry>
+    </group>
+
 </kcfg>
