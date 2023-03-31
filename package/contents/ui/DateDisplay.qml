@@ -22,15 +22,14 @@ MouseArea {
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       minimumPointSize: 1
+      textFormat: Text.StyledText
       font.pixelSize: 1000
       fontSizeMode: Text.Fit
-      text: {
-        const locale = Qt._sc_.useLocale();
-        const displayDate = new persianDate(Qt._sc_.store.calendarSlice.jToday)
-                              .toLocale(locale)
-                              .format(Plasmoid.configuration.panelPrimaryTextFormat);
-        return displayDate;
-      }
+      text: Qt._sc_.utils.richDateFormatParser(
+        Qt._sc_.store.calendarSlice.jToday,
+        Plasmoid.configuration.panelPrimaryTextFormat,
+        Qt._sc_.useLocale()
+      )
     }
 
     PlasmaComponents3.Label {
@@ -41,15 +40,14 @@ MouseArea {
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       minimumPointSize: 1
+      textFormat: Text.StyledText
       font.pixelSize: 1000
       fontSizeMode: Text.Fit
-      text: {
-        const locale = Qt._sc_.useLocale();
-        const displayDate = new persianDate(Qt._sc_.store.calendarSlice.jToday)
-                              .toLocale(locale)
-                              .format(Plasmoid.configuration.panelSecondaryTextFormat);
-        return displayDate;
-      }
+      text: Qt._sc_.utils.richDateFormatParser(
+        Qt._sc_.store.calendarSlice.jToday,
+        Plasmoid.configuration.panelSecondaryTextFormat,
+        Qt._sc_.useLocale()
+      )
     }
 
   }

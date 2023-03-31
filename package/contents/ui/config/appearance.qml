@@ -30,8 +30,11 @@ ColumnLayout {
     'D MMM',
     'dddd D MMMM YYYY',
     'ddd D MMMM YYYY',
-    'dddd D MMM YYY',
+    'dddd D MMM YY',
     'ddd D MMM YYYY',
+    '<font color="#3daee9">MMM d</font>',
+    '<font color="#3daee9">dddd D <font color="#D4AF37">MMMM </font>YYYY</font>',
+    '<font><font color="#888">dddd</font> D</font>'
   ]
 
   anchors.fill: parent
@@ -63,11 +66,15 @@ ColumnLayout {
     RowLayout {
       Kirigami.FormData.label: Qt.i18next.t('result', {lng: Plasmoid.configuration.language}) + ':'
       Controls.Label {
-        textFormat: Text.PlainText
+        Layout.maximumWidth: Kirigami.Units.gridUnit * 16
+        textFormat: Text.StyledText
         text: {
           if (!panelPrimaryTextFormat.text) return null;
-          const locale = Qt._sc_.useLocale(Plasmoid.configuration.language);
-          return new persianDate().toLocale(locale).format(panelPrimaryTextFormat.text)
+          return Qt._sc_.utils.richDateFormatParser(
+            undefined,
+            panelPrimaryTextFormat.text,
+            Qt._sc_.useLocale(Plasmoid.configuration.language)
+          );
         }
       }
     }
@@ -96,14 +103,24 @@ ColumnLayout {
           Repeater {
             model: appearanceConfig.dateTemplates
             delegate: Controls.Button {
-              property string displayText: {
-                const locale = Qt._sc_.useLocale(Plasmoid.configuration.language);
-                new persianDate().toLocale(locale).format(modelData);
-              }
-              text: displayText
+              property string displayText: Qt._sc_.utils.richDateFormatParser(
+                undefined,
+                modelData,
+                Qt._sc_.useLocale(Plasmoid.configuration.language)
+              )
+              topPadding: Kirigami.Units.smallSpacing
+              rightPadding: Kirigami.Units.smallSpacing * 2
+              bottomPadding: Kirigami.Units.smallSpacing
+              leftPadding: Kirigami.Units.smallSpacing * 2
               Controls.ToolTip.visible: hovered
               Controls.ToolTip.delay: 500
               Controls.ToolTip.text: displayText
+              contentItem: Controls.Label {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                text: displayText
+                textFormat: Text.StyledText
+              }
               onClicked: panelPrimaryTextFormat.text = modelData
             }
           }
@@ -134,11 +151,15 @@ ColumnLayout {
     RowLayout {
       Kirigami.FormData.label: Qt.i18next.t('result', {lng: Plasmoid.configuration.language}) + ':'
       Controls.Label {
-        textFormat: Text.PlainText
+        Layout.maximumWidth: Kirigami.Units.gridUnit * 16
+        textFormat: Text.StyledText
         text: {
           if (!panelSecondaryTextFormat.text) return null;
-          const locale = Qt._sc_.useLocale(Plasmoid.configuration.language);
-          return new persianDate().toLocale(locale).format(panelSecondaryTextFormat.text)
+          return Qt._sc_.utils.richDateFormatParser(
+            undefined,
+            panelSecondaryTextFormat.text,
+            Qt._sc_.useLocale(Plasmoid.configuration.language)
+          );
         }
       }
     }
@@ -166,16 +187,26 @@ ColumnLayout {
           Repeater {
             model: appearanceConfig.dateTemplates
             delegate: Controls.Button {              
-              property string displayText: {
-                const locale = Qt._sc_.useLocale(Plasmoid.configuration.language);
-                new persianDate().toLocale(locale).format(modelData);
-              }
-              text: displayText
+              property string displayText: Qt._sc_.utils.richDateFormatParser(
+                undefined,
+                modelData,
+                Qt._sc_.useLocale(Plasmoid.configuration.language)
+              )
+              topPadding: Kirigami.Units.smallSpacing
+              rightPadding: Kirigami.Units.smallSpacing * 2
+              bottomPadding: Kirigami.Units.smallSpacing
+              leftPadding: Kirigami.Units.smallSpacing * 2
               Controls.ToolTip.visible: hovered
               Controls.ToolTip.delay: 500
               Controls.ToolTip.text: displayText
-              onClicked: panelSecondaryTextFormat.text = modelData
               enabled: secondaryText.checked
+              contentItem: Controls.Label {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                text: displayText
+                textFormat: Text.StyledText
+              }
+              onClicked: panelSecondaryTextFormat.text = modelData
             }
           }
         }

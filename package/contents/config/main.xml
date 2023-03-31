@@ -4,13 +4,14 @@
 
     <group name="Appearance">
         <entry name="panelPrimaryTextFormat" type="String">
-            <default>dddd D MMMM</default>
+            <!-- <default>dddd D MMMM</default> -->
+            <default><![CDATA[dddd D MMMM]]></default>
         </entry>
         <entry name="secondaryText" type="Bool">
             <default>false</default>
         </entry>
         <entry name="panelSecondaryTextFormat" type="String">
-            <default>dddd D MMMM</default>
+            <default><![CDATA[dddd D MMMM]]></default>
         </entry>
         <entry name="secondaryTextHeight" type="Int">
             <default>50</default>
