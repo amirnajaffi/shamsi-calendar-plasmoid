@@ -147,9 +147,58 @@ PlasmaExtras.Representation {
       id: stack
       clip: true
       anchors.fill: parent
+
       initialItem: MonthViewAndEvents {
         id: monthViewAndEvents
         objectName: Qt._sc_.const.stack.MONTH_VIEW_AND_EVENTS.objectName
+      }
+
+      pushEnter: Transition {
+        NumberAnimation {
+          duration: PlasmaCore.Units.shortDuration
+          property: "opacity"
+          from: 0
+          to: 1
+        }
+        NumberAnimation {
+          duration: PlasmaCore.Units.shortDuration
+          property: "scale"
+          from: 1.5
+          to: 1
+        }
+      }
+
+      pushExit: Transition {
+        NumberAnimation {
+          duration: PlasmaCore.Units.shortDuration
+          property: "opacity"
+          from: 1
+          to: 0
+        }
+      }
+
+      popEnter: Transition {
+        NumberAnimation {
+          duration: PlasmaCore.Units.shortDuration
+          property: "opacity"
+          from: 0
+          to: 1
+        }
+      }
+
+      popExit: Transition {
+        id: popExit
+        NumberAnimation {
+          duration: PlasmaCore.Units.shortDuration
+          property: "opacity"
+          from: 1
+          to: 0
+        }
+        NumberAnimation {
+          duration: PlasmaCore.Units.shortDuration
+          property: "scale"
+          to: popExit.ViewTransition.item.scale * 1.5
+        }
       }
 
       Component.onCompleted: qmlStore.uiReference.stack = stack
