@@ -31,10 +31,18 @@ Item {
 
   Plasmoid.compactRepresentation: DateDisplay {}
   Plasmoid.fullRepresentation: Calendar {}
-  /* TODO: Tooltip
-  Plasmoid.toolTipMainText: todayDate.format('dddd')
-  Plasmoid.toolTipSubText: todayDate.format('D MMMM YYYY')
-  */
+
+  Plasmoid.toolTipMainText: Qt._sc_.calendarUI.toolTipText(
+    Qt._sc_.store.calendarSlice.jToday,
+    'dddd',
+    Qt._sc_.useLocale()
+  )
+  Plasmoid.toolTipSubText: Qt._sc_.calendarUI.toolTipText(
+    Qt._sc_.store.calendarSlice.jToday,
+    'D MMMM YYYY',
+    Qt._sc_.useLocale()
+  )
+  
   Plasmoid.hideOnWindowDeactivate: hideOnWindowDeactivate
 
   /* Debugging */

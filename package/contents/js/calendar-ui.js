@@ -32,6 +32,10 @@ Qt._sc_.calendarUI = {
     return mustHighlight;
   },
 
+  toolTipText: function (jDateArr, format, locale) {
+    return new persianDate(jDateArr).toLocale(locale).format(format);
+  },
+
   headerNavigation_goNextModelState: function (nextDirection) {
     const next = this._getNextNavigableData(nextDirection);
     next.callback.call(Qt._sc_.calendar);
