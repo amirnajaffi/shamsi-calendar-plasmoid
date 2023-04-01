@@ -19,7 +19,7 @@ ColumnLayout {
   property string cfg_fontFamily: Plasmoid.configuration.fontFamily
 
   property alias cfg_weekendHighlight: weekendHighlight.checked
-  property string cfg_weekendHighlightDays
+  property string cfg_weekendHighlightDays: Plasmoid.configuration.weekendHighlightDays;
 
   readonly property var dateTemplates: [
     'YYYY MM DD',
@@ -115,6 +115,68 @@ ColumnLayout {
 
       }
     }
+
+    Item {
+      Kirigami.FormData.isSection: true
+    }
+
+    Controls.Switch {
+      id: weekendHighlight
+      text: Qt.i18next.t('enable_weekend_highlight', {lng: Plasmoid.configuration.language})
+    }
+
+    Item {
+      readonly property int _scrollHeight: Kirigami.Units.gridUnit * 2
+      readonly property int _scrollWidth: Kirigami.Units.gridUnit * 16
+      implicitHeight: _scrollHeight
+      implicitWidth: _scrollWidth
+      Layout.minimumHeight: _scrollHeight
+      Layout.maximumHeight: _scrollHeight
+
+      Kirigami.FormData.label: Qt.i18next.t('weekend', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+      Controls.ScrollView {
+        clip: true
+        width: parent.width
+        height: parent.height
+        contentWidth: availableWidth
+        Flow {
+          anchors.fill: parent
+          spacing: Kirigami.Units.smallSpacing
+          Repeater {
+            model: Array.from({length: 7}, (_, index) => index + 1)
+            delegate: Controls.CheckBox {
+              text: Qt.i18next.t('week_label.' + modelData, {lng: Plasmoid.configuration.language})
+              enabled: weekendHighlight.checked
+              checked: isChecked()
+
+              onClicked: {
+                const weekDaysArray = Qt._sc_.utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
+                if (checked) {
+                  weekDaysArray.push(modelData);
+                } else {
+                  const index = weekDaysArray.indexOf(modelData);
+                  if (index > -1) {
+                    weekDaysArray.splice(index, 1);
+                  }
+                }
+                appearanceConfig.cfg_weekendHighlightDays = weekDaysArray.join();
+                checked = Qt.binding(isChecked);
+              }
+
+              function isChecked() {
+                const weekDaysArray = Qt._sc_.utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
+                return weekDaysArray.some((item) => parseInt(item) === parseInt(modelData));
+              }
+
+            } // end Checkbox
+          } // end Repeater
+        } // end Flow
+      } // end Scrollview
+    } // end item
+
+    /* End General Settings */
 
     /* Start Panel Settings */
     Kirigami.Separator {
@@ -303,73 +365,6 @@ ColumnLayout {
       }
     }
     /* End Panel Settings */
-
-    /* Start Calendar Settings */
-    Kirigami.Separator {
-      Kirigami.FormData.isSection: true
-      Kirigami.FormData.label: Qt.i18next.t('calendar', {lng: Plasmoid.configuration.language})
-    }
-
-    Controls.Switch {
-      id: weekendHighlight
-      text: Qt.i18next.t('enable_weekend_highlight', {lng: Plasmoid.configuration.language})
-    }
-
-    Item {
-      readonly property int _scrollHeight: Kirigami.Units.gridUnit * 3
-      readonly property int _scrollWidth: Kirigami.Units.gridUnit * 16
-      implicitHeight: _scrollHeight
-      implicitWidth: _scrollWidth
-      Layout.minimumHeight: _scrollHeight
-      Layout.maximumHeight: _scrollHeight
-
-      Kirigami.FormData.label: Qt.i18next.t('weekend', {lng: Plasmoid.configuration.language}) + ':'
-      Kirigami.FormData.labelAlignment: Qt.AlignTop
-
-      Controls.ScrollView {
-        clip: true
-        width: parent.width
-        height: parent.height
-        contentWidth: availableWidth
-        Flow {
-          anchors.fill: parent
-          spacing: Kirigami.Units.smallSpacing
-          Repeater {
-            model: Array.from({length: 7}, (_, index) => index + 1)
-            delegate: Controls.CheckBox {
-              text: Qt.i18next.t('week_label.' + modelData, {lng: Plasmoid.configuration.language})
-              enabled: weekendHighlight.checked
-              checked: isChecked()
-
-              onClicked: {
-                const weekDaysArray = Qt._sc_.utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
-                if (checked) {
-                  weekDaysArray.push(modelData);
-                } else {
-                  const index = weekDaysArray.indexOf(modelData);
-                  if (index > -1) {
-                    weekDaysArray.splice(index, 1);
-                  }
-                }
-                appearanceConfig.cfg_weekendHighlightDays = weekDaysArray.join();
-                checked = Qt.binding(isChecked);
-              }
-
-              function isChecked() {
-                const weekDaysArray = Qt._sc_.utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
-                return weekDaysArray.some((item) => parseInt(item) === parseInt(modelData));
-              }
-
-            } // end Checkbox
-          } // end Repeater
-        } // end Flow
-
-        Component.onCompleted: {
-          appearanceConfig.cfg_weekendHighlightDays = Plasmoid.configuration.weekendHighlightDays;
-        }
-      } // end Scrollview
-    } // end item
-    /* End Calendar Settings */
 
   } // End Kirigami.FormLayout
 
