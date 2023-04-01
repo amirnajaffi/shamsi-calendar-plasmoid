@@ -13,7 +13,6 @@ import "../js/bin/jalalidate.js" as JalaliDate
 import "../js/events.js" as Events
 import "../js/calendar.js" as CalendarJS
 import "../js/calendar-ui.js" as CalendarUI
-import "../js/main.js" as Scripts
 
 Item {
   id: root
