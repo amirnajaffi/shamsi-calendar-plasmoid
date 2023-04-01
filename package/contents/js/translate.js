@@ -66,6 +66,10 @@ Qt.i18next.init({
         date_format: 'Date format',
         result: 'Result',
         templates: 'Templates',
+        date_format_documentation: '<a href=\"https://github.com/babakhani/PersianDate#format\">Date Format Documentation</a>',
+        font_tag_documentation: '<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/font#attributes\">Font Tag Documentation</a>',
+        format_description:
+          'Just use the font tag. If you use a tag for styling, be sure to have an enclosing tag and then use the format and tags inside it as desired (see templates). You can use tags to change the font, color, etc. Styles applied by tags take precedence over setting values. Time formats are not currently supported.',
         secondary_text: 'Secondary Text',
         enable_secondary_text: 'Enable secondary text',
         height: 'Height',
@@ -139,6 +143,10 @@ Qt.i18next.init({
         date_format: 'فرمت تاریخ',
         result: 'نتیجه',
         templates: 'نمونه‌ها',
+        date_format_documentation: '<a href=\"https://github.com/babakhani/PersianDate#format\">مستندات فرمت تاریخ</a>',
+        font_tag_documentation: '<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/font#attributes\">مستندات تگ فونت</a>',
+        format_description:
+          'فقط از تگ font استفاده کنید. در صورت استفاده از تگ جهت استایل دهی حتما یک تگ دربرگیرنده داشته باشید و سپس داخل آن به صورت دلخواه از فرمت و تگ‌ها استفاده کنید (نمونه‌ها را ببینید). شما میتوانید با استفاده از تگ‌ها فونت، رنگ و ... را تغییر دهید. استایل های اعمال شده توسط تگ‌ها مقدم بر مقادیر تنظیمات هستند. در حال حاضر فرمت‌های زمان پشتیبانی نمی‌شوند.',
         secondary_text: 'متن دوم',
         enable_secondary_text: 'فعال‌سازی متن دوم',
         height: 'ارتفاع',

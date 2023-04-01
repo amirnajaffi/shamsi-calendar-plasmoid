@@ -271,6 +271,42 @@ ColumnLayout {
       }
     }
 
+    Controls.Label {
+      text: Qt.i18next.t('date_format_documentation', {lng: Plasmoid.configuration.language})
+      wrapMode: Text.Wrap
+      Layout.preferredWidth: Layout.maximumWidth
+      Layout.maximumWidth: Kirigami.Units.gridUnit * 16
+      font: PlasmaCore.Theme.smallestFont
+      onLinkActivated: Qt.openUrlExternally(link)
+      MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.NoButton
+        cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+      }
+    }
+
+    Controls.Label {
+      text: Qt.i18next.t('font_tag_documentation', {lng: Plasmoid.configuration.language})
+      wrapMode: Text.Wrap
+      Layout.preferredWidth: Layout.maximumWidth
+      Layout.maximumWidth: Kirigami.Units.gridUnit * 16
+      font: PlasmaCore.Theme.smallestFont
+      onLinkActivated: Qt.openUrlExternally(link)
+      MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.NoButton
+        cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+      }
+    }
+
+    Controls.Label {
+      text: Qt.i18next.t('format_description', {lng: Plasmoid.configuration.language})
+      Layout.fillWidth: true
+      Layout.maximumWidth: Kirigami.Units.gridUnit * 16
+      wrapMode: Text.Wrap
+      font: PlasmaCore.Theme.smallestFont
+    }
+
     Item {
       Kirigami.FormData.isSection: true
       Kirigami.FormData.label: Qt.i18next.t('secondary_text', {lng: Plasmoid.configuration.language})
