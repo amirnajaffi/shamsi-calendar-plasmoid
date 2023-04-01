@@ -47,15 +47,18 @@ Qt._sc_.events = {
 
     const iranSolar = new IranSolar.IranSolar();
     const iranLunar = new IranLunar.IranLunar();
+    let persian = new Persian.Persian(jDates[0][0]);
     const persianPersonage = new PersianPersonage.PersianPersonage();
     const world = new World.World();
     const isIranSolarActive = activeEventsArray.includes(iranSolar.id);
     const isIranLunarActive = activeEventsArray.includes(iranLunar.id);
+    const isPersianActive = activeEventsArray.includes(persian.id);
     const isPersianPersonageActive = activeEventsArray.includes(persianPersonage.id);
     const isWorldActive = activeEventsArray.includes(world.id);
 
     const events = [];
     const pushEvent = (event, index) => (events[index] = [...(events[index] || []), [...event]]);
+    let lastJYear = jDates[0][0];
 
     for (let i = 0; i < jDates.length; i++) {
       const jDate = jDates[i];
@@ -71,10 +74,14 @@ Qt._sc_.events = {
         pushEvent(iranLunar.events[lunarDate[1]][lunarDate[2]], i);
       }
 
-      const persian = new Persian.Persian(jDate[0]);
-      const isPersianActive = activeEventsArray.includes(persian.id);
-      if (isPersianActive && persian.events[jDate[1]] && persian.events[jDate[1]][jDate[2]]) {
-        pushEvent(persian.events[jDate[1]][jDate[2]], i);
+      if (isPersianActive) {
+        if (lastJYear !== jDate[0]) {
+          persian = new Persian.Persian(jDate[0]);
+          lastJYear = jDate[0];
+        }
+        if (persian.events[jDate[1]] && persian.events[jDate[1]][jDate[2]]) {
+          pushEvent(persian.events[jDate[1]][jDate[2]], i);
+        }
       }
 
       if (
