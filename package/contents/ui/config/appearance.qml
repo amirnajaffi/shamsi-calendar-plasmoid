@@ -198,6 +198,10 @@ ColumnLayout {
       }
     }
 
+    Item {
+      Kirigami.FormData.isSection: true
+    }
+
     RowLayout {
       Kirigami.FormData.label: Qt.i18next.t('result', {lng: Plasmoid.configuration.language}) + ':'
       Controls.Label {
@@ -212,6 +216,10 @@ ColumnLayout {
           );
         }
       }
+    }
+
+    Item {
+      Kirigami.FormData.isSection: true
     }
 
     Item {
@@ -283,6 +291,10 @@ ColumnLayout {
       }
     }
 
+    Item {
+      Kirigami.FormData.isSection: true
+    }
+
     RowLayout {
       Kirigami.FormData.label: Qt.i18next.t('result', {lng: Plasmoid.configuration.language}) + ':'
       Controls.Label {
@@ -297,6 +309,10 @@ ColumnLayout {
           );
         }
       }
+    }
+
+    Item {
+      Kirigami.FormData.isSection: true
     }
 
     Item {
@@ -348,6 +364,10 @@ ColumnLayout {
       }
     }
 
+    Item {
+      Kirigami.FormData.isSection: true
+    }
+
     RowLayout {
       Kirigami.FormData.label: Qt.i18next.t('height', {lng: Plasmoid.configuration.language}) + ':'
       opacity: secondaryText.checked ? 1 : 0.5
@@ -364,6 +384,11 @@ ColumnLayout {
         text: secondaryTextHeight.value + "%"
       }
     }
+    
+    Item {
+      Kirigami.FormData.isSection: true
+    }
+
     /* End Panel Settings */
 
   } // End Kirigami.FormLayout
