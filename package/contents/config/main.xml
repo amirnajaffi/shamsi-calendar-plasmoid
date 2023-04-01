@@ -16,6 +16,12 @@
         <entry name="secondaryTextHeight" type="Int">
             <default>50</default>
         </entry>
+        <entry name="fontStatus" type="String">
+            <default>default</default>
+        </entry>
+        <entry name="fontFamily" type="String">
+            <default></default>
+        </entry>
         <entry name="weekendHighlight" type="Bool">
             <default>false</default>
         </entry>

@@ -23,6 +23,7 @@ MouseArea {
       verticalAlignment: Text.AlignVCenter
       minimumPointSize: 1
       textFormat: Text.StyledText
+      font.family: root.fontFamily
       font.pixelSize: 1000
       fontSizeMode: Text.Fit
       text: Qt._sc_.utils.richDateFormatParser(
@@ -41,6 +42,7 @@ MouseArea {
       verticalAlignment: Text.AlignVCenter
       minimumPointSize: 1
       textFormat: Text.StyledText
+      font.family: root.fontFamily
       font.pixelSize: 1000
       fontSizeMode: Text.Fit
       text: Qt._sc_.utils.richDateFormatParser(

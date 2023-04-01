@@ -31,6 +31,7 @@ Grid {
       opacity: 0.5
       maximumLineCount: 1
       elide: Text.ElideRight
+      font.family: root.fontFamily
       font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize
     }
   } // end days name Repeater
@@ -65,6 +66,7 @@ Grid {
           verticalAlignment: Text.AlignVCenter
           maximumLineCount: 1
           elide: Text.ElideRight
+          font.family: root.fontFamily
           font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
           font.weight: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? Font.DemiBold : Font.Normal
           color: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index) === true ? Qt._sc_.const.COLOR_EVENT_HOLIDAY : PlasmaCore.Theme.textColor

@@ -51,6 +51,7 @@ PlasmaExtras.Representation {
         fontSizeMode: Text.Fit
         wrapMode: Text.Wrap
         elide: Text.ElideRight
+        font.family: root.fontFamily
         font.pixelSize: 300
         font.weight: Font.DemiBold
         MouseArea {
@@ -82,6 +83,7 @@ PlasmaExtras.Representation {
           fontSizeMode: Text.Fit
           wrapMode: Text.Wrap
           elide: Text.ElideRight
+          font.family: root.fontFamily
           font.pixelSize: 300
           font.weight: Font.Light
           MouseArea {
@@ -98,6 +100,7 @@ PlasmaExtras.Representation {
           onClicked: Qt._sc_.calendarUI.headerNavigation_goNextModelState('current')
           PlasmaComponents3.ToolTip {
             text: parent.displayText
+            font.family: root.fontFamily
           }
         }
 
@@ -109,6 +112,7 @@ PlasmaExtras.Representation {
           onClicked: Qt._sc_.calendarUI.headerNavigation_goNextModelState('prev')
           PlasmaComponents3.ToolTip {
             text: parent.displayText
+            font.family: root.fontFamily
           }
         }
 
@@ -120,6 +124,7 @@ PlasmaExtras.Representation {
           onClicked: Qt._sc_.calendarUI.headerNavigation_goNextModelState('next')
           PlasmaComponents3.ToolTip {
             text: parent.displayText
+            font.family: root.fontFamily
           }
         }
 
@@ -225,6 +230,7 @@ PlasmaExtras.Representation {
         onClicked: plasmoid.action("configure").trigger()
         PlasmaComponents3.ToolTip {
           text: parent.displayText
+          font.family: root.fontFamily
         }
       }
 
@@ -237,6 +243,7 @@ PlasmaExtras.Representation {
         onToggled: root.hideOnWindowDeactivate = !root.hideOnWindowDeactivate
         PlasmaComponents3.ToolTip {
           text: parent.displayText
+          font.family: root.fontFamily
         }
       }
 
@@ -251,6 +258,7 @@ PlasmaExtras.Representation {
         }
         PlasmaComponents3.ToolTip {
           text: parent.displayText
+          font.family: root.fontFamily
         }
       }
 

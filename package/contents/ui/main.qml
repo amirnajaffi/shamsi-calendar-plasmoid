@@ -17,8 +17,17 @@ import "../js/main.js" as Scripts
 
 Item {
   id: root
+
   property bool hideOnWindowDeactivate: true
-  property string lang: 'en' // temp
+
+  property string fontFamily: {
+    if (Plasmoid.configuration.fontStatus === Qt._sc_.const.font.MANUAL && Plasmoid.configuration.fontFamily !== '') {
+      return Plasmoid.configuration.fontFamily;
+    } else if(Plasmoid.configuration.fontStatus === Qt._sc_.const.font.VAZIR) {
+      return vazirFont.name;
+    }
+    return PlasmaCore.Theme.defaultFont.family;
+  }
 
   Plasmoid.compactRepresentation: DateDisplay {}
   Plasmoid.fullRepresentation: Calendar {}
@@ -30,6 +39,11 @@ Item {
 
   /* Debugging */
   // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+
+  FontLoader {
+    id: vazirFont;
+    source: "../fonts/Vazirmatn[wght].ttf"
+  }
 
   QtObject {
     id: qmlStore

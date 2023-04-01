@@ -1,9 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
+import QtQuick.Dialogs 1.1 as QtDialogs
 import QtQuick.Controls 2.5 as Controls
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 ColumnLayout {
   id: appearanceConfig
@@ -12,6 +14,10 @@ ColumnLayout {
   property alias cfg_secondaryText: secondaryText.checked
   property alias cfg_panelSecondaryTextFormat: panelSecondaryTextFormat.text
   property alias cfg_secondaryTextHeight: secondaryTextHeight.value
+
+  property string cfg_fontStatus: Plasmoid.configuration.fontStatus
+  property string cfg_fontFamily: Plasmoid.configuration.fontFamily
+
   property alias cfg_weekendHighlight: weekendHighlight.checked
   property string cfg_weekendHighlightDays
 
@@ -42,6 +48,73 @@ ColumnLayout {
   Kirigami.FormLayout {
     Layout.fillWidth: true
     Layout.fillHeight: true
+
+    /* Start General settings */
+    RowLayout {
+      Kirigami.FormData.label: Qt.i18next.t('font', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+      Controls.ButtonGroup {
+        id: fontRadioGroup
+        onCheckedButtonChanged: {
+          appearanceConfig.cfg_fontStatus = checkedButton.value
+          if (checkedButton.value === Qt._sc_.const.font.MANUAL && appearanceConfig.cfg_fontFamily === "") {
+            appearanceConfig.cfg_fontFamily = PlasmaCore.Theme.defaultFont.family
+          }
+        }
+      }
+
+      ColumnLayout {
+        Controls.RadioButton {
+          text: Qt.i18next.t('default', {lng: Plasmoid.configuration.language})
+          Controls.ButtonGroup.group: fontRadioGroup
+          readonly property string value: Qt._sc_.const.font.DEFAULT
+          checked: value === appearanceConfig.cfg_fontStatus
+        }
+
+        Controls.RadioButton {
+          text: Qt.i18next.t('vazir', {lng: Plasmoid.configuration.language})
+          Controls.ButtonGroup.group: fontRadioGroup
+          readonly property string value: Qt._sc_.const.font.VAZIR
+          checked: value === appearanceConfig.cfg_fontStatus
+        }
+
+        Controls.Label {
+          text: Qt.i18next.t('best_look_in_persian', {lng: Plasmoid.configuration.language})
+          Layout.fillWidth: true
+          wrapMode: Text.Wrap
+          font: PlasmaCore.Theme.smallestFont
+        }
+
+        RowLayout {
+          Controls.RadioButton {
+            id: fontManualRadioButton
+            text: Qt.i18next.t('manual', {lng: Plasmoid.configuration.language})
+            Controls.ButtonGroup.group: fontRadioGroup
+            readonly property string value: Qt._sc_.const.font.MANUAL
+            checked: value === appearanceConfig.cfg_fontStatus
+          }
+
+          Controls.Button {
+            text: Qt.i18next.t('choose_font', {lng: Plasmoid.configuration.language})
+            icon.name: "settings-configure"
+            enabled: fontManualRadioButton.checked
+            onClicked: {
+              fontDialog.font = Qt.font({family: appearanceConfig.cfg_fontFamily})
+              fontDialog.open()
+            }
+          }
+        }
+
+        Controls.Label {
+          text: Qt.i18next.t('only_font_name_is_applied', {lng: Plasmoid.configuration.language})
+          Layout.fillWidth: true
+          wrapMode: Text.Wrap
+          font: PlasmaCore.Theme.smallestFont
+        }
+
+      }
+    }
 
     /* Start Panel Settings */
     Kirigami.Separator {
@@ -299,4 +372,15 @@ ColumnLayout {
     /* End Calendar Settings */
 
   } // End Kirigami.FormLayout
+
+  QtDialogs.FontDialog {
+    id: fontDialog
+    title: "Choose a Font"
+    modality: Qt.WindowModal
+
+    onAccepted: {
+      appearanceConfig.cfg_fontFamily = font.family
+    }
+  }
+
 } // End ColumnLayout

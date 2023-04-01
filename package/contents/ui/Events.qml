@@ -32,6 +32,7 @@ ScrollView {
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       opacity: 0.2
+      font.family: root.fontFamily
       font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.5
       font.weight: Font.Bold
     }
@@ -57,6 +58,7 @@ ScrollView {
           Layout.fillWidth: true
           text: modelData[0]
           wrapMode: Text.Wrap
+          font.family: root.fontFamily
           font.weight: Font.DemiBold
         }
 

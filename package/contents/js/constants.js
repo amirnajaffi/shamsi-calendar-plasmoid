@@ -10,4 +10,9 @@ Qt._sc_.const = {
   COLOR_EVENT_OTHER: '#0c61b9',
   LANG_FA: 'fa',
   LANG_EN: 'en',
+  font: {
+    DEFAULT: 'default',
+    VAZIR: 'vazir',
+    MANUAL: 'manual',
+  },
 };

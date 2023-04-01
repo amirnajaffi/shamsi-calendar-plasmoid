@@ -26,6 +26,7 @@ Grid {
       opacity: 1
       maximumLineCount: 1
       elide: Text.ElideRight
+      font.family: root.fontFamily
       font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
       font.weight: Font.DemiBold
 
