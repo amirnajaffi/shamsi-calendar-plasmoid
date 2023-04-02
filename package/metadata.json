@@ -6,11 +6,12 @@
         "Name": "Amirhossein Najafi"
       }
     ],
+    "BugReportUrl": "https://github.com/amirnajaffi/shamsi-calendar-plasmoid/issues/new",
+    "Category": "Date and Time",
+    "Icon": "office-calendar",
     "Id": "org.kde.plasma.shamsi-calendar",
     "Name": "Shamsi Calendar",
     "Description": "Shamsi Calendar with holidays. Known as Persian Calendar or Jalali Calendar!",
-    "Icon": "org.kde.plasma.calendar",
-    "Category": "Date and Time",
     "ServiceTypes": [
       "Plasma/Applet"
     ],
@@ -19,5 +20,8 @@
     "License": "GPLv3"
   },
   "X-Plasma-API": "declarativeappletscript",
-  "X-Plasma-MainScript": "ui/main.qml"
+  "X-Plasma-MainScript": "ui/main.qml",
+  "X-Plasma-Provides": [
+    "org.kde.plasma.date"
+  ]
 }
