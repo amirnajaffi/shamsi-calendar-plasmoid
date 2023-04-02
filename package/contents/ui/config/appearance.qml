@@ -10,6 +10,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 ColumnLayout {
   id: appearanceConfig
 
+  property string cfg_calendarCellFontMode: Plasmoid.configuration.calendarCellFontMode
+  property alias cfg_calendarCellFontPixelSizeScale: calendarCellFontPixelSizeScale.value
+
   property alias cfg_panelPrimaryTextFormat: panelPrimaryTextFormat.text
   property alias cfg_secondaryText: secondaryText.checked
   property alias cfg_panelSecondaryTextFormat: panelSecondaryTextFormat.text
@@ -50,6 +53,73 @@ ColumnLayout {
     Layout.fillHeight: true
 
     /* Start General settings */
+    RowLayout {
+      // Kirigami.FormData.label: Qt.i18next.t('font', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Qt.i18next.t('calendar_cell_font_mode', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.labelAlignment: Qt.AlignTop
+
+      Controls.ButtonGroup {
+        id: calendarCellFontModeRadioGroup
+        onCheckedButtonChanged: {
+          appearanceConfig.cfg_calendarCellFontMode = checkedButton.value
+        }
+      }
+
+      ColumnLayout {
+        Controls.RadioButton {
+          text: Qt.i18next.t('fit', {lng: Plasmoid.configuration.language})
+          Controls.ButtonGroup.group: calendarCellFontModeRadioGroup
+          readonly property string value: 'fit'
+          checked: value === appearanceConfig.cfg_calendarCellFontMode
+        }
+
+        RowLayout {
+          Controls.RadioButton {
+            id: fixedCalendarCellFontModeRadioButton
+            text: Qt.i18next.t('fixed', {lng: Plasmoid.configuration.language})
+            Controls.ButtonGroup.group: calendarCellFontModeRadioGroup
+            readonly property string value: 'fixed'
+            checked: value === appearanceConfig.cfg_calendarCellFontMode
+          }
+          
+        }
+
+        RowLayout {
+          Controls.Label {
+            text: Qt.i18next.t('scale', {lng: Plasmoid.configuration.language}) + ':'
+            visible: fixedCalendarCellFontModeRadioButton.checked
+          }
+
+          Controls.Label {
+            text: calendarCellFontPixelSizeScale.value
+            visible: fixedCalendarCellFontModeRadioButton.checked
+          }
+
+          Controls.Button {
+            icon.name: "reload"
+            display: Controls.AbstractButton.IconOnly
+            visible: fixedCalendarCellFontModeRadioButton.checked
+            onClicked: calendarCellFontPixelSizeScale.value = 1.2
+            Controls.ToolTip {
+              text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
+            }
+          }
+        }
+
+        Controls.Slider {
+          id: calendarCellFontPixelSizeScale
+          visible: fixedCalendarCellFontModeRadioButton.checked
+          from: 1.0
+          to: 2.0
+          stepSize: 0.1
+        }
+      }
+    }
+
+    Item {
+      Kirigami.FormData.isSection: true
+    }
+
     RowLayout {
       Kirigami.FormData.label: Qt.i18next.t('font', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop

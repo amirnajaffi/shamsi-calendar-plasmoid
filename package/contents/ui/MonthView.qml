@@ -67,7 +67,8 @@ Grid {
           maximumLineCount: 1
           elide: Text.ElideRight
           font.family: root.fontFamily
-          font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
+          font.pixelSize: Plasmoid.configuration.calendarCellFontMode === 'fit' ? 1000 : PlasmaCore.Theme.defaultFont.pixelSize * Plasmoid.configuration.calendarCellFontPixelSizeScale
+          fontSizeMode: Plasmoid.configuration.calendarCellFontMode === 'fit' ? Text.Fit : Text.FixedSize
           font.weight: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? Font.DemiBold : Font.Normal
           color: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index) === true ? Qt._sc_.const.COLOR_EVENT_HOLIDAY : PlasmaCore.Theme.textColor
 

@@ -3,6 +3,12 @@
     <kcfgfile name=""/>
 
     <group name="Appearance">
+        <entry name="calendarCellFontMode" type="String">
+            <default>fixed</default>
+        </entry>
+        <entry name="calendarCellFontPixelSizeScale" type="Double">
+            <default>1.2</default>
+        </entry>
         <entry name="fontStatus" type="String">
             <default>default</default>
         </entry>
