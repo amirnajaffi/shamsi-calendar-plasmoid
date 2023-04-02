@@ -18,7 +18,8 @@ Item {
   id: root
 
   property bool hideOnWindowDeactivate: true
-
+  property string toolTipMainText
+  property string toolTipSubText
   property string fontFamily: {
     if (Plasmoid.configuration.fontStatus === Qt._sc_.const.font.MANUAL && Plasmoid.configuration.fontFamily !== '') {
       return Plasmoid.configuration.fontFamily;
@@ -30,22 +31,12 @@ Item {
 
   Plasmoid.compactRepresentation: DateDisplay {}
   Plasmoid.fullRepresentation: Calendar {}
-
-  Plasmoid.toolTipMainText: Qt._sc_.calendarUI.toolTipText(
-    Qt._sc_.store.calendarSlice.jToday,
-    'dddd',
-    Qt._sc_.useLocale()
-  )
-  Plasmoid.toolTipSubText: Qt._sc_.calendarUI.toolTipText(
-    Qt._sc_.store.calendarSlice.jToday,
-    'D MMMM YYYY',
-    Qt._sc_.useLocale()
-  )
-  
+  Plasmoid.toolTipMainText: root.toolTipMainText
+  Plasmoid.toolTipSubText: root.toolTipSubText
   Plasmoid.hideOnWindowDeactivate: hideOnWindowDeactivate
 
   /* Debugging */
-  // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+  Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
   FontLoader {
     id: vazirFont;
@@ -118,6 +109,21 @@ Item {
     Qt._sc_.calendar.baseDateChangeHandler(localTime.data.Local.DateTime);
     Qt._sc_.calendar.changeDecade(Qt._sc_.store.calendarSlice.jToday[0]);
     Qt.i18next.changeLanguage(Plasmoid.configuration.language);
+
+    root.toolTipMainText = Qt.binding(function() {
+      return  Qt._sc_.calendarUI.toolTipText(
+        Qt._sc_.store.calendarSlice.jToday,
+        'dddd',
+        Qt._sc_.useLocale()
+      )
+    })
+    root.toolTipSubText = Qt.binding(function() {
+      return Qt._sc_.calendarUI.toolTipText(
+        Qt._sc_.store.calendarSlice.jToday,
+        'D MMMM YYYY',
+        Qt._sc_.useLocale()
+      )
+    })
   }
 
 }
