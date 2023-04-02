@@ -36,7 +36,7 @@ Item {
   Plasmoid.hideOnWindowDeactivate: hideOnWindowDeactivate
 
   /* Debugging */
-  Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+  // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
   FontLoader {
     id: vazirFont;
