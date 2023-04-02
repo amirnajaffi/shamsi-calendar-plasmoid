@@ -70,7 +70,7 @@ Grid {
           font.pixelSize: Plasmoid.configuration.calendarCellFontMode === 'fit' ? 1000 : PlasmaCore.Theme.defaultFont.pixelSize * Plasmoid.configuration.calendarCellFontPixelSizeScale
           fontSizeMode: Plasmoid.configuration.calendarCellFontMode === 'fit' ? Text.Fit : Text.FixedSize
           font.weight: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? Font.DemiBold : Font.Normal
-          color: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index) === true ? Qt._sc_.const.COLOR_EVENT_HOLIDAY : PlasmaCore.Theme.textColor
+          color: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index) === true ? Plasmoid.configuration.holidayColor : PlasmaCore.Theme.textColor
 
           RoundedHighlight {
             property bool isHovered: false
@@ -84,7 +84,7 @@ Grid {
           // background: Rectangle { // Holiday background
           //   visible: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index)
           //   radius: 180
-          //   color: Qt._sc_.const.COLOR_EVENT_HOLIDAY
+          //   color: Plasmoid.configuration.holidayColor
           //   anchors.fill: parent
           // }
 
@@ -100,7 +100,7 @@ Grid {
             width: height
             height: PlasmaCore.Units.gridUnit / 4
             radius: 180
-            color: Qt._sc_.const.COLOR_EVENT_OTHER
+            color: Plasmoid.configuration.eventColor
           }
         } // end cell bottom (event badges)
 

@@ -10,6 +10,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 ColumnLayout {
   id: appearanceConfig
 
+  property alias cfg_holidayColor: holidayColor.text
+  property alias cfg_eventColor: eventColor.text
+
   property string cfg_calendarCellFontMode: Plasmoid.configuration.calendarCellFontMode
   property alias cfg_calendarCellFontPixelSizeScale: calendarCellFontPixelSizeScale.value
 
@@ -53,6 +56,75 @@ ColumnLayout {
     Layout.fillHeight: true
 
     /* Start General settings */
+    RowLayout {
+      Kirigami.FormData.label: Qt.i18next.t('holiday_color', {lng: Plasmoid.configuration.language}) + ':'
+
+      Controls.TextField {
+        id: holidayColor
+      }
+
+      Rectangle {
+        width: Kirigami.Units.gridUnit * 1.5
+        height: width
+        color: cfg_holidayColor
+
+        MouseArea {
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          onClicked: {
+            colorDialog.target = holidayColor
+            colorDialog.color = cfg_holidayColor
+            colorDialog.open()
+          }
+        }
+      }
+
+      Controls.Button {
+        icon.name: "reload"
+        display: Controls.AbstractButton.IconOnly
+        visible: holidayColor.text !== Qt._sc_.const.COLOR_EVENT_HOLIDAY
+        onClicked: holidayColor.text = Qt._sc_.const.COLOR_EVENT_HOLIDAY
+        Controls.ToolTip {
+          text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
+        }
+      }
+    }
+
+    RowLayout {
+      Kirigami.FormData.label: Qt.i18next.t('event_color', {lng: Plasmoid.configuration.language}) + ':'
+
+      Controls.TextField {
+        id: eventColor
+      }
+
+      Rectangle {
+        width: Kirigami.Units.gridUnit * 1.5
+        height: width
+        color: cfg_eventColor
+
+        MouseArea {
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          onClicked: {
+            colorDialog.target = eventColor
+            colorDialog.color = cfg_eventColor
+            colorDialog.open()
+          }
+        }
+      }
+
+      Controls.Button {
+        icon.name: "reload"
+        display: Controls.AbstractButton.IconOnly
+        visible: eventColor.text !== Qt._sc_.const.COLOR_EVENT_OTHER
+        onClicked: eventColor.text = Qt._sc_.const.COLOR_EVENT_OTHER
+        Controls.ToolTip {
+          text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
+        }
+      }
+
+    }
+
     RowLayout {
       // Kirigami.FormData.label: Qt.i18next.t('font', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.label: Qt.i18next.t('calendar_cell_font_mode', {lng: Plasmoid.configuration.language}) + ':'
@@ -98,7 +170,7 @@ ColumnLayout {
           Controls.Button {
             icon.name: "reload"
             display: Controls.AbstractButton.IconOnly
-            visible: fixedCalendarCellFontModeRadioButton.checked
+            visible: fixedCalendarCellFontModeRadioButton.checked && calendarCellFontPixelSizeScale.value != 1.2
             onClicked: calendarCellFontPixelSizeScale.value = 1.2
             Controls.ToolTip {
               text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
@@ -507,6 +579,18 @@ ColumnLayout {
     onAccepted: {
       appearanceConfig.cfg_fontFamily = font.family
     }
+  }
+
+  QtDialogs.ColorDialog {
+    id: colorDialog
+    title: "Choose a color"
+    modality: Qt.WindowModal
+    property var target
+
+    onAccepted: {
+      target.text = colorDialog.color
+    }
+    
   }
 
 } // End ColumnLayout

@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
@@ -51,7 +52,7 @@ ScrollView {
           width: height
           height: PlasmaCore.Units.gridUnit / 2
           radius: 180
-          color: modelData[1] === true ? Qt._sc_.const.COLOR_EVENT_HOLIDAY : Qt._sc_.const.COLOR_EVENT_OTHER
+          color: modelData[1] === true ? Plasmoid.configuration.holidayColor : Plasmoid.configuration.eventColor
         }
 
         PlasmaComponents3.Label {
