@@ -96,13 +96,13 @@ Item {
       id: secondaryText
       visible: Plasmoid.configuration.secondaryText
       width: parent.width
-      height: displayDate.secondaryHeight
+      height: secondaryTextHidden.height
       horizontalAlignment: secondaryTextHidden.horizontalAlignment
       verticalAlignment: secondaryTextHidden.verticalAlignment
-      minimumPointSize: secondaryTextHidden.minimumPointSize
       textFormat: secondaryTextHidden.textFormat
       font.family: secondaryTextHidden.font.family
-      font.pixelSize: secondaryTextHidden.font.pixelSize
+      minimumPointSize: secondaryTextHidden.minimumPointSize
+      font.pointSize: secondaryTextHidden.font.pointSize
       fontSizeMode: secondaryTextHidden.fontSizeMode
       text: secondaryTextHidden.text
     }
