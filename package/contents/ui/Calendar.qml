@@ -1,6 +1,6 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -9,13 +9,17 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 PlasmaExtras.Representation {
   id: calendar
+
   readonly property int _minimumWidth: Math.round(PlasmaCore.Units.gridUnit * 21)
   readonly property int _minimumHeight: Math.round(PlasmaCore.Units.gridUnit * 20) + eventsHeight
+
   implicitWidth: _minimumWidth
+  Layout.preferredWidth: _minimumWidth
   Layout.minimumWidth: _minimumWidth
+  Layout.maximumWidth: _minimumWidth
+  Layout.preferredHeight: _minimumHeight
   Layout.minimumHeight: _minimumHeight
-  Layout.maximumWidth: PlasmaCore.Units.gridUnit * 80
-  Layout.maximumHeight: PlasmaCore.Units.gridUnit * 40
+  Layout.maximumHeight: _minimumHeight
 
   property int headerHeight: Math.round(PlasmaCore.Units.gridUnit * 3.15)
   property int footerHeight: Math.round(PlasmaCore.Units.gridUnit * 2)
