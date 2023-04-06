@@ -25,7 +25,7 @@ ConfigModel {
 
   ConfigCategory {
     name: Qt.i18next.t('other', {lng: Plasmoid.configuration.language})
-    icon: "view-more-horizontal"
+    icon: "view-more-horizontal-symbolic"
     source: "config/other.qml"
   }
 

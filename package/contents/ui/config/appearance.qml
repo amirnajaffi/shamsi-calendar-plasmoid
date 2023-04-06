@@ -80,7 +80,7 @@ ColumnLayout {
       }
 
       Controls.Button {
-        icon.name: "reload"
+        icon.name: "edit-undo"
         display: Controls.AbstractButton.IconOnly
         visible: holidayColor.text !== Qt._sc_.const.COLOR_EVENT_HOLIDAY
         onClicked: holidayColor.text = Qt._sc_.const.COLOR_EVENT_HOLIDAY
@@ -114,7 +114,7 @@ ColumnLayout {
       }
 
       Controls.Button {
-        icon.name: "reload"
+        icon.name: "edit-undo"
         display: Controls.AbstractButton.IconOnly
         visible: eventColor.text !== Qt._sc_.const.COLOR_EVENT_OTHER
         onClicked: eventColor.text = Qt._sc_.const.COLOR_EVENT_OTHER
@@ -168,7 +168,7 @@ ColumnLayout {
           }
 
           Controls.Button {
-            icon.name: "reload"
+            icon.name: "edit-undo"
             display: Controls.AbstractButton.IconOnly
             visible: fixedCalendarCellFontModeRadioButton.checked && calendarCellFontPixelSizeScale.value != 1.2
             onClicked: calendarCellFontPixelSizeScale.value = 1.2
