@@ -10,7 +10,7 @@
             <default>#0c61b9</default>
         </entry>
         <entry name="calendarCellFontMode" type="String">
-            <default>fixed</default>
+            <default>fit</default>
         </entry>
         <entry name="calendarCellFontPixelSizeScale" type="Double">
             <default>1.2</default>
