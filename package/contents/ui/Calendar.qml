@@ -253,8 +253,8 @@ PlasmaExtras.Representation {
 
       PlasmaComponents3.ToolButton {
         id: langButton
-        property string displayText: Qt._sc_.t("languages")
-        icon.name: "config-language"
+        property string displayText: Qt._sc_.t("change_language")
+        icon.name: "languages"
         Accessible.description: displayText
         onClicked: {
           const newLang = Plasmoid.configuration.tempLanguage === 'en' ? 'fa' : 'en';
