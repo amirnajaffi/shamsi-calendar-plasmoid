@@ -9,8 +9,8 @@ PlasmaExtras.Highlight {
 
   layer.enabled: rounded
   layer.effect: ShaderEffect {
-    property real adjustX: parent.adapt ? Math.max(width / height, 1) : 1
-    property real adjustY: parent.adapt ? Math.max(1 / (width / height), 1) : 1
+    property real adjustX: parent.adapt ? Math.max(width / height, 1) : 1.05
+    property real adjustY: parent.adapt ? Math.max(1 / (width / height), 1) : 1.05
 
     fragmentShader: "
     #ifdef GL_ES
