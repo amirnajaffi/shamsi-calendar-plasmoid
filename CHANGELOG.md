@@ -1,7 +1,6 @@
 # Changelog
 
 ## [2.0.0-beta.2] - 2023-04-07
-### Added
 - Added font size option to panel primary and secondary texts
 - Visual improvements
 - Minor bug fixes
