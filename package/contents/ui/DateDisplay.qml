@@ -45,9 +45,9 @@ Item {
       verticalAlignment: Text.AlignVCenter
       textFormat: Text.StyledText
       font.family: root.fontFamily
-      minimumPointSize: 1
-      font.pointSize: 1000
-      fontSizeMode: Text.Fit
+      minimumPixelSize: 1
+      font.pixelSize: Plasmoid.configuration.panelPrimaryTextFontSizeMode === 'fit' ? 1000 : Plasmoid.configuration.panelPrimaryTextPixelSize
+      fontSizeMode: Plasmoid.configuration.panelPrimaryTextFontSizeMode === 'fit' ? Text.Fit : Text.FixedSize 
       text: Qt._sc_.utils.richDateFormatParser(
         Qt._sc_.store.calendarSlice.jToday,
         Plasmoid.configuration.panelPrimaryTextFormat,
@@ -63,8 +63,8 @@ Item {
       verticalAlignment: primaryTextHidden.verticalAlignment
       textFormat: primaryTextHidden.textFormat
       font.family: primaryTextHidden.font.family
-      minimumPointSize: primaryTextHidden.minimumPointSize
-      font.pointSize: primaryTextHidden.font.pointSize
+      minimumPixelSize: primaryTextHidden.minimumPixelSize
+      font.pixelSize: primaryTextHidden.font.pixelSize
       fontSizeMode: primaryTextHidden.fontSizeMode
       text: primaryTextHidden.text
     }
@@ -82,9 +82,9 @@ Item {
       verticalAlignment: Text.AlignVCenter
       textFormat: Text.StyledText
       font.family: root.fontFamily
-      minimumPointSize: 1
-      font.pointSize: 1000
-      fontSizeMode: Text.Fit
+      minimumPixelSize: 1
+      font.pixelSize: Plasmoid.configuration.panelSecondaryTextFontSizeMode === 'fit' ? 1000 : Plasmoid.configuration.panelSecondaryTextPixelSize
+      fontSizeMode: Plasmoid.configuration.panelSecondaryTextFontSizeMode === 'fit' ? Text.Fit : Text.FixedSize 
       text: Qt._sc_.utils.richDateFormatParser(
         Qt._sc_.store.calendarSlice.jToday,
         Plasmoid.configuration.panelSecondaryTextFormat,
@@ -101,8 +101,8 @@ Item {
       verticalAlignment: secondaryTextHidden.verticalAlignment
       textFormat: secondaryTextHidden.textFormat
       font.family: secondaryTextHidden.font.family
-      minimumPointSize: secondaryTextHidden.minimumPointSize
-      font.pointSize: secondaryTextHidden.font.pointSize
+      minimumPixelSize: secondaryTextHidden.minimumPixelSize
+      font.pixelSize: secondaryTextHidden.font.pixelSize
       fontSizeMode: secondaryTextHidden.fontSizeMode
       text: secondaryTextHidden.text
     }

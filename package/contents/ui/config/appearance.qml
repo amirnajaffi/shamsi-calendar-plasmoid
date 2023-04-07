@@ -17,9 +17,13 @@ ColumnLayout {
   property alias cfg_calendarCellFontPixelSizeScale: calendarCellFontPixelSizeScale.value
 
   property alias cfg_panelPrimaryTextFormat: panelPrimaryTextFormat.text
+  property string cfg_panelPrimaryTextFontSizeMode: Plasmoid.configuration.panelPrimaryTextFontSizeMode
+  property alias cfg_panelPrimaryTextPixelSize: panelPrimaryTextPixelSize.value
   property alias cfg_secondaryText: secondaryText.checked
   property alias cfg_panelSecondaryTextFormat: panelSecondaryTextFormat.text
   property alias cfg_secondaryTextHeight: secondaryTextHeight.value
+  property string cfg_panelSecondaryTextFontSizeMode: Plasmoid.configuration.panelSecondaryTextFontSizeMode
+  property alias cfg_panelSecondaryTextPixelSize: panelSecondaryTextPixelSize.value
 
   property string cfg_fontStatus: Plasmoid.configuration.fontStatus
   property string cfg_fontFamily: Plasmoid.configuration.fontFamily
@@ -451,6 +455,54 @@ ColumnLayout {
 
     Item {
       Kirigami.FormData.isSection: true
+    }
+
+    RowLayout {
+      Kirigami.FormData.label: Qt.i18next.t('font_size', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.labelAlignment: Qt.AlignTop
+      
+      Controls.ButtonGroup {
+        id: panelPrimaryTextFontSizeModeRadioGroup
+        onCheckedButtonChanged: {
+          appearanceConfig.cfg_panelPrimaryTextFontSizeMode = checkedButton.value
+        }
+      }
+
+      ColumnLayout {
+        Controls.RadioButton {
+          text: Qt.i18next.t('fit', {lng: Plasmoid.configuration.language})
+          Controls.ButtonGroup.group: panelPrimaryTextFontSizeModeRadioGroup
+          readonly property string value: 'fit'
+          checked: value === appearanceConfig.cfg_panelPrimaryTextFontSizeMode
+        }
+
+        RowLayout {
+          Controls.RadioButton {
+            id: fixedPanelPrimaryTextFontSizeModeRadioButton
+            text: Qt.i18next.t('fixed', {lng: Plasmoid.configuration.language})
+            Controls.ButtonGroup.group: panelPrimaryTextFontSizeModeRadioGroup
+            readonly property string value: 'fixed'
+            checked: value === appearanceConfig.cfg_panelPrimaryTextFontSizeMode
+          }
+
+          Controls.SpinBox {
+            id: panelPrimaryTextPixelSize
+            visible: fixedPanelPrimaryTextFontSizeModeRadioButton.checked
+            from: 4
+            to: 99
+            stepSize: 1
+          }
+          
+          Controls.Label {
+            text: 'px'
+            visible: fixedPanelPrimaryTextFontSizeModeRadioButton.checked
+          }
+        }
+      }
+    }
+
+    Item {
+      Kirigami.FormData.isSection: true
       Kirigami.FormData.label: Qt.i18next.t('secondary_text', {lng: Plasmoid.configuration.language})
     }
 
@@ -478,6 +530,7 @@ ColumnLayout {
       Controls.Label {
         Layout.maximumWidth: Kirigami.Units.gridUnit * 16
         textFormat: Text.StyledText
+        opacity: secondaryText.checked ? 1 : 0.5
         text: {
           if (!panelSecondaryTextFormat.text) return null;
           return Qt._sc_.utils.richDateFormatParser(
@@ -560,6 +613,58 @@ ColumnLayout {
 
       Controls.Label {
         text: secondaryTextHeight.value + "%"
+      }
+    }
+
+    Item {
+      Kirigami.FormData.isSection: true
+    }
+
+    RowLayout {
+      Kirigami.FormData.label: Qt.i18next.t('font_size', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.labelAlignment: Qt.AlignTop
+      
+      Controls.ButtonGroup {
+        id: panelSecondaryTextFontSizeModeRadioGroup
+        onCheckedButtonChanged: {
+          appearanceConfig.cfg_panelSecondaryTextFontSizeMode = checkedButton.value
+        }
+      }
+
+      ColumnLayout {
+        Controls.RadioButton {
+          text: Qt.i18next.t('fit', {lng: Plasmoid.configuration.language})
+          Controls.ButtonGroup.group: panelSecondaryTextFontSizeModeRadioGroup
+          readonly property string value: 'fit'
+          enabled: secondaryText.checked
+          checked: value === appearanceConfig.cfg_panelSecondaryTextFontSizeMode
+        }
+
+        RowLayout {
+          Controls.RadioButton {
+            id: fixedPanelSecondaryTextFontSizeModeRadioButton
+            text: Qt.i18next.t('fixed', {lng: Plasmoid.configuration.language})
+            Controls.ButtonGroup.group: panelSecondaryTextFontSizeModeRadioGroup
+            readonly property string value: 'fixed'
+            enabled: secondaryText.checked
+            checked: value === appearanceConfig.cfg_panelSecondaryTextFontSizeMode
+          }
+
+          Controls.SpinBox {
+            id: panelSecondaryTextPixelSize
+            visible: fixedPanelSecondaryTextFontSizeModeRadioButton.checked
+            enabled: secondaryText.checked
+            from: 4
+            to: 99
+            stepSize: 1
+          }
+          
+          Controls.Label {
+            text: 'px'
+            opacity: secondaryText.checked ? 1 : 0.5
+            visible: fixedPanelSecondaryTextFontSizeModeRadioButton.checked
+          }
+        }
       }
     }
     
