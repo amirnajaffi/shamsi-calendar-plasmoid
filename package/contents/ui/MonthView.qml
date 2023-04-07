@@ -30,7 +30,7 @@ Grid {
       horizontalAlignment: Text.AlignHCenter
       opacity: 0.5
       maximumLineCount: 1
-      elide: Text.ElideRight
+      elide: Text.ElideNone
       font.family: root.fontFamily
       font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize
     }
@@ -65,7 +65,7 @@ Grid {
           horizontalAlignment: Text.AlignHCenter
           verticalAlignment: Text.AlignVCenter
           maximumLineCount: 1
-          elide: Text.ElideRight
+          elide: Text.ElideNone
           font.family: root.fontFamily
           font.pixelSize: Plasmoid.configuration.calendarCellFontSizeMode === 'fit' ? 1000 : PlasmaCore.Theme.defaultFont.pixelSize * Plasmoid.configuration.calendarCellFontPixelSizeScale
           fontSizeMode: Plasmoid.configuration.calendarCellFontSizeMode === 'fit' ? Text.Fit : Text.FixedSize
