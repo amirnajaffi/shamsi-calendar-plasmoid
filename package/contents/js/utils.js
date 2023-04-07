@@ -32,9 +32,9 @@ Qt._sc_.utils = {
 
   richDateFormatParser(date, format, locale) {
     if (!format) return '';
-    if (!date) return new persianDate().toLocale(locale).format(format);
     if (!format.startsWith('<')) {
       // if it's not rich format
+      if (!date) return new persianDate().toLocale(locale).format(format);
       return new persianDate(date).toLocale(locale).format(format);
     }
 
