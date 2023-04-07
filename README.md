@@ -45,3 +45,12 @@ Distributed under the GPL v3 License. See LICENSE for more information.
 * [Persian Calendar for Gnome-Shell](https://github.com/omid/Persian-Calendar-for-Gnome-Shell)
 * [Gnome Shamsi Calendar](https://github.com/SCR-IR/gnome-shamsi-calendar)
 
+## FAQ
+
+* **I have problems installing/updating from KDE Store**
+
+  Check [manual installation](https://github.com/amirnajaffi/shamsi-calendar-plasmoid#installupdate)
+
+* **I get errors after installation**
+
+  Errors are usually displayed due to the low plasma version. [Make sure that the minimum version of Plasma required to run this program is installed](https://github.com/amirnajaffi/shamsi-calendar-plasmoid#requirement). If problem still exists please open a new issue.
