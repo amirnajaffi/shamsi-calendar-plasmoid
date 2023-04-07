@@ -9,7 +9,7 @@
         <entry name="eventColor" type="String">
             <default>#0c61b9</default>
         </entry>
-        <entry name="calendarCellFontMode" type="String">
+        <entry name="calendarCellFontSizeMode" type="String">
             <default>fit</default>
         </entry>
         <entry name="calendarCellFontPixelSizeScale" type="Double">

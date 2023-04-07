@@ -13,7 +13,7 @@ ColumnLayout {
   property alias cfg_holidayColor: holidayColor.text
   property alias cfg_eventColor: eventColor.text
 
-  property string cfg_calendarCellFontMode: Plasmoid.configuration.calendarCellFontMode
+  property string cfg_calendarCellFontSizeMode: Plasmoid.configuration.calendarCellFontSizeMode
   property alias cfg_calendarCellFontPixelSizeScale: calendarCellFontPixelSizeScale.value
 
   property alias cfg_panelPrimaryTextFormat: panelPrimaryTextFormat.text
@@ -131,31 +131,31 @@ ColumnLayout {
 
     RowLayout {
       // Kirigami.FormData.label: Qt.i18next.t('font', {lng: Plasmoid.configuration.language}) + ':'
-      Kirigami.FormData.label: Qt.i18next.t('calendar_cell_font_mode', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Qt.i18next.t('calendar_cell_font_size_mode', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
 
       Controls.ButtonGroup {
-        id: calendarCellFontModeRadioGroup
+        id: calendarCellFontSizeModeRadioGroup
         onCheckedButtonChanged: {
-          appearanceConfig.cfg_calendarCellFontMode = checkedButton.value
+          appearanceConfig.cfg_calendarCellFontSizeMode = checkedButton.value
         }
       }
 
       ColumnLayout {
         Controls.RadioButton {
           text: Qt.i18next.t('fit', {lng: Plasmoid.configuration.language})
-          Controls.ButtonGroup.group: calendarCellFontModeRadioGroup
+          Controls.ButtonGroup.group: calendarCellFontSizeModeRadioGroup
           readonly property string value: 'fit'
-          checked: value === appearanceConfig.cfg_calendarCellFontMode
+          checked: value === appearanceConfig.cfg_calendarCellFontSizeMode
         }
 
         RowLayout {
           Controls.RadioButton {
-            id: fixedCalendarCellFontModeRadioButton
+            id: fixedCalendarCellFontSizeModeRadioButton
             text: Qt.i18next.t('fixed', {lng: Plasmoid.configuration.language})
-            Controls.ButtonGroup.group: calendarCellFontModeRadioGroup
+            Controls.ButtonGroup.group: calendarCellFontSizeModeRadioGroup
             readonly property string value: 'fixed'
-            checked: value === appearanceConfig.cfg_calendarCellFontMode
+            checked: value === appearanceConfig.cfg_calendarCellFontSizeMode
           }
           
         }
@@ -163,18 +163,18 @@ ColumnLayout {
         RowLayout {
           Controls.Label {
             text: Qt.i18next.t('scale', {lng: Plasmoid.configuration.language}) + ':'
-            visible: fixedCalendarCellFontModeRadioButton.checked
+            visible: fixedCalendarCellFontSizeModeRadioButton.checked
           }
 
           Controls.Label {
             text: calendarCellFontPixelSizeScale.value
-            visible: fixedCalendarCellFontModeRadioButton.checked
+            visible: fixedCalendarCellFontSizeModeRadioButton.checked
           }
 
           Controls.Button {
             icon.name: "edit-undo"
             display: Controls.AbstractButton.IconOnly
-            visible: fixedCalendarCellFontModeRadioButton.checked && calendarCellFontPixelSizeScale.value != 1.2
+            visible: fixedCalendarCellFontSizeModeRadioButton.checked && calendarCellFontPixelSizeScale.value != 1.2
             onClicked: calendarCellFontPixelSizeScale.value = 1.2
             Controls.ToolTip {
               text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
@@ -184,7 +184,7 @@ ColumnLayout {
 
         Controls.Slider {
           id: calendarCellFontPixelSizeScale
-          visible: fixedCalendarCellFontModeRadioButton.checked
+          visible: fixedCalendarCellFontSizeModeRadioButton.checked
           from: 1.0
           to: 2.0
           stepSize: 0.1
