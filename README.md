@@ -1,6 +1,8 @@
 # KDE Plasma Shamsi Calendar
 This is a plasmoid that is used to show Shamsi Calendar (also known as Persian Calendar or Jalali Calendar) in KDE Plasma available in the [KDE store](https://store.kde.org/p/1460130/). The Calendar supports official holidays.
 
+![Shamsi Calendar Plasmoidscreenshot](./img/featured.png)
+
 [CHANGELOG](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/blob/main/CHANGELOG.md)
 
 ## Requirement
@@ -46,6 +48,7 @@ Distributed under the GPL v3 License. See LICENSE for more information.
 * [Persian Date](https://github.com/babakhani/PersianDate)
 * [Persian Calendar for Gnome-Shell](https://github.com/omid/Persian-Calendar-for-Gnome-Shell)
 * [Gnome Shamsi Calendar](https://github.com/SCR-IR/gnome-shamsi-calendar)
+* [Vazirmatn Font](https://github.com/rastikerdar/vazirmatn)
 
 ## FAQ
 * **I have problems installing/updating from KDE Store**
