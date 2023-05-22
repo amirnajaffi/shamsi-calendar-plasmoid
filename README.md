@@ -6,7 +6,7 @@ This is a plasmoid that is used to show Shamsi Calendar (also known as Persian C
 [CHANGELOG](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/blob/main/CHANGELOG.md)
 
 ## Requirement
-Plasma > 5.25
+Plasma >= 5.25
 
 Check: `plasmashell --version`
 
