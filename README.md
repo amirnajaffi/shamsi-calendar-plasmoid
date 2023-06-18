@@ -6,11 +6,12 @@ This is a plasmoid that is used to show Shamsi Calendar (also known as Persian C
 [CHANGELOG](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/blob/main/CHANGELOG.md)
 
 ## Requirement
-Plasma >= 5.25
+| Plasma Version | Widget Version |
+| --- | --- |
+| 5.25 and above | 2.x |
+| 5.24 and below | [1.x](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/tree/v1) |
 
 Check: `plasmashell --version`
-
-For older plasma versions use [v1](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/1.0.0)
 
 ## Install/Update
 You can install from [KDE Store](https://store.kde.org/p/1460130/) or follow the instructions below
@@ -28,6 +29,10 @@ git clone https://github.com/amirnajaffi/shamsi-calendar-plasmoid.git
 **4. Open directory:**
 ```
 cd shamsi-calendar-plasmoid
+```
+***Optional:** If you want to install v1 run:
+```
+git checkout v1
 ```
 **5. Install:**
 ```
