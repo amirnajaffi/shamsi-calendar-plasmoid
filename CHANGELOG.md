@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0-beta.3] - 2023-04-07
+## [2.0.0-beta.3] - 2023-08-05
 - Setting horizontalAlignment explicitly due to the change in Plasma Framework
 
 ## [2.0.0-beta.2] - 2023-04-07
