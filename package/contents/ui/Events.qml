@@ -59,6 +59,7 @@ ScrollView {
           Layout.fillWidth: true
           text: modelData[0]
           wrapMode: Text.Wrap
+          horizontalAlignment: Qt.AlignRight
           font.family: root.fontFamily
           font.weight: Font.DemiBold
         }

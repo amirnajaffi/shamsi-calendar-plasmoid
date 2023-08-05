@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.0.0-beta.3] - 2023-04-07
+- Setting horizontalAlignment explicitly due to the change in Plasma Framework
+
 ## [2.0.0-beta.2] - 2023-04-07
 - Added font size option to panel primary and secondary texts
 - Visual improvements
@@ -35,6 +38,7 @@ The calendar has been completely rewritten and many features have been added to 
 ## [0.1.0] - 2020-12-15
 - Initial release.
 
+[2.0.0-beta.3]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.0.0-beta.3
 [2.0.0-beta.2]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.0.0-beta.2
 [2.0.0-beta.1]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.0.0-beta.1
 [1.0.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/1.0.0

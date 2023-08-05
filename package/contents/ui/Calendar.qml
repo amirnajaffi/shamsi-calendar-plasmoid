@@ -51,6 +51,7 @@ PlasmaExtras.Representation {
         Layout.alignment: Qt.AlignLeft
         leftPadding: PlasmaCore.Units.largeSpacing / 2
         rightPadding: PlasmaCore.Units.largeSpacing / 2
+        horizontalAlignment: Qt._sc_.calendarUI.useTextHorizontalAlignment()
         verticalAlignment: Text.AlignVCenter
         fontSizeMode: Text.Fit
         wrapMode: Text.Wrap
