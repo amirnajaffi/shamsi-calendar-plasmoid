@@ -55,7 +55,7 @@ Navigate into the newly created directory:
 cd shamsi-calendar-plasmoid
 ```
 
-**\*Optional:** If you're feeling nostalgic and want to install version 1 (or maybe your out of Requirement of v2), type:
+**\*Optional:** If you're feeling nostalgic and want to install version 1 (or! maybe your out of Requirement of v2), type:
 
 ```
 git checkout v1
@@ -63,7 +63,7 @@ git checkout v1
 
 **5. Install:**
 
-It's time to bring the magic to life! Use this incantation in your terminal:
+It's time to bring the magic to life! Use this command in your terminal:
 
 ```
 kpackagetool5 -t Plasma/Applet --install package
