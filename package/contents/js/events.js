@@ -64,7 +64,8 @@ Qt._sc_.events = {
       const jDate = jDates[i];
       let gDate = Qt.jalaali.toGregorian(...jDate);
       gDate = [...Object.keys(gDate).map((key) => gDate[key])];
-      const lunarDate = Qt.jalalidate.gregorian_to_islamic(...gDate);
+      let lunarDate = Qt.hijriDate.fromGregorian(...gDate);
+      lunarDate = Object.values(lunarDate);
 
       if (isIranSolarActive && iranSolar.events[jDate[1]] && iranSolar.events[jDate[1]][jDate[2]]) {
         pushEvent(iranSolar.events[jDate[1]][jDate[2]], i);
