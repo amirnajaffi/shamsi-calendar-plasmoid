@@ -85,7 +85,7 @@ Distributed under the GPL v3 License. See LICENSE for more information.
 - [jalaali-js](https://github.com/jalaali/jalaali-js)
 - [Persian Date](https://github.com/babakhani/PersianDate)
 - [Persian Calendar for Gnome-Shell](https://github.com/omid/Persian-Calendar-for-Gnome-Shell)
-- [Gnome Shamsi Calendar](https://github.com/SCR-IR/gnome-shamsi-calendar)
+- [tarikh-npm](https://github.com/SCR-IR/tarikh-npm)
 - [Vazirmatn Font](https://github.com/rastikerdar/vazirmatn)
 
 ## FAQ

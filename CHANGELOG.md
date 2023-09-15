@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.1.0] - 2023-09-15
+Bugfix: Hijri Dates for iran - Using [tarikh-npm](https://github.com/SCR-IR/tarikh-npm)
+
 ## [2.0.1] - 2023-09-14
 Improve translations - Credit: [mokazemi](https://github.com/mokazemi).
 
@@ -44,6 +47,7 @@ The calendar has been completely rewritten and many features have been added to 
 ## [0.1.0] - 2020-12-15
 - Initial release.
 
+[2.1.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.1.0
 [2.0.1]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.0.1
 [2.0.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.0.0
 [2.0.0-beta.3]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.0.0-beta.3

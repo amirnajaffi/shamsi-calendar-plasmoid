@@ -9,7 +9,7 @@ import "../js/constants.js" as Constants
 import "../js/translate.js" as Translate
 import "../js/bin/persian-date.js" as PersianDate
 import "../js/bin/jalaali.js" as Jalaali
-import "../js/bin/jalalidate.js" as JalaliDate
+import "../js/bin/hijri-date.js" as HijriDate
 import "../js/events.js" as Events
 import "../js/calendar.js" as CalendarJS
 import "../js/calendar-ui.js" as CalendarUI

@@ -15,7 +15,7 @@
     "ServiceTypes": [
       "Plasma/Applet"
     ],
-    "Version": "2.0.1",
+    "Version": "2.1.0",
     "Website": "https://github.com/amirnajaffi/shamsi-calendar-plasmoid",
     "License": "GPLv3"
   },
