@@ -59,10 +59,7 @@ It's time to bring the magic to life! Use this command in your terminal:
 kpackagetool5 -t Plasma/Applet --install package
 ```
 
-If you have a previous version installed, use `--upgrade` in above command instead:
-```
-kpackagetool5 -t Plasma/Applet --upgrade package
-```
+If you have a previous version installed, use `--upgrade` in above command instead.
 
 <br />
 
