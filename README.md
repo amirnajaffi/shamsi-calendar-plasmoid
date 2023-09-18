@@ -26,29 +26,19 @@ You can find and download the Shamsi Calendar plugin on the KDE Store [here](htt
 
 Check: `plasmashell --version`
 
-## Install/Update
+## Install/Update 📦 
 
 You've got two options to get this plasmoid up and running: you can either grab it from the [KDE Store](https://store.kde.org/p/1460130/) or follow these simple steps below.
 
-**1. Say Goodbye to the Old**
 
-If you've got a previous version hanging around, let's clear the way. Open up your terminal and type in:
-```
-kpackagetool5 -t Plasma/Applet --remove org.kde.plasma.shamsi-calendar
-```
+**1. Clone/Download repo:**
 
-**2. Log Out/In**
-
-Log out of your system and then log back in.
-
-**3. Clone/Download repo:**
-
-Now, let's get the plasmoid's source code. Open your terminal again and enter:
+Let's get the plasmoid's source code. Open your terminal again and enter:
 ```
 git clone https://github.com/amirnajaffi/shamsi-calendar-plasmoid.git
 ```
 
-**4. Open directory:**
+**2. Open directory:**
 
 Navigate into the newly created directory:
 ```
@@ -61,13 +51,34 @@ cd shamsi-calendar-plasmoid
 git checkout v1
 ```
 
-**5. Install:**
+**3. Install:**
 
 It's time to bring the magic to life! Use this command in your terminal:
 
 ```
 kpackagetool5 -t Plasma/Applet --install package
 ```
+
+If you have a previous version installed, use `--upgrade` in above command instead:
+```
+kpackagetool5 -t Plasma/Applet --upgrade package
+```
+
+<br />
+
+_Or alternatively, type in the terminal to remove the previous versions:_ (And you can re-install the new version after that).
+```
+kpackagetool5 -t Plasma/Applet --remove org.kde.plasma.shamsi-calendar
+```
+
+
+**4. Log Out/In**
+
+Log out of your system and then log back in. Now everything is done! 😃
+
+<br />
+
+**As an alternative way** simply you can grab the latest `.plasmoid` file from [this page](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/latest) and install it with above commands.
 
 ## Contributing
 
