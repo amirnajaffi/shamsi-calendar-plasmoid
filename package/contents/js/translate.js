@@ -1,8 +1,10 @@
 .pragma library
 
 .import "./bin/i18next.js" as I18next
+.import "./constants.js" as Const
+.import "./store.js" as Store
 
-Qt.i18next.init({
+I18next.instance.i18next.init({
   compatibilityJSON: 'v3',
   lng: 'en',
   debug: false,
@@ -183,21 +185,25 @@ Qt.i18next.init({
   },
 });
 
-Qt._sc_.t = function (...props) {
+var t = function (...props) {
   /* translation function depends on store */
-  Qt._sc_.store.configSlice.language;
-  return Qt.i18next.t(...props);
+  Store.store.configSlice.language;
+  return I18next.instance.i18next.t(...props);
 };
 
-Qt._sc_.tpd = function (number, source = undefined) {
+var tConfigScope = function (...props) {
+  return I18next.instance.i18next.t(...props);
+}
+
+var tpd = function (number, source = undefined) {
   // To Persian Digits
   let lang;
   if (source) {
     lang = source;
   } else {
-    lang = Qt._sc_.store.configSlice.language;
+    lang = Store.store.configSlice.language;
   }
-  if (lang === Qt._sc_.const.LANG_FA) {
+  if (lang === Const.constants.LANG_FA) {
     const persian = {
       0: '۰',
       1: '۱',
@@ -223,17 +229,17 @@ Qt._sc_.tpd = function (number, source = undefined) {
   return number;
 };
 
-Qt._sc_.useLocale = function (source = undefined) {
+var useLocale = function (source = undefined) {
   let lang;
   if (source) {
     lang = source;
   } else {
-    lang = Qt._sc_.store.configSlice.language;
+    lang = Store.store.configSlice.language;
   }
 
-  if (lang === Qt._sc_.const.LANG_FA) {
+  if (lang === Const.constants.LANG_FA) {
     return 'fa';
-  } else if (lang === Qt._sc_.const.LANG_EN) {
+  } else if (lang === Const.constants.LANG_EN) {
     return 'en';
   }
   return 'en';

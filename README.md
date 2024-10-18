@@ -1,87 +1,73 @@
 # KDE Plasma Shamsi Calendar
 
-Integrate the Persian (Shamsi - Jalali) calendar into your KDE Plasma desktop with the Shamsi Calendar Plasmoid. Developed with precision and user-centric design, this plasmoid has evolved from a personal project to a feature-rich tool tailored to your needs.
+Integrate the Persian Calendar into your KDE Plasma desktop. Also known as Shamsi Calenar or Jalali Calendar.
 
-You can find and download the Shamsi Calendar plugin on the KDE Store [here](https://store.kde.org/p/1460130/).
+Download the plugin from the [KDE Store](https://store.kde.org/p/2216432/).
 
-**Features**
+## Features
 
-- Multi-language support for a personalized experience.
-- 5 adjustable events types.
-- Navigate using stack navigation.
-- Display dual parallel configurable texts (Primary and Secondary) on the panel.
-- Personalize colors, fonts, sizes, and events to suit your style.
-- And more!
+- Multi-language support
+- Five adjustable event types
+- Stack navigation
+- Dual configurable texts on the panel
+- Customize colors, fonts, sizes, and events
 
-![Shamsi Calendar Plasmoidscreenshot](./img/featured.png)
+![Shamsi Calendar Plasmoid Screenshot](./img/featured.png)
 
-[KDE Store](https://store.kde.org/p/1460130/) - [CHANGELOG](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/blob/main/CHANGELOG.md)
+[Changelog](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/blob/main/CHANGELOG.md)
 
-## Requirement
+## Requirements
 
-| Plasma Version | Widget Version                                                         |
-| -------------- | ---------------------------------------------------------------------- |
-| 5.25 and above | 2.x                                                                    |
-| 5.24 and below | [1.x](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/tree/v1) |
+| Plasma Version    | Widget Version                                                         | Link                                                   |
+| ----------------- | ---------------------------------------------------------------------- | ------------------------------------------------------ |
+| 6 and above       | 3.x                                                                    | [Plasma 6 Store](https://store.kde.org/p/2216432/) |
+| 5.25 > plasma < 6 | [2.x](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/tree/v2) | [Plasma 5 Store](https://store.kde.org/p/1460130/) |
+| 5.24 and below    | [1.x](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/tree/v1) | [Plasma 5 Store](https://store.kde.org/p/1460130/) |
 
-Check: `plasmashell --version`
+Check your Plasma version: `plasmashell --version`
 
-## Install/Update 📦 
+## Install or Update
 
-You've got two options to get this plasmoid up and running: you can either grab it from the [KDE Store](https://store.kde.org/p/1460130/) or follow these simple steps below.
+**Option 1: Install from KDE Store**
 
+Download directly from the [KDE Store](https://store.kde.org/p/1460130/).
 
-**1. Clone/Download repo:**
+**Option 2: Manual Installation**
 
-Let's get the plasmoid's source code. Open your terminal again and enter:
+1. **Clone the repository:**
 ```
 git clone https://github.com/amirnajaffi/shamsi-calendar-plasmoid.git
 ```
 
-**2. Open directory:**
-
-Navigate into the newly created directory:
+2. **Navigate to the directory:**
 ```
 cd shamsi-calendar-plasmoid
 ```
 
-**\*Optional:** If you're feeling nostalgic and want to install version 1 (or! maybe your out of Requirement of v2), type:
-
+3. **(Optional) Switch to version 1 for Plasma < 5.24, or version 2 for 5.25 > plasma < 6:**
 ```
-git checkout v1
-```
-
-**3. Install:**
-
-It's time to bring the magic to life! Use this command in your terminal:
-
-```
-kpackagetool5 -t Plasma/Applet --install package
+git checkout v1 (or v2)
 ```
 
-If you have a previous version installed, use `--upgrade` in above command instead.
+4. **Install the plasmoid:**
+```
+kpackagetool6 -t Plasma/Applet --install package
+```
+To upgrade from a previous version, use `--upgrade` instead of `--install`. There is a `--delete` flag too.
+<br />
+Alternatively use `kpackagetool5` for V1 and V2
+
+5. **Log out and log back in.**
 
 <br />
 
-_Or alternatively, type in the terminal to remove the previous versions:_ (And you can re-install the new version after that).
-```
-kpackagetool5 -t Plasma/Applet --remove org.kde.plasma.shamsi-calendar
-```
-
-
-**4. Log Out/In**
-
-Log out of your system and then log back in. Now everything is done! 😃
-
-<br />
-
-**As an alternative way** simply you can grab the latest `.plasmoid` file from [this page](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/latest) and install it with above commands.
+**Alternative Method:**
+Download the latest `.plasmoid` file from [here](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/latest) and install it using the command above.
 
 ## Contributing
 
-Thank you for considering contributing to the KDE Plasma Shamsi Calendar! Any contributions you make are greatly appreciated. You can also check [this list](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/issues/10).
+Contributions are welcome! Please check [this list](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/issues/10). For major changes, open an issue to discuss them first.
 
-For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
@@ -98,8 +84,10 @@ Distributed under the GPL v3 License. See LICENSE for more information.
 
 ## FAQ
 
-- **Having Trouble Installing or Updating via KDE Store?**
-If you're facing issues with installation or updates from the KDE Store, don't worry! We've got you covered with a simple [manual installation guide](https://github.com/amirnajaffi/shamsi-calendar-plasmoid#installupdate).
+- **Trouble installing or updating via KDE Store?**
 
-- **Encountering Errors After Installation?**
-Sometimes, errors might pop up after installation, and that's okay. Often, these errors are caused by having an older version of Plasma. Make sure you have at least the [minimum required Plasma version](https://github.com/amirnajaffi/shamsi-calendar-plasmoid#requirement) installed. If you're still facing issues, feel free to open a new issue – we're here to help!
+Try the [manual installation guide](#install-or-update) above.
+
+- **Errors after installation?**
+
+Ensure you meet the [minimum Plasma version requirements](#requirements). If issues persist, please open a new issue.

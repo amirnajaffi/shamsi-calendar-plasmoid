@@ -1,16 +1,19 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.5 as Controls
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kcmutils as KCM
+import org.kde.kirigami as Kirigami
 
-ColumnLayout {
+import "../../js/translate.js" as Translate
+
+KCM.SimpleKCM {
   id: otherConfig
 
   /* 
   Using 'tempLanguage' instead of 'language' directly, it's necessary for right components re-evalluate 
-  as we need to change Plasmoid.configuration.language AFTER calling Qt.i18next.changeLanguage .
-  flow: change tempLanguage -> call Qt.i18next.changeLanguage(to tempLanguage) -> change language(to tempLanguage).
+  as we need to change Plasmoid.configuration.language AFTER calling I18next.instance.i18next.changeLanguage .
+  flow: change tempLanguage -> call I18next.instance.i18next.changeLanguage(to tempLanguage) -> change language(to tempLanguage).
   (check onTempLanguageChanged method on main.qml connections)
   */
   property string cfg_tempLanguage

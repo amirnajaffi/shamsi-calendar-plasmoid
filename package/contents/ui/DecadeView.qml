@@ -1,32 +1,38 @@
-import QtQuick 2.12
+import QtQuick
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kirigami as Kirigami
+
+import "../js/store.js" as Store
+import "../js/calendar.js" as CalendarJS
+import "../js/calendar-ui.js" as CalendarUI
+import "../js/translate.js" as Translate
 
 Grid {
   id: decadeViewGrid
   rows: 4
   columns: 3
-  rightPadding: PlasmaCore.Units.gridUnit / 2
-  leftPadding: PlasmaCore.Units.gridUnit / 2
-  bottomPadding: PlasmaCore.Units.gridUnit / 2
-  topPadding: PlasmaCore.Units.gridUnit / 2
-  layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
+  rightPadding: Kirigami.Units.gridUnit / 2
+  leftPadding: Kirigami.Units.gridUnit / 2
+  bottomPadding: Kirigami.Units.gridUnit / 2
+  topPadding: Kirigami.Units.gridUnit / 2
+  layoutDirection: CalendarUI.useLayoutDirection()
 
   Repeater {
-    model: Qt._sc_.store.calendarSlice.surface_yearsOfDecade
+    model: Store.store.calendarSlice.surface_yearsOfDecade
     delegate: PlasmaComponents3.Label {
-      text: Qt._sc_.tpd(modelData)
-      width: (parent.width - PlasmaCore.Units.gridUnit) / decadeViewGrid.columns
-      height: (parent.height - PlasmaCore.Units.gridUnit) / decadeViewGrid.rows
+      text: Translate.tpd(modelData)
+      width: (parent.width - Kirigami.Units.gridUnit) / decadeViewGrid.columns
+      height: (parent.height - Kirigami.Units.gridUnit) / decadeViewGrid.rows
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       opacity: index === 0 || index === 11 ? 0.5 : 1
       maximumLineCount: 1
       elide: Text.ElideRight
       font.family: root.fontFamily
-      font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
+      font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 1.2
       font.weight: Font.DemiBold
       
       PlasmaExtras.Highlight {
@@ -35,7 +41,7 @@ Grid {
         anchors.fill: parent
         hovered: true
         visible: true
-        opacity: Qt._sc_.calendarUI.decadeView_highlightOpacity(isHovered, modelData)
+        opacity: CalendarUI.decadeView_highlightOpacity(isHovered, modelData)
       }
       
       MouseArea {
@@ -45,8 +51,8 @@ Grid {
         onEntered: decadeViewHighlight.isHovered = true
         onExited: decadeViewHighlight.isHovered = false
         onClicked: {
-          Qt._sc_.calendar.changeYear(modelData);
-          Qt._sc_.calendarUI.stackNavigation_toOrFromDecadeView(true);
+          CalendarJS.changeYear(modelData);
+          CalendarUI.stackNavigation_toOrFromDecadeView(true);
         }
       }
 

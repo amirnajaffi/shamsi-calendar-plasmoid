@@ -1,11 +1,15 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.5 as Controls
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.plasma.plasmoid
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCM
 
-ColumnLayout {
+import "../../js/translate.js" as Translate
+import "../../js/utils.js" as Utils
+
+KCM.SimpleKCM {
   id: eventConfig
 
   property string cfg_activeEvents
@@ -15,7 +19,7 @@ ColumnLayout {
     Layout.fillHeight: true
 
     ColumnLayout {
-      Kirigami.FormData.label: Qt.i18next.t('available_events', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('available_events', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
 
       Repeater {
@@ -28,11 +32,11 @@ ColumnLayout {
         ]
 
         delegate: Controls.CheckBox {
-          text: Qt.i18next.t(modelData.label, {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope(modelData.label, {lng: Plasmoid.configuration.language})
           checked: isChecked()
 
           onClicked: {
-            const activeEventsArray = Qt._sc_.utils.stringToArray(eventConfig.cfg_activeEvents);
+            const activeEventsArray = Utils.stringToArray(eventConfig.cfg_activeEvents);
             if (checked) {
               activeEventsArray.push(modelData.id);
             } else {
@@ -46,7 +50,7 @@ ColumnLayout {
           }
 
           function isChecked() {
-            const activeEventsArray = Qt._sc_.utils.stringToArray(eventConfig.cfg_activeEvents);
+            const activeEventsArray = Utils.stringToArray(eventConfig.cfg_activeEvents);
             return activeEventsArray.some((item) => item === modelData.id);
           }
         }

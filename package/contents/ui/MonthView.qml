@@ -1,29 +1,35 @@
-import QtQuick 2.12
+import QtQuick
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kirigami as Kirigami
+
+import "../js/store.js" as Store
+import "../js/calendar.js" as CalendarJS
+import "../js/calendar-ui.js" as CalendarUI
+import "../js/translate.js" as Translate
 
 Grid {
   id: monthView
   property int dayNumberHeight: Math.round((calendar.cellHeight * 80) / 100) // 80% of cell for number
   property int dayEventsHeight: calendar.cellHeight - dayNumberHeight // 20% of cell for event badges
   property var weekendHighlightDaysIndexes: Plasmoid.configuration.weekendHighlight 
-    ? Qt._sc_.calendarUI.getWeekendHighlightIndexes(Plasmoid.configuration.weekendHighlightDays, rows, columns) 
+    ? CalendarUI.getWeekendHighlightIndexes(Plasmoid.configuration.weekendHighlightDays, rows, columns) 
     : []
 
   columns: 7
   rows: 7
   columnSpacing: 0
   rowSpacing: 0
-  layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
+  layoutDirection: CalendarUI.useLayoutDirection()
   
   Repeater { // days name Repeater
     id: daysName
     model: Array.from({length: 7}, (_, index) => index + 1)
     delegate: PlasmaComponents3.Label {
-      text: Qt._sc_.t('week_label.' + modelData)
+      text: Translate.t('week_label.' + modelData)
       width: calendar.cellWidth
       height: calendar.cellDaysNamesHeight
       verticalAlignment: Text.AlignBottom
@@ -32,13 +38,13 @@ Grid {
       maximumLineCount: 1
       elide: Text.ElideNone
       font.family: root.fontFamily
-      font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize
+      font.pixelSize: Kirigami.Theme.defaultFont.pixelSize
     }
   } // end days name Repeater
 
   Repeater { // days number Repeater
     id: daysRepeater
-    model: Qt._sc_.store.calendarSlice.surface_daysOfMonth
+    model: Store.store.calendarSlice.surface_daysOfMonth
     delegate: Item { // cell container Item
       id: cellContainer
       width: calendar.cellWidth
@@ -47,7 +53,7 @@ Grid {
       Rectangle { // add weekend highlight if enabled
         visible: Plasmoid.configuration.weekendHighlight && monthView.weekendHighlightDaysIndexes.includes(index + 1)
         anchors.fill: parent
-        color: Qt.darker(PlasmaCore.Theme.backgroundColor)
+        color: Qt.darker(Kirigami.Theme.backgroundColor)
         opacity: 0.5
       }
 
@@ -55,10 +61,10 @@ Grid {
         width: parent.width
         height: parent.height
         spacing: 0
-        opacity: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? 1 : 0.5 // less opacity for prev and next month dates
+        opacity: modelData[1] === Store.store.calendarSlice.surface_yearAndMonth[1] ? 1 : 0.5 // less opacity for prev and next month dates
 
         PlasmaComponents3.Label { // cell top (number)
-          text: Qt._sc_.tpd(modelData[2])
+          text: Translate.tpd(modelData[2])
           width: height
           height: monthView.dayNumberHeight
           anchors.horizontalCenter: parent.horizontalCenter
@@ -67,22 +73,22 @@ Grid {
           maximumLineCount: 1
           elide: Text.ElideNone
           font.family: root.fontFamily
-          font.pixelSize: Plasmoid.configuration.calendarCellFontSizeMode === 'fit' ? 1000 : PlasmaCore.Theme.defaultFont.pixelSize * Plasmoid.configuration.calendarCellFontPixelSizeScale
+          font.pixelSize: Plasmoid.configuration.calendarCellFontSizeMode === 'fit' ? 1000 : Kirigami.Theme.defaultFont.pixelSize * Plasmoid.configuration.calendarCellFontPixelSizeScale
           fontSizeMode: Plasmoid.configuration.calendarCellFontSizeMode === 'fit' ? Text.Fit : Text.FixedSize
-          font.weight: modelData[1] === Qt._sc_.store.calendarSlice.surface_yearAndMonth[1] ? Font.DemiBold : Font.Normal
-          color: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index) === true ? Plasmoid.configuration.holidayColor : PlasmaCore.Theme.textColor
+          font.weight: modelData[1] === Store.store.calendarSlice.surface_yearAndMonth[1] ? Font.DemiBold : Font.Normal
+          color: CalendarUI.monthView_repeater_dayHasHoliday(index) === true ? Plasmoid.configuration.holidayColor : Kirigami.Theme.textColor
 
-          RoundedHighlight {
+          PlasmaExtras.Highlight {
             property bool isHovered: false
             id: monthViewHighlight
             anchors.fill: parent
             hovered: true
             visible: true
-            opacity: Qt._sc_.calendarUI.monthView_highlightOpacity(isHovered, modelData)
+            opacity: CalendarUI.monthView_highlightOpacity(isHovered, modelData)
           }
 
           // background: Rectangle { // Holiday background
-          //   visible: Qt._sc_.calendarUI.monthView_repeater_dayHasHoliday(index)
+          //   visible: CalendarUI.monthView_repeater_dayHasHoliday(index)
           //   radius: 180
           //   color: Plasmoid.configuration.holidayColor
           //   anchors.fill: parent
@@ -93,12 +99,12 @@ Grid {
         Row { // cell bottom (event badges)
           height: monthView.dayEventsHeight
           anchors.horizontalCenter: parent.horizontalCenter
-          spacing: PlasmaCore.Units.gridUnit / 4
+          spacing: Kirigami.Units.gridUnit / 4
 
           Rectangle {
-            visible: Qt._sc_.calendarUI.monthView_repeater_dayHasOtherEvent(index)
+            visible: CalendarUI.monthView_repeater_dayHasOtherEvent(index)
             width: height
-            height: PlasmaCore.Units.gridUnit / 4
+            height: Kirigami.Units.gridUnit / 4
             radius: 180
             color: Plasmoid.configuration.eventColor
           }
@@ -113,7 +119,7 @@ Grid {
         onEntered: monthViewHighlight.isHovered = true
         onExited: monthViewHighlight.isHovered = false
         onClicked: {
-          Qt._sc_.calendar.reducers.setSelectedDate(modelData);
+          CalendarJS.reducers.setSelectedDate(modelData);
         }
       }
 
