@@ -1,6 +1,6 @@
 .pragma library
 
-Qt._sc_.const = {
+var constants = {
   stack: {
     MONTH_VIEW_AND_EVENTS: { objectName: 'monthViewAndEvents' },
     YEAR_VIEW: { objectName: 'yearView' },

@@ -4,6 +4,8 @@ Source: https://github.com/omid/Persian-Calendar-for-Gnome-Shell
 
 // copyright پژوهش‌های ایرانی at http://ghiasabadi.com/
 
+.import "../utils.js" as Utils
+
 class Persian {
   constructor(pyear) {
     this.id = 'persian';
@@ -73,7 +75,7 @@ class Persian {
   }
 
   addSpecificEvents(pyear) {
-    const PersianDate = Qt._sc_.utils.pcgs_adapter; /* Added by shamsi calendar plasmoid */
+    const PersianDate = Utils.pcgs_adapter; /* Added by shamsi calendar plasmoid */
     let first_saturday_of_year, first_wednesday_of_year, last_day_of_year, last_wednesday_of_year;
 
     // find first saturday of the year

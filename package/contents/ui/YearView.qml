@@ -1,33 +1,38 @@
-import QtQuick 2.12
+import QtQuick
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kirigami as Kirigami
+
+import "../js/calendar-ui.js" as CalendarUI
+import "../js/translate.js" as Translate
+import "../js/calendar.js" as CalendarJS
 
 Grid {
   id: yearViewGrid
   rows: 4
   columns: 3
-  rightPadding: PlasmaCore.Units.gridUnit / 2
-  leftPadding: PlasmaCore.Units.gridUnit / 2
-  bottomPadding: PlasmaCore.Units.gridUnit / 2
-  topPadding: PlasmaCore.Units.gridUnit / 2
-  layoutDirection: Qt._sc_.calendarUI.useLayoutDirection()
+  rightPadding: Kirigami.Units.gridUnit / 2
+  leftPadding: Kirigami.Units.gridUnit / 2
+  bottomPadding: Kirigami.Units.gridUnit / 2
+  topPadding: Kirigami.Units.gridUnit / 2
+  layoutDirection: CalendarUI.useLayoutDirection()
   
   Repeater {
     model: Array.from({length: 12}, (_, index) => index + 1)
     delegate:  PlasmaComponents3.Label {
       id: label
-      text: Qt._sc_.t('month.normal.' + modelData)
-      width: (parent.width - PlasmaCore.Units.gridUnit) / yearViewGrid.columns
-      height: (parent.height - PlasmaCore.Units.gridUnit) / yearViewGrid.rows
+      text: Translate.t('month.normal.' + modelData)
+      width: (parent.width - Kirigami.Units.gridUnit) / yearViewGrid.columns
+      height: (parent.height - Kirigami.Units.gridUnit) / yearViewGrid.rows
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
       opacity: 1
       maximumLineCount: 1
       elide: Text.ElideRight
       font.family: root.fontFamily
-      font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.2
+      font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 1.2
       font.weight: Font.DemiBold
 
       PlasmaExtras.Highlight {
@@ -36,7 +41,7 @@ Grid {
         anchors.fill: parent
         hovered: true
         visible: true
-        opacity: Qt._sc_.calendarUI.yearView_highlightOpacity(isHovered, index + 1)
+        opacity: CalendarUI.yearView_highlightOpacity(isHovered, index + 1)
       }
 
       MouseArea {
@@ -46,8 +51,8 @@ Grid {
         onEntered: yearViewHighlight.isHovered = true
         onExited: yearViewHighlight.isHovered = false
         onClicked: {
-          Qt._sc_.calendar.changeMonth(index+1);
-          Qt._sc_.calendarUI.stackNavigation_toOrFromYearView();
+          CalendarJS.changeMonth(index+1);
+          CalendarUI.stackNavigation_toOrFromYearView();
         }
       }
 

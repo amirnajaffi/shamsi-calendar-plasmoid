@@ -1,42 +1,48 @@
-import QtQuick 2.12
+pragma ComponentBehavior: Bound
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick
+
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasma5support as P5Support
+import org.kde.kirigami as Kirigami
 
 import "../js/store.js" as Store
 import "../js/utils.js" as Utils
-import "../js/constants.js" as Constants
+import "../js/constants.js" as Const
 import "../js/translate.js" as Translate
 import "../js/bin/persian-date.js" as PersianDate
 import "../js/bin/jalaali.js" as Jalaali
 import "../js/bin/hijri-date.js" as HijriDate
+import "../js/bin/i18next.js" as I18next
 import "../js/events.js" as Events
 import "../js/calendar.js" as CalendarJS
 import "../js/calendar-ui.js" as CalendarUI
 
-Item {
+
+PlasmoidItem {
   id: root
 
-  property bool hideOnWindowDeactivate: true
+  // property bool _hideOnWindowDeactivate: true
   property string toolTipMainText
   property string toolTipSubText
   property string fontFamily: {
-    if (Plasmoid.configuration.fontStatus === Qt._sc_.const.font.MANUAL && Plasmoid.configuration.fontFamily !== '') {
+    if (Plasmoid.configuration.fontStatus === Const.constants.font.MANUAL && Plasmoid.configuration.fontFamily !== '') {
       return Plasmoid.configuration.fontFamily;
-    } else if(Plasmoid.configuration.fontStatus === Qt._sc_.const.font.VAZIR) {
+    } else if(Plasmoid.configuration.fontStatus === Const.constants.font.VAZIR) {
       return vazirFont.name;
     }
-    return PlasmaCore.Theme.defaultFont.family;
+    return Kirigami.Theme.defaultFont.family;
   }
 
-  Plasmoid.compactRepresentation: DateDisplay {}
-  Plasmoid.fullRepresentation: Calendar {}
-  Plasmoid.toolTipMainText: root.toolTipMainText
-  Plasmoid.toolTipSubText: root.toolTipSubText
-  Plasmoid.hideOnWindowDeactivate: hideOnWindowDeactivate
+  compactRepresentation: DateDisplay {}
+  fullRepresentation: Calendar {}
+  toolTipMainText: root.toolTipMainText
+  toolTipSubText: root.toolTipSubText
+  hideOnWindowDeactivate: true
 
   /* Debugging */
-  // Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+  preferredRepresentation: compactRepresentation;
 
   FontLoader {
     id: vazirFont;
@@ -78,13 +84,13 @@ Item {
     }
   }
 
-  PlasmaCore.DataSource {
+  P5Support.DataSource {
     id: localTime
     engine: "time"
     connectedSources: ["Local"]
-    interval: 60000
+    interval: 2000
     onNewData: (sourceName, data) => {
-      Qt._sc_.calendar.baseDateChangeHandler(data.DateTime);
+      CalendarJS.baseDateChangeHandler(data.DateTime);
     }
   }
 
@@ -93,35 +99,35 @@ Item {
     target: Plasmoid.configuration
 
     function onTempLanguageChanged() {
-      Qt.i18next.changeLanguage(Plasmoid.configuration.tempLanguage, () => {
+      I18next.instance.i18next.changeLanguage(Plasmoid.configuration.tempLanguage, () => {
         Plasmoid.configuration.language = Plasmoid.configuration.tempLanguage
       });
     }
 
     function onActiveEventsChanged() {
-      Qt._sc_.events.calculateAndSetSurfaceEvents(Qt._sc_.store.calendarSlice.surface_daysOfMonth);
+      Events.calculateAndSetSurfaceEvents(Store.store.calendarSlice.surface_daysOfMonth);
     }
   }
 
   Component.onCompleted: {
     /* Boot calendar */
-    Qt._sc_.storeUtils.setStore(qmlStore);
-    Qt._sc_.calendar.baseDateChangeHandler(localTime.data.Local.DateTime);
-    Qt._sc_.calendar.changeDecade(Qt._sc_.store.calendarSlice.jToday[0]);
-    Qt.i18next.changeLanguage(Plasmoid.configuration.language);
+    Store.storeUtils.setStore(qmlStore);
+    CalendarJS.baseDateChangeHandler(localTime.data.Local.DateTime);
+    CalendarJS.changeDecade(Store.store.calendarSlice.jToday[0]);
+    I18next.instance.i18next.changeLanguage(Plasmoid.configuration.language);
 
     root.toolTipMainText = Qt.binding(function() {
-      return  Qt._sc_.calendarUI.toolTipText(
-        Qt._sc_.store.calendarSlice.jToday,
+      return  CalendarUI.toolTipText(
+        Store.store.calendarSlice.jToday,
         'dddd',
-        Qt._sc_.useLocale()
+        Translate.useLocale()
       )
     })
     root.toolTipSubText = Qt.binding(function() {
-      return Qt._sc_.calendarUI.toolTipText(
-        Qt._sc_.store.calendarSlice.jToday,
+      return CalendarUI.toolTipText(
+        Store.store.calendarSlice.jToday,
         'D MMMM YYYY',
-        Qt._sc_.useLocale()
+        Translate.useLocale()
       )
     })
   }

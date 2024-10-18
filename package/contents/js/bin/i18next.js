@@ -1,16 +1,18 @@
 /*
-source: https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.10/i18next.js
+source: https://unpkg.com/i18next@22.5.1/dist/umd/i18next.js
 
 Changes:
-  - Change IIFE input from ---this--- to ---Qt---
-  - Change IIFE inti function to global.i18next = factory();
+  - Change IIFE input from ---this--- to ---instance---
+  - Change IIFE init function to global.i18next = factory();
 */
 
 .pragma library
 
+var instance = {};
+
 (function (global, factory) {
   global.i18next = factory();
-})(Qt, (function () { 'use strict';
+})(instance, (function () { 'use strict';
 
   function _typeof(obj) {
     "@babel/helpers - typeof";
@@ -398,11 +400,6 @@ Changes:
     }
     return matched;
   }
-
-  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-  function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   function deepFind(obj, path) {
     var keySeparator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
     if (!obj) return undefined;
@@ -437,6 +434,11 @@ Changes:
     }
     return current;
   }
+
+  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function _createSuper$3(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$3(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+  function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
   var ResourceStore = function (_EventEmitter) {
     _inherits(ResourceStore, _EventEmitter);
     var _super = _createSuper$3(ResourceStore);
@@ -498,8 +500,7 @@ Changes:
         var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {
           silent: false
         };
-        var keySeparator = this.options.keySeparator;
-        if (keySeparator === undefined) keySeparator = '.';
+        var keySeparator = options.keySeparator !== undefined ? options.keySeparator : this.options.keySeparator;
         var path = [lng, ns];
         if (key) path = path.concat(keySeparator ? key.split(keySeparator) : key);
         if (lng.indexOf('.') > -1) {
@@ -680,6 +681,7 @@ Changes:
         if (_typeof(options) !== 'object' && this.options.overloadTranslationOptionHandler) {
           options = this.options.overloadTranslationOptionHandler(arguments);
         }
+        if (_typeof(options) === 'object') options = _objectSpread$4({}, options);
         if (!options) options = {};
         if (keys === undefined || keys === null) return '';
         if (!Array.isArray(keys)) keys = [String(keys)];
@@ -858,6 +860,7 @@ Changes:
             var nestAft = na && na.length;
             if (nestBef < nestAft) options.nest = false;
           }
+          if (!options.lng && this.options.compatibilityAPI !== 'v1' && resolved && resolved.res) options.lng = resolved.usedLng;
           if (options.nest !== false) res = this.interpolator.nest(res, function () {
             for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
               args[_key] = arguments[_key];
@@ -1057,6 +1060,8 @@ Changes:
             var lngOnly = _this.getLanguagePartFromCode(code);
             if (_this.isSupportedCode(lngOnly)) return found = lngOnly;
             found = _this.options.supportedLngs.find(function (supportedLng) {
+              if (supportedLng === lngOnly) return supportedLng;
+              if (supportedLng.indexOf('-') < 0 && lngOnly.indexOf('-') < 0) return;
               if (supportedLng.indexOf(lngOnly) === 0) return supportedLng;
             });
           });
@@ -1414,6 +1419,16 @@ Changes:
 
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function deepFindWithDefaults(data, defaultData, key) {
+    var keySeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
+    var ignoreJSONStructure = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+    var path = getPathWithDefaults(data, defaultData, key);
+    if (!path && ignoreJSONStructure && typeof key === 'string') {
+      path = deepFind(data, key, keySeparator);
+      if (path === undefined) path = deepFind(defaultData, key, keySeparator);
+    }
+    return path;
+  }
   var Interpolator = function () {
     function Interpolator() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -1476,7 +1491,7 @@ Changes:
         }
         var handleFormat = function handleFormat(key) {
           if (key.indexOf(_this.formatSeparator) < 0) {
-            var path = getPathWithDefaults(data, defaultData, key);
+            var path = deepFindWithDefaults(data, defaultData, key, _this.options.keySeparator, _this.options.ignoreJSONStructure);
             return _this.alwaysFormat ? _this.format(path, undefined, lng, _objectSpread$3(_objectSpread$3(_objectSpread$3({}, options), data), {}, {
               interpolationkey: key
             })) : path;
@@ -1484,7 +1499,7 @@ Changes:
           var p = key.split(_this.formatSeparator);
           var k = p.shift().trim();
           var f = p.join(_this.formatSeparator).trim();
-          return _this.format(getPathWithDefaults(data, defaultData, k), f, lng, _objectSpread$3(_objectSpread$3(_objectSpread$3({}, options), data), {}, {
+          return _this.format(deepFindWithDefaults(data, defaultData, k, _this.options.keySeparator, _this.options.ignoreJSONStructure), f, lng, _objectSpread$3(_objectSpread$3(_objectSpread$3({}, options), data), {}, {
             interpolationkey: k
           }));
         };
@@ -2510,7 +2525,7 @@ Changes:
           this.logger.warn('hasLoadedNamespace: i18n.languages were undefined or empty', this.languages);
           return false;
         }
-        var lng = this.resolvedLanguage || this.languages[0];
+        var lng = options.lng || this.resolvedLanguage || this.languages[0];
         var fallbackLng = this.options ? this.options.fallbackLng : false;
         var lastLng = this.languages[this.languages.length - 1];
         if (lng.toLowerCase() === 'cimode') return true;

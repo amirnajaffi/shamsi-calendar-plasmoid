@@ -1,13 +1,18 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Dialogs 1.1 as QtDialogs
-import QtQuick.Controls 2.5 as Controls
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Dialogs as QtDialogs
+import QtQuick.Controls as Controls
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.kirigami 2.5 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
+import org.kde.kcmutils as KCMUtils
 
-ColumnLayout {
+import "../../js/constants.js" as Const
+import "../../js/utils.js" as Utils
+import "../../js/translate.js" as Translate
+
+KCMUtils.SimpleKCM {
   id: appearanceConfig
 
   property alias cfg_holidayColor: holidayColor.text
@@ -53,15 +58,13 @@ ColumnLayout {
     '<font><font color="#888">dddd</font> D</font>'
   ]
 
-  anchors.fill: parent
-
   Kirigami.FormLayout {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
     /* Start General settings */
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('holiday_color', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('holiday_color', {lng: Plasmoid.configuration.language}) + ':'
 
       Controls.TextField {
         id: holidayColor
@@ -86,16 +89,16 @@ ColumnLayout {
       Controls.Button {
         icon.name: "edit-undo"
         display: Controls.AbstractButton.IconOnly
-        visible: holidayColor.text !== Qt._sc_.const.COLOR_EVENT_HOLIDAY
-        onClicked: holidayColor.text = Qt._sc_.const.COLOR_EVENT_HOLIDAY
+        visible: holidayColor.text !== Const.constants.COLOR_EVENT_HOLIDAY
+        onClicked: holidayColor.text = Const.constants.COLOR_EVENT_HOLIDAY
         Controls.ToolTip {
-          text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('reset', {lng: Plasmoid.configuration.language})
         }
       }
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('event_color', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('event_color', {lng: Plasmoid.configuration.language}) + ':'
 
       Controls.TextField {
         id: eventColor
@@ -120,18 +123,18 @@ ColumnLayout {
       Controls.Button {
         icon.name: "edit-undo"
         display: Controls.AbstractButton.IconOnly
-        visible: eventColor.text !== Qt._sc_.const.COLOR_EVENT_OTHER
-        onClicked: eventColor.text = Qt._sc_.const.COLOR_EVENT_OTHER
+        visible: eventColor.text !== Const.constants.COLOR_EVENT_OTHER
+        onClicked: eventColor.text = Const.constants.COLOR_EVENT_OTHER
         Controls.ToolTip {
-          text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('reset', {lng: Plasmoid.configuration.language})
         }
       }
 
     }
 
     RowLayout {
-      // Kirigami.FormData.label: Qt.i18next.t('font', {lng: Plasmoid.configuration.language}) + ':'
-      Kirigami.FormData.label: Qt.i18next.t('calendar_cell_font_size_mode', {lng: Plasmoid.configuration.language}) + ':'
+      // Kirigami.FormData.label: Translate.tConfigScope('font', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('calendar_cell_font_size_mode', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
 
       Controls.ButtonGroup {
@@ -143,7 +146,7 @@ ColumnLayout {
 
       ColumnLayout {
         Controls.RadioButton {
-          text: Qt.i18next.t('fit', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('fit', {lng: Plasmoid.configuration.language})
           Controls.ButtonGroup.group: calendarCellFontSizeModeRadioGroup
           readonly property string value: 'fit'
           checked: value === appearanceConfig.cfg_calendarCellFontSizeMode
@@ -152,7 +155,7 @@ ColumnLayout {
         RowLayout {
           Controls.RadioButton {
             id: fixedCalendarCellFontSizeModeRadioButton
-            text: Qt.i18next.t('fixed', {lng: Plasmoid.configuration.language})
+            text: Translate.tConfigScope('fixed', {lng: Plasmoid.configuration.language})
             Controls.ButtonGroup.group: calendarCellFontSizeModeRadioGroup
             readonly property string value: 'fixed'
             checked: value === appearanceConfig.cfg_calendarCellFontSizeMode
@@ -162,7 +165,7 @@ ColumnLayout {
 
         RowLayout {
           Controls.Label {
-            text: Qt.i18next.t('scale', {lng: Plasmoid.configuration.language}) + ':'
+            text: Translate.tConfigScope('scale', {lng: Plasmoid.configuration.language}) + ':'
             visible: fixedCalendarCellFontSizeModeRadioButton.checked
           }
 
@@ -177,7 +180,7 @@ ColumnLayout {
             visible: fixedCalendarCellFontSizeModeRadioButton.checked && calendarCellFontPixelSizeScale.value != 1.2
             onClicked: calendarCellFontPixelSizeScale.value = 1.2
             Controls.ToolTip {
-              text: Qt.i18next.t('reset', {lng: Plasmoid.configuration.language})
+              text: Translate.tConfigScope('reset', {lng: Plasmoid.configuration.language})
             }
           }
         }
@@ -197,52 +200,52 @@ ColumnLayout {
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('font', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('font', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
 
       Controls.ButtonGroup {
         id: fontRadioGroup
         onCheckedButtonChanged: {
           appearanceConfig.cfg_fontStatus = checkedButton.value
-          if (checkedButton.value === Qt._sc_.const.font.MANUAL && appearanceConfig.cfg_fontFamily === "") {
-            appearanceConfig.cfg_fontFamily = PlasmaCore.Theme.defaultFont.family
+          if (checkedButton.value === Const.constants.font.MANUAL && appearanceConfig.cfg_fontFamily === "") {
+            appearanceConfig.cfg_fontFamily = Kirigami.Theme.defaultFont.family
           }
         }
       }
 
       ColumnLayout {
         Controls.RadioButton {
-          text: Qt.i18next.t('default', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('default', {lng: Plasmoid.configuration.language})
           Controls.ButtonGroup.group: fontRadioGroup
-          readonly property string value: Qt._sc_.const.font.DEFAULT
+          readonly property string value: Const.constants.font.DEFAULT
           checked: value === appearanceConfig.cfg_fontStatus
         }
 
         Controls.RadioButton {
-          text: Qt.i18next.t('vazir', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('vazir', {lng: Plasmoid.configuration.language})
           Controls.ButtonGroup.group: fontRadioGroup
-          readonly property string value: Qt._sc_.const.font.VAZIR
+          readonly property string value: Const.constants.font.VAZIR
           checked: value === appearanceConfig.cfg_fontStatus
         }
 
         Controls.Label {
-          text: Qt.i18next.t('best_look_in_persian', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('best_look_in_persian', {lng: Plasmoid.configuration.language})
           Layout.fillWidth: true
           wrapMode: Text.Wrap
-          font: PlasmaCore.Theme.smallestFont
+          font: Kirigami.Theme.smallFont
         }
 
         RowLayout {
           Controls.RadioButton {
             id: fontManualRadioButton
-            text: Qt.i18next.t('manual', {lng: Plasmoid.configuration.language})
+            text: Translate.tConfigScope('manual', {lng: Plasmoid.configuration.language})
             Controls.ButtonGroup.group: fontRadioGroup
-            readonly property string value: Qt._sc_.const.font.MANUAL
+            readonly property string value: Const.constants.font.MANUAL
             checked: value === appearanceConfig.cfg_fontStatus
           }
 
           Controls.Button {
-            text: Qt.i18next.t('choose_font', {lng: Plasmoid.configuration.language})
+            text: Translate.tConfigScope('choose_font', {lng: Plasmoid.configuration.language})
             icon.name: "settings-configure"
             enabled: fontManualRadioButton.checked
             onClicked: {
@@ -253,10 +256,10 @@ ColumnLayout {
         }
 
         Controls.Label {
-          text: Qt.i18next.t('only_font_name_is_applied', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('only_font_name_is_applied', {lng: Plasmoid.configuration.language})
           Layout.fillWidth: true
           wrapMode: Text.Wrap
-          font: PlasmaCore.Theme.smallestFont
+          font: Kirigami.Theme.smallFont
         }
 
       }
@@ -268,7 +271,7 @@ ColumnLayout {
 
     Controls.Switch {
       id: weekendHighlight
-      text: Qt.i18next.t('enable_weekend_highlight', {lng: Plasmoid.configuration.language})
+      text: Translate.tConfigScope('enable_weekend_highlight', {lng: Plasmoid.configuration.language})
     }
 
     Item {
@@ -279,7 +282,7 @@ ColumnLayout {
       Layout.minimumHeight: _scrollHeight
       Layout.maximumHeight: _scrollHeight
 
-      Kirigami.FormData.label: Qt.i18next.t('weekend', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('weekend', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
 
       Controls.ScrollView {
@@ -293,12 +296,13 @@ ColumnLayout {
           Repeater {
             model: Array.from({length: 7}, (_, index) => index + 1)
             delegate: Controls.CheckBox {
-              text: Qt.i18next.t('week_label.' + modelData, {lng: Plasmoid.configuration.language})
+              required property string modelData
+              text: Translate.tConfigScope('week_label.' + modelData, {lng: Plasmoid.configuration.language})
               enabled: weekendHighlight.checked
               checked: isChecked()
 
               onClicked: {
-                const weekDaysArray = Qt._sc_.utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
+                const weekDaysArray = Utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
                 if (checked) {
                   weekDaysArray.push(modelData);
                 } else {
@@ -312,7 +316,7 @@ ColumnLayout {
               }
 
               function isChecked() {
-                const weekDaysArray = Qt._sc_.utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
+                const weekDaysArray = Utils.stringToNumberArray(appearanceConfig.cfg_weekendHighlightDays);
                 return weekDaysArray.some((item) => parseInt(item) === parseInt(modelData));
               }
 
@@ -327,16 +331,16 @@ ColumnLayout {
     /* Start Panel Settings */
     Kirigami.Separator {
       Kirigami.FormData.isSection: true
-      Kirigami.FormData.label: Qt.i18next.t('panel', {lng: Plasmoid.configuration.language})
+      Kirigami.FormData.label: Translate.tConfigScope('panel', {lng: Plasmoid.configuration.language})
     }
 
     Item {
       Kirigami.FormData.isSection: true
-      Kirigami.FormData.label: Qt.i18next.t('primary_text', {lng: Plasmoid.configuration.language})
+      Kirigami.FormData.label: Translate.tConfigScope('primary_text', {lng: Plasmoid.configuration.language})
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('date_format', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('date_format', {lng: Plasmoid.configuration.language}) + ':'
 
       Controls.TextField {
         id: panelPrimaryTextFormat
@@ -349,16 +353,16 @@ ColumnLayout {
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('result', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('result', {lng: Plasmoid.configuration.language}) + ':'
       Controls.Label {
         Layout.maximumWidth: Kirigami.Units.gridUnit * 16
         textFormat: Text.StyledText
         text: {
           if (!panelPrimaryTextFormat.text) return null;
-          return Qt._sc_.utils.richDateFormatParser(
+          return Utils.richDateFormatParser(
             undefined,
             panelPrimaryTextFormat.text,
-            Qt._sc_.useLocale(Plasmoid.configuration.language)
+            Translate.useLocale(Plasmoid.configuration.language)
           );
         }
       }
@@ -376,7 +380,7 @@ ColumnLayout {
       Layout.minimumHeight: _scrollHeight
       Layout.maximumHeight: _scrollHeight
 
-      Kirigami.FormData.label: Qt.i18next.t('templates', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('templates', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
 
       Controls.ScrollView {
@@ -384,7 +388,7 @@ ColumnLayout {
         width: parent.width
         height: parent.height
         contentWidth: availableWidth
-        
+
         Flow {
           spacing: Kirigami.Units.smallSpacing
           anchors.fill: parent
@@ -392,10 +396,11 @@ ColumnLayout {
           Repeater {
             model: appearanceConfig.dateTemplates
             delegate: Controls.Button {
-              property string displayText: Qt._sc_.utils.richDateFormatParser(
+              required property string modelData
+              property string displayText: Utils.richDateFormatParser(
                 undefined,
                 modelData,
-                Qt._sc_.useLocale(Plasmoid.configuration.language)
+                Translate.useLocale(Plasmoid.configuration.language)
               )
               topPadding: Kirigami.Units.smallSpacing
               rightPadding: Kirigami.Units.smallSpacing * 2
@@ -418,11 +423,11 @@ ColumnLayout {
     }
 
     Controls.Label {
-      text: Qt.i18next.t('date_format_documentation', {lng: Plasmoid.configuration.language})
+      text: Translate.tConfigScope('date_format_documentation', {lng: Plasmoid.configuration.language})
       wrapMode: Text.Wrap
       Layout.preferredWidth: Layout.maximumWidth
       Layout.maximumWidth: Kirigami.Units.gridUnit * 16
-      font: PlasmaCore.Theme.smallestFont
+      font: Kirigami.Theme.smallFont
       onLinkActivated: Qt.openUrlExternally(link)
       MouseArea {
         anchors.fill: parent
@@ -432,11 +437,11 @@ ColumnLayout {
     }
 
     Controls.Label {
-      text: Qt.i18next.t('font_tag_documentation', {lng: Plasmoid.configuration.language})
+      text: Translate.tConfigScope('font_tag_documentation', {lng: Plasmoid.configuration.language})
       wrapMode: Text.Wrap
       Layout.preferredWidth: Layout.maximumWidth
       Layout.maximumWidth: Kirigami.Units.gridUnit * 16
-      font: PlasmaCore.Theme.smallestFont
+      font: Kirigami.Theme.smallFont
       onLinkActivated: Qt.openUrlExternally(link)
       MouseArea {
         anchors.fill: parent
@@ -446,11 +451,11 @@ ColumnLayout {
     }
 
     Controls.Label {
-      text: Qt.i18next.t('format_description', {lng: Plasmoid.configuration.language})
+      text: Translate.tConfigScope('format_description', {lng: Plasmoid.configuration.language})
       Layout.fillWidth: true
       Layout.maximumWidth: Kirigami.Units.gridUnit * 16
       wrapMode: Text.Wrap
-      font: PlasmaCore.Theme.smallestFont
+      font: Kirigami.Theme.smallFont
     }
 
     Item {
@@ -458,7 +463,7 @@ ColumnLayout {
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('font_size', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('font_size', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
       
       Controls.ButtonGroup {
@@ -470,7 +475,7 @@ ColumnLayout {
 
       ColumnLayout {
         Controls.RadioButton {
-          text: Qt.i18next.t('fit', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('fit', {lng: Plasmoid.configuration.language})
           Controls.ButtonGroup.group: panelPrimaryTextFontSizeModeRadioGroup
           readonly property string value: 'fit'
           checked: value === appearanceConfig.cfg_panelPrimaryTextFontSizeMode
@@ -479,7 +484,7 @@ ColumnLayout {
         RowLayout {
           Controls.RadioButton {
             id: fixedPanelPrimaryTextFontSizeModeRadioButton
-            text: Qt.i18next.t('fixed', {lng: Plasmoid.configuration.language})
+            text: Translate.tConfigScope('fixed', {lng: Plasmoid.configuration.language})
             Controls.ButtonGroup.group: panelPrimaryTextFontSizeModeRadioGroup
             readonly property string value: 'fixed'
             checked: value === appearanceConfig.cfg_panelPrimaryTextFontSizeMode
@@ -503,16 +508,16 @@ ColumnLayout {
 
     Item {
       Kirigami.FormData.isSection: true
-      Kirigami.FormData.label: Qt.i18next.t('secondary_text', {lng: Plasmoid.configuration.language})
+      Kirigami.FormData.label: Translate.tConfigScope('secondary_text', {lng: Plasmoid.configuration.language})
     }
 
     Controls.Switch {
       id: secondaryText
-      text: Qt.i18next.t('enable_secondary_text', {lng: Plasmoid.configuration.language})
+      text: Translate.tConfigScope('enable_secondary_text', {lng: Plasmoid.configuration.language})
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('date_format', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('date_format', {lng: Plasmoid.configuration.language}) + ':'
       opacity: secondaryText.checked ? 1 : 0.5
 
       Controls.TextField {
@@ -526,17 +531,17 @@ ColumnLayout {
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('result', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('result', {lng: Plasmoid.configuration.language}) + ':'
       Controls.Label {
         Layout.maximumWidth: Kirigami.Units.gridUnit * 16
         textFormat: Text.StyledText
         opacity: secondaryText.checked ? 1 : 0.5
         text: {
           if (!panelSecondaryTextFormat.text) return null;
-          return Qt._sc_.utils.richDateFormatParser(
+          return Utils.richDateFormatParser(
             undefined,
             panelSecondaryTextFormat.text,
-            Qt._sc_.useLocale(Plasmoid.configuration.language)
+            Translate.useLocale(Plasmoid.configuration.language)
           );
         }
       }
@@ -554,7 +559,7 @@ ColumnLayout {
       Layout.minimumHeight: _scrollHeight
       Layout.maximumHeight: _scrollHeight
 
-      Kirigami.FormData.label: Qt.i18next.t('templates', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('templates', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
 
       Controls.ScrollView {
@@ -568,11 +573,12 @@ ColumnLayout {
           spacing: Kirigami.Units.smallSpacing
           Repeater {
             model: appearanceConfig.dateTemplates
-            delegate: Controls.Button {              
-              property string displayText: Qt._sc_.utils.richDateFormatParser(
+            delegate: Controls.Button {            
+              required property string modelData  
+              property string displayText: Utils.richDateFormatParser(
                 undefined,
                 modelData,
-                Qt._sc_.useLocale(Plasmoid.configuration.language)
+                Translate.useLocale(Plasmoid.configuration.language)
               )
               topPadding: Kirigami.Units.smallSpacing
               rightPadding: Kirigami.Units.smallSpacing * 2
@@ -600,7 +606,7 @@ ColumnLayout {
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('height', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('height', {lng: Plasmoid.configuration.language}) + ':'
       opacity: secondaryText.checked ? 1 : 0.5
 
       Controls.Slider {
@@ -621,7 +627,7 @@ ColumnLayout {
     }
 
     RowLayout {
-      Kirigami.FormData.label: Qt.i18next.t('font_size', {lng: Plasmoid.configuration.language}) + ':'
+      Kirigami.FormData.label: Translate.tConfigScope('font_size', {lng: Plasmoid.configuration.language}) + ':'
       Kirigami.FormData.labelAlignment: Qt.AlignTop
       
       Controls.ButtonGroup {
@@ -633,7 +639,7 @@ ColumnLayout {
 
       ColumnLayout {
         Controls.RadioButton {
-          text: Qt.i18next.t('fit', {lng: Plasmoid.configuration.language})
+          text: Translate.tConfigScope('fit', {lng: Plasmoid.configuration.language})
           Controls.ButtonGroup.group: panelSecondaryTextFontSizeModeRadioGroup
           readonly property string value: 'fit'
           enabled: secondaryText.checked
@@ -643,7 +649,7 @@ ColumnLayout {
         RowLayout {
           Controls.RadioButton {
             id: fixedPanelSecondaryTextFontSizeModeRadioButton
-            text: Qt.i18next.t('fixed', {lng: Plasmoid.configuration.language})
+            text: Translate.tConfigScope('fixed', {lng: Plasmoid.configuration.language})
             Controls.ButtonGroup.group: panelSecondaryTextFontSizeModeRadioGroup
             readonly property string value: 'fixed'
             enabled: secondaryText.checked

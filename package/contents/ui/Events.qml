@@ -1,15 +1,19 @@
-import QtQuick 2.12
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kirigami as Kirigami
+
+import "../js/translate.js" as Translate
+import "../js/events.js" as Events
 
 ScrollView {
   QtObject {
     id: eventsObject
-    property var events: Qt._sc_.events.getSelectedDateEvents()
+    property var events: Events.getSelectedDateEvents()
   }
 
   clip: true
@@ -17,16 +21,16 @@ ScrollView {
   contentWidth: availableWidth
 
   anchors {
-    topMargin: PlasmaCore.Units.gridUnit
-    bottomMargin: PlasmaCore.Units.gridUnit
+    topMargin: Kirigami.Units.gridUnit
+    bottomMargin: Kirigami.Units.gridUnit
   }
 
   Column {
     anchors.fill: parent
-    spacing: PlasmaCore.Units.gridUnit / 2
+    spacing: Kirigami.Units.gridUnit / 2
 
     PlasmaComponents3.Label {
-      text: Qt._sc_.t('no_event')
+      text: Translate.t('no_event')
       visible: !eventsObject.events.length > 0
       width: parent.width
       height: parent.height
@@ -34,14 +38,14 @@ ScrollView {
       verticalAlignment: Text.AlignVCenter
       opacity: 0.2
       font.family: root.fontFamily
-      font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 1.5
+      font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 1.5
       font.weight: Font.Bold
     }
 
     Repeater {
       model: eventsObject.events
       delegate: RowLayout {
-        spacing: PlasmaCore.Units.gridUnit / 2
+        spacing: Kirigami.Units.gridUnit / 2
         layoutDirection: Qt.RightToLeft
         anchors {
           right: parent.right
@@ -50,7 +54,7 @@ ScrollView {
 
         Rectangle {
           width: height
-          height: PlasmaCore.Units.gridUnit / 2
+          height: Kirigami.Units.gridUnit / 2
           radius: 180
           color: modelData[1] === true ? Plasmoid.configuration.holidayColor : Plasmoid.configuration.eventColor
         }
