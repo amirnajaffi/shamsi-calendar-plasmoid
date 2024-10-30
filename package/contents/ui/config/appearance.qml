@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Dialogs as QtDialogs
+import Qt.labs.platform as QtPlatform
 import QtQuick.Controls as Controls
 
 import org.kde.plasma.plasmoid
@@ -682,7 +682,7 @@ KCMUtils.SimpleKCM {
 
   } // End Kirigami.FormLayout
 
-  QtDialogs.FontDialog {
+  QtPlatform.FontDialog {
     id: fontDialog
     title: "Choose a Font"
     modality: Qt.WindowModal
@@ -692,7 +692,7 @@ KCMUtils.SimpleKCM {
     }
   }
 
-  QtDialogs.ColorDialog {
+  QtPlatform.ColorDialog {
     id: colorDialog
     title: "Choose a color"
     modality: Qt.WindowModal
