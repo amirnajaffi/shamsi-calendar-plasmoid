@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.0.1] - 2023-10-18
+Bugfix: color and font dialog issues
+
 ## [3.0.0] - 2023-10-18
 Port to Plasma 6
 
@@ -50,6 +53,7 @@ The calendar has been completely rewritten and many features have been added to 
 ## [0.1.0] - 2020-12-15
 - Initial release.
 
+[3.0.1]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/3.0.1
 [3.0.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/3.0.0
 [2.1.0]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.1.0
 [2.0.1]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/2.0.1
