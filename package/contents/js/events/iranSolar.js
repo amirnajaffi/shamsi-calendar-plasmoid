@@ -37,11 +37,11 @@ class IranSolar {
 
     let last_day_of_year;
     let leap = PersianDate.isLeap(pyear);
-    console.log('leap', leap);
+
     if (!last_day_of_year) {
       last_day_of_year = 29 + leap;
-      console.log('last_day_of_year', last_day_of_year)
     }
+
     if (last_day_of_year >= 30) {
       this.events[12][last_day_of_year] = [
         'آخرین روز سال',
