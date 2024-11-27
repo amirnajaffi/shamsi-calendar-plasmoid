@@ -26,21 +26,27 @@ class IranSolar {
     this.events[9][30] = ['شب یلدا', false];
     this.events[11][22] = ['پیروزی انقلاب اسلامی', true];
     this.events[12][29] = ['روز ملی شدن صنعت نفت', true];
+    this.events[12][30] = ['آخرین روز سال', true];
 
     this.addSpecificEvents(pyear);
   }
 
-  addSpecificEvents(pyear) { /* Added by shamsi calendar plasmoid */
+  /* Added by shamsi calendar plasmoid */
+  addSpecificEvents(pyear) { 
     const PersianDate = Utils.pcgs_adapter; 
 
     let last_day_of_year;
     let leap = PersianDate.isLeap(pyear);
+    console.log('leap', leap);
     if (!last_day_of_year) {
       last_day_of_year = 29 + leap;
+      console.log('last_day_of_year', last_day_of_year)
     }
-    this.events[12][last_day_of_year] = [
-      'آخرین روز سال',
-      true,
-    ];
+    if (last_day_of_year >= 30) {
+      this.events[12][last_day_of_year] = [
+        'آخرین روز سال',
+        true,
+      ];
+    }
   }
 };
