@@ -1,12 +1,12 @@
 # Changelog
 
-## [3.0.2] - 2023-11-28
+## [3.0.2] - 2024-11-28
 - The "Last Day of Year" event now calculates correctly
 
-## [3.0.1] - 2023-10-30
+## [3.0.1] - 2024-10-30
 Bugfix: color and font dialog issues
 
-## [3.0.0] - 2023-10-18
+## [3.0.0] - 2024-10-18
 Port to Plasma 6
 
 ## [2.1.0] - 2023-09-15
