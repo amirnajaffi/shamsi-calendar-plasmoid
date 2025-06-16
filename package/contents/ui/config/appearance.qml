@@ -306,7 +306,7 @@ KCMUtils.SimpleKCM {
                 if (checked) {
                   weekDaysArray.push(modelData);
                 } else {
-                  const index = weekDaysArray.indexOf(modelData);
+                  const index = weekDaysArray.indexOf(parseInt(modelData));
                   if (index > -1) {
                     weekDaysArray.splice(index, 1);
                   }
