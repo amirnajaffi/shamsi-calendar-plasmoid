@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.0.4] - 2025-06-16
+- Weekend bugfix
+
 ## [3.0.3] - 2025-06-14
 - Hijri Date bugfix
 
@@ -59,6 +62,7 @@ The calendar has been completely rewritten and many features have been added to 
 ## [0.1.0] - 2020-12-15
 - Initial release.
 
+[3.0.4]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/3.0.4
 [3.0.3]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/3.0.3
 [3.0.2]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/3.0.2
 [3.0.1]: https://github.com/amirnajaffi/shamsi-calendar-plasmoid/releases/tag/3.0.1

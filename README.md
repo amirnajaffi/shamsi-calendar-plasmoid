@@ -21,7 +21,7 @@ Download the plugin from the [KDE Store](https://store.kde.org/p/2216432/).
 | Plasma Version    | Widget Version                                                         | Link                                                   |
 | ----------------- | ---------------------------------------------------------------------- | ------------------------------------------------------ |
 | 6 and above       | 3.x                                                                    | [Plasma 6 Store](https://store.kde.org/p/2216432/) |
-| 5.25 > plasma < 6 | [2.x](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/tree/v2) | [Plasma 5 Store](https://store.kde.org/p/1460130/) |
+| 5.25 >= plasma < 6 | [2.x](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/tree/v2) | [Plasma 5 Store](https://store.kde.org/p/1460130/) |
 | 5.24 and below    | [1.x](https://github.com/amirnajaffi/shamsi-calendar-plasmoid/tree/v1) | [Plasma 5 Store](https://store.kde.org/p/1460130/) |
 
 Check your Plasma version: `plasmashell --version`
