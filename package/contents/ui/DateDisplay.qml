@@ -6,6 +6,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents3
 
 import "../js/store.js" as Store
+import "../js/calendar.js" as CalendarJS
 import "../js/translate.js" as Translate
 import "../js/utils.js" as Utils
 
@@ -23,7 +24,12 @@ Item {
 
   MouseArea {
     anchors.fill: parent
-    onClicked: root.expanded = !root.expanded
+    onClicked: {
+      if (!root.expanded) {
+        CalendarJS.goCurrentDay();
+      }
+      root.expanded = !root.expanded;
+    }
   }
 
   Column {
