@@ -12,7 +12,6 @@
     "Id": "org.kde.plasma.shamsi-calendar",
     "Name": "Shamsi Calendar",
     "Description": "Shamsi Calendar. A Persian calendar for easy date tracking and holiday support. Known as Shamsi Calendar or Jalali Calendar!",
-    "KPackageStructure": "Plasma/Applet",
     "Version": "3.0.5",
     "Website": "https://github.com/amirnajaffi/shamsi-calendar-plasmoid",
     "License": "GPLv3"
@@ -20,5 +19,6 @@
   "X-Plasma-API-Minimum-Version": "6.0",
   "X-Plasma-Provides": [
     "org.kde.plasma.date"
-  ]
+  ],
+  "KPackageStructure": "Plasma/Applet"
 }
