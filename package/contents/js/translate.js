@@ -80,7 +80,7 @@ I18next.instance.i18next.init({
         font_tag_documentation:
           '<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/font#attributes">Font Tag Documentation</a>',
         format_description:
-          'Just use the font tag. If you use a tag for styling, be sure to have an enclosing tag and then use the format and tags inside it as desired (see templates). You can use tags to change font and color. Styles applied by tags take precedence over setting values. Time formats are not currently supported.',
+          'Just use the font tag. If you use a tag for styling, be sure to have an enclosing tag and then use the format and tags inside it as desired (see templates). You can use tags to change font and color. Styles applied by tags take precedence over setting values.',
         font_size: 'Font Size',
         secondary_text: 'Secondary Text',
         enable_secondary_text: 'Enable secondary text',
