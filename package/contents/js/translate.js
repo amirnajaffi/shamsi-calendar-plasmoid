@@ -80,7 +80,7 @@ I18next.instance.i18next.init({
         font_tag_documentation:
           '<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/font#attributes">Font Tag Documentation</a>',
         format_description:
-          'Just use the font tag. If you use a tag for styling, be sure to have an enclosing tag and then use the format and tags inside it as desired (see templates). You can use tags to change font and color. Styles applied by tags take precedence over setting values. Time formats are not currently supported.',
+          'Just use the font tag. If you use a tag for styling, be sure to have an enclosing tag and then use the format and tags inside it as desired (see templates). You can use tags to change font and color. Styles applied by tags take precedence over setting values.',
         font_size: 'Font Size',
         secondary_text: 'Secondary Text',
         enable_secondary_text: 'Enable secondary text',
@@ -166,7 +166,7 @@ I18next.instance.i18next.init({
         font_tag_documentation:
           '<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/font#attributes">مستندات تگ قلم</a>',
         format_description:
-          'فقط از تگ font استفاده کنید. در صورت استفاده از تگ جهت تغییر سبک، حتما یک تگ دربرگیرنده داشته باشید و سپس داخل آن به صورت دلخواه از قالب و تگ‌ها استفاده کنید (نمونه‌ها را ببینید). شما می‌توانید با استفاده از تگ‌ها، قلم و رنگ را تغییر دهید. سبک‌های اعمال شده توسط تگ‌ها، دارای اولویت بالاتری نسبت به مقدارهای تنظیمات هستند. در حال حاضر قالب‌های زمان پشتیبانی نمی‌شوند.',
+          'فقط از تگ font استفاده کنید. در صورت استفاده از تگ جهت تغییر سبک، حتما یک تگ دربرگیرنده داشته باشید و سپس داخل آن به صورت دلخواه از قالب و تگ‌ها استفاده کنید (نمونه‌ها را ببینید). شما می‌توانید با استفاده از تگ‌ها، قلم و رنگ را تغییر دهید. سبک‌های اعمال شده توسط تگ‌ها، دارای اولویت بالاتری نسبت به مقدارهای تنظیمات هستند.',
         font_size: 'اندازه قلم',
         secondary_text: 'متن دوم',
         enable_secondary_text: 'فعال‌سازی متن دوم',

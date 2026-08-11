@@ -59,7 +59,7 @@ Item {
       font.pixelSize: Plasmoid.configuration.panelPrimaryTextFontSizeMode === 'fit' ? 1000 : Plasmoid.configuration.panelPrimaryTextPixelSize
       fontSizeMode: Plasmoid.configuration.panelPrimaryTextFontSizeMode === 'fit' ? Text.Fit : Text.FixedSize 
       text: Utils.richDateFormatParser(
-        Store.store.calendarSlice.jToday,
+        root.currentDateTime,
         Plasmoid.configuration.panelPrimaryTextFormat,
         Translate.useLocale()
       )
@@ -96,7 +96,7 @@ Item {
       font.pixelSize: Plasmoid.configuration.panelSecondaryTextFontSizeMode === 'fit' ? 1000 : Plasmoid.configuration.panelSecondaryTextPixelSize
       fontSizeMode: Plasmoid.configuration.panelSecondaryTextFontSizeMode === 'fit' ? Text.Fit : Text.FixedSize 
       text: Utils.richDateFormatParser(
-        Store.store.calendarSlice.jToday,
+        root.currentDateTime,
         Plasmoid.configuration.panelSecondaryTextFormat,
         Translate.useLocale()
       )

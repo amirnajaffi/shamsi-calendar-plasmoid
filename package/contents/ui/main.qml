@@ -26,6 +26,7 @@ PlasmoidItem {
   // property bool _hideOnWindowDeactivate: true
   property string toolTipMainText
   property string toolTipSubText
+  property date currentDateTime: new Date()
   property string fontFamily: {
     if (Plasmoid.configuration.fontStatus === Const.constants.font.MANUAL && Plasmoid.configuration.fontFamily !== '') {
       return Plasmoid.configuration.fontFamily;
@@ -90,6 +91,7 @@ PlasmoidItem {
     connectedSources: ["Local"]
     interval: 2000
     onNewData: (sourceName, data) => {
+      root.currentDateTime = data.DateTime;
       CalendarJS.baseDateChangeHandler(data.DateTime);
     }
   }
@@ -112,6 +114,7 @@ PlasmoidItem {
   Component.onCompleted: {
     /* Boot calendar */
     Store.storeUtils.setStore(qmlStore);
+    root.currentDateTime = localTime.data.Local.DateTime;
     CalendarJS.baseDateChangeHandler(localTime.data.Local.DateTime);
     CalendarJS.changeDecade(Store.store.calendarSlice.jToday[0]);
     I18next.instance.i18next.changeLanguage(Plasmoid.configuration.language);

@@ -37,6 +37,7 @@ KCMUtils.SimpleKCM {
   property string cfg_weekendHighlightDays: Plasmoid.configuration.weekendHighlightDays;
 
   readonly property var dateTemplates: [
+    'HH:mm',
     'YYYY MM DD',
     'YYYY-MM-DD',
     'YYYY/MM/DD',
